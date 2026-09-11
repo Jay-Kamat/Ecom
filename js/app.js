@@ -2348,6 +2348,14 @@ export function switchView(viewName) {
     stickyBar.style.display = (viewName === 'pdp' && window.innerWidth <= 768) ? 'grid' : 'none';
   }
 
+  const bottomNav = document.getElementById('bottom-nav-bar');
+  if (bottomNav && window.innerWidth <= 768) {
+    bottomNav.style.display = (viewName === 'pdp') ? 'none' : 'flex';
+  }
+
+  document.getElementById('filters-sidebar')?.classList.remove('active');
+  document.getElementById('filters-drawer-overlay')?.classList.remove('active');
+
   document.querySelectorAll('.bottom-nav-item').forEach(item => {
     const target = item.getAttribute('data-bottom-target');
     if (target === viewName) {
@@ -2538,6 +2546,25 @@ function initEventListeners() {
     renderProductGrid();
   });
 
+  // Mobile Filter Drawer
+  const openMobileFilters = () => {
+    document.getElementById('filters-sidebar')?.classList.add('active');
+    document.getElementById('filters-drawer-overlay')?.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+  const closeMobileFilters = () => {
+    document.getElementById('filters-sidebar')?.classList.remove('active');
+    document.getElementById('filters-drawer-overlay')?.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+  document.getElementById('btn-mobile-filter')?.addEventListener('click', openMobileFilters);
+  document.getElementById('btn-close-filters')?.addEventListener('click', closeMobileFilters);
+  document.getElementById('filters-drawer-overlay')?.addEventListener('click', closeMobileFilters);
+  document.getElementById('btn-apply-mobile-filters')?.addEventListener('click', () => {
+    closeMobileFilters();
+    applyFilters();
+  });
+
   // Bottom Navigation Bar items
   document.querySelectorAll('.bottom-nav-item').forEach(item => {
     item.addEventListener('click', (e) => {
@@ -2708,6 +2735,8 @@ function initEventListeners() {
       document.getElementById('admin-product-modal')?.classList.remove('active');
       document.getElementById('admin-coupon-modal')?.classList.remove('active');
       document.getElementById('cookie-preferences-modal')?.classList.remove('active');
+      document.getElementById('filters-sidebar')?.classList.remove('active');
+      document.getElementById('filters-drawer-overlay')?.classList.remove('active');
       document.body.style.overflow = '';
     }
   });

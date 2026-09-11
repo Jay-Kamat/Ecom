@@ -306,7 +306,15 @@
             <span id="product-count" style="color: var(--color-text-muted); font-size: 0.85rem;">Showing items</span>
           </div>
 
-          <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+          <div class="catalog-header-actions" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <!-- Mobile Filter Toggle Button -->
+            <button class="btn-outline-navy mobile-filter-btn" id="btn-mobile-filter" aria-label="Open Filters">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+              </svg>
+              <span>Filters</span>
+            </button>
+
             <!-- Grid vs List View Mode Toggle (PRD Section 3.1) -->
             <div class="view-mode-toggle" aria-label="Change view mode">
               <button class="view-mode-btn active" id="btn-view-grid" title="Grid View">
@@ -319,9 +327,9 @@
 
             <!-- Sort By -->
             <div class="sort-select-wrapper">
-              <label for="sort-dropdown" style="font-weight: 600; color: var(--color-navy);">Sort By:</label>
+              <label for="sort-dropdown" class="hide-mobile" style="font-weight: 600; color: var(--color-navy);">Sort By:</label>
               <select id="sort-dropdown" class="sort-select" aria-label="Sort products">
-                <option value="popularity">Featured &amp; Popular</option>
+                <option value="popularity">Featured</option>
                 <option value="price-low">Price: Low to High</option>
                 <option value="price-high">Price: High to Low</option>
                 <option value="rating">Customer Rating</option>
@@ -333,9 +341,11 @@
 
         <div class="catalog-layout">
           <!-- Filters Sidebar (PRD Section 3.1) -->
-          <aside class="filters-sidebar" aria-label="Product Filters">
-            <div style="font-size: 1.1rem; font-weight: 800; color: var(--color-navy); margin-bottom: 16px; border-bottom: 1px solid var(--color-border); padding-bottom: 10px;">
-              Filters
+          <div class="mobile-drawer-overlay" id="filters-drawer-overlay"></div>
+          <aside class="filters-sidebar" id="filters-sidebar" aria-label="Product Filters">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--color-border); padding-bottom: 10px;">
+              <span style="font-size: 1.1rem; font-weight: 800; color: var(--color-navy);">Filters</span>
+              <button id="btn-close-filters" class="drawer-close-btn hide-desktop" style="color: var(--color-navy); font-size: 1.5rem; background: none; border: none; cursor: pointer; line-height: 1;">&times;</button>
             </div>
 
             <!-- Price Slider -->
@@ -391,6 +401,9 @@
               <div style="font-size: 0.8rem; color: var(--color-text-muted); line-height: 1.4;">
                 All items dispatched from NovaMart Verified Fulfillment Centers with tamper-proof security tags.
               </div>
+            <!-- Mobile Apply Button -->
+            <div class="hide-desktop" style="position: sticky; bottom: 0; background: #FFFFFF; padding-top: 14px; margin-top: 16px; border-top: 1px solid var(--color-border);">
+              <button class="btn-primary" id="btn-apply-mobile-filters" style="width: 100%; min-height: 44px; font-weight: 700; border-radius: var(--radius-sm);">Apply Filters</button>
             </div>
           </aside>
 
