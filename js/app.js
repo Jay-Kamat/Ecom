@@ -1,6 +1,7 @@
 // NovaMart Comprehensive E-Commerce Engine & Admin Panel
 import { CATEGORIES, BRANDS, PRODUCTS, INITIAL_SAVED_ADDRESSES, INITIAL_USERS, VALID_COUPONS } from './data.js';
 import { CookieManager } from './cookies.js';
+import { api } from './api.js';
 
 // Local Storage Persistence Helper
 export const Storage = {
@@ -1480,6 +1481,30 @@ function handleCheckoutSubmit(e) {
   };
 
   State.orders.unshift(newOrder);
+
+  // Asynchronously sync with backend .NET 10 REST API
+  api.createOrder({
+    customer: newOrder.customer,
+    email: newOrder.email,
+    phone: phoneInput.value.trim(),
+    address: `${addressInput.value.trim()}, PIN: ${pinInput.value.trim()}`,
+    deliverySpeed: deliverySpeedLabel,
+    paymentMethod: 'UPI / Card',
+    couponCode: State.appliedCoupon ? State.appliedCoupon.code : null,
+    items: State.cart.map(c => ({
+      productId: c.product.id || 'prod-1',
+      title: c.product.title,
+      qty: c.qty,
+      price: c.product.price,
+      img: c.product.images[0] || ''
+    }))
+  }).then(saved => {
+    if (saved && saved.id) {
+      newOrder.id = saved.id;
+      newOrder.trackingId = saved.trackingId || newOrder.trackingId;
+    }
+  }).catch(() => {});
+
   State.cart = [];
   State.appliedCoupon = null;
   updateCartBadges();
@@ -1507,7 +1532,12 @@ function renderAdminPanel() {
         <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--color-navy);">
           NovaMart Merchant Admin Center
         </h2>
-        <span class="admin-badge">⚡ Store Owner Operations Active</span>
+        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 4px;">
+          <span class="admin-badge">⚡ Store Owner Operations Active</span>
+          <a href="http://localhost:5000/scalar/v1" target="_blank" rel="noopener" class="admin-badge" style="background: #e0f2fe; color: #0284c7; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700;">
+            <i class="fas fa-server"></i> .NET 10 API &amp; Swagger Docs ↗
+          </a>
+        </div>
       </div>
       <button class="btn-outline-navy btn-touch" id="btn-exit-admin">
         ← Back to Customer Storefront
@@ -2694,6 +2724,13 @@ document.addEventListener('DOMContentLoaded', () => {
   setupSearchAutosuggest();
   initEventListeners();
   CookieManager.init();
+
+  // Probe .NET 10 backend API health
+  api.checkHealth().then(isOnline => {
+    if (isOnline) {
+      console.log('[NovaMart] Connected to ASP.NET Core REST API at http://localhost:5000');
+    }
+  });
 
   const params = new URLSearchParams(window.location.search);
   if (params.get('page') === '404') {

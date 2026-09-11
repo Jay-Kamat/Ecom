@@ -1,6 +1,11 @@
 import { resolve } from 'path';
 
 export default {
+  server: {
+    watch: {
+      ignored: ['**/backend/**']
+    }
+  },
   build: {
     rollupOptions: {
       input: {
