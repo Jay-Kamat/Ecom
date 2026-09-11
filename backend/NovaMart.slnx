@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="NovaMart.Api/NovaMart.Api.csproj" />
+  <Project Path="NovaMart.Application/NovaMart.Application.csproj" />
+  <Project Path="NovaMart.Domain/NovaMart.Domain.csproj" />
+  <Project Path="NovaMart.Infrastructure/NovaMart.Infrastructure.csproj" />
+</Solution>

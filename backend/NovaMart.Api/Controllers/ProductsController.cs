@@ -1,8 +1,10 @@
 using System.Security.Claims;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NovaMart.Api.Models;
-using NovaMart.Api.Repositories;
+using NovaMart.Application.Features.Products.Commands;
+using NovaMart.Application.Features.Products.Queries;
+using NovaMart.Domain.Entities;
 
 namespace NovaMart.Api.Controllers;
 
@@ -10,11 +12,11 @@ namespace NovaMart.Api.Controllers;
 [Route("api/[controller]")]
 public class ProductsController : ControllerBase
 {
-    private readonly IDataStore _dataStore;
+    private readonly ISender _mediator;
 
-    public ProductsController(IDataStore dataStore)
+    public ProductsController(ISender mediator)
     {
-        _dataStore = dataStore;
+        _mediator = mediator;
     }
 
     [HttpGet]
@@ -27,23 +29,15 @@ public class ProductsController : ControllerBase
         [FromQuery] double? minRating = null,
         [FromQuery] string? sort = null)
     {
-        var products = await _dataStore.GetProductsAsync(
-            category,
-            brand,
-            search,
-            maxPrice,
-            inStockOnly,
-            minRating,
-            sort
-        );
-
+        var query = new GetProductsQuery(category, brand, search, maxPrice, inStockOnly, minRating, sort);
+        var products = await _mediator.Send(query);
         return Ok(products);
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<Product>> GetById(string id)
     {
-        var product = await _dataStore.GetProductByIdAsync(id);
+        var product = await _mediator.Send(new GetProductByIdQuery(id));
         if (product == null)
             return NotFound(new { message = $"Product with ID '{id}' not found." });
 
@@ -57,13 +51,7 @@ public class ProductsController : ControllerBase
         if (string.IsNullOrWhiteSpace(product.Title))
             return BadRequest(new { message = "Product title is required." });
 
-        if (string.IsNullOrWhiteSpace(product.Id))
-            product.Id = "prod-" + Guid.NewGuid().ToString("N")[..8];
-
-        if (product.Mrp == 0)
-            product.Mrp = product.Price;
-
-        var created = await _dataStore.CreateProductAsync(product);
+        var created = await _mediator.Send(new CreateProductCommand(product));
         return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
     }
 
@@ -71,9 +59,8 @@ public class ProductsController : ControllerBase
     [HttpPut("{id}")]
     public async Task<ActionResult> Update(string id, [FromBody] Product product)
     {
-        product.Id = id;
-        var updated = await _dataStore.UpdateProductAsync(product);
-        if (!updated)
+        var success = await _mediator.Send(new UpdateProductCommand(id, product));
+        if (!success)
             return NotFound(new { message = $"Product with ID '{id}' not found." });
 
         return Ok(new { message = "Product updated successfully." });
@@ -83,15 +70,17 @@ public class ProductsController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(string id)
     {
-        var deleted = await _dataStore.DeleteProductAsync(id);
-        if (!deleted)
+        var success = await _mediator.Send(new DeleteProductCommand(id));
+        if (!success)
             return NotFound(new { message = $"Product with ID '{id}' not found." });
 
         return Ok(new { message = "Product deleted successfully." });
     }
 
+    public record AddReviewDto(string Title, string Text, int Rating = 5, string? Author = null);
+
     [HttpPost("{id}/reviews")]
-    public async Task<ActionResult> AddReview(string id, [FromBody] AddReviewRequest req)
+    public async Task<ActionResult> AddReview(string id, [FromBody] AddReviewDto req)
     {
         if (string.IsNullOrWhiteSpace(req.Text) || string.IsNullOrWhiteSpace(req.Title))
             return BadRequest(new { message = "Review title and text are required." });
@@ -111,10 +100,10 @@ public class ProductsController : ControllerBase
             Text = req.Text.Trim()
         };
 
-        var success = await _dataStore.AddProductReviewAsync(id, review);
+        var (success, createdReview) = await _mediator.Send(new AddProductReviewCommand(id, review));
         if (!success)
             return NotFound(new { message = $"Product with ID '{id}' not found." });
 
-        return Ok(new { message = "Review added successfully.", review });
+        return Ok(new { message = "Review added successfully.", review = createdReview });
     }
 }

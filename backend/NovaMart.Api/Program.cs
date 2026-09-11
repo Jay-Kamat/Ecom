@@ -1,50 +1,18 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using MongoDB.Driver;
-using NovaMart.Api.Repositories;
-using NovaMart.Api.Services;
+using NovaMart.Application;
+using NovaMart.Infrastructure;
+using NovaMart.Infrastructure.Persistence;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Core DI Services
-builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
-builder.Services.AddSingleton<ITokenService, TokenService>();
+// 1. Clean Architecture Layer Dependencies
+builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices(builder.Configuration);
 
-// 2. DataStore Registration (MongoDb with automatic In-Memory fallback)
-var useMongo = builder.Configuration.GetValue<bool>("UseMongoDb", false);
-var mongoConnectionString = builder.Configuration.GetConnectionString("MongoDb") ?? "mongodb://localhost:27017";
-
-if (useMongo)
-{
-    try
-    {
-        var client = new MongoClient(mongoConnectionString);
-        var pingTask = client.GetDatabase("admin").RunCommandAsync<MongoDB.Bson.BsonDocument>(new MongoDB.Bson.BsonDocument("ping", 1));
-        if (pingTask.Wait(2000))
-        {
-            builder.Services.AddSingleton<IDataStore, MongoDataStore>();
-            Console.WriteLine("[NovaMart] Connected to MongoDB database successfully.");
-        }
-        else
-        {
-            throw new TimeoutException("MongoDB ping timed out.");
-        }
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"[NovaMart] MongoDB not reachable ({ex.Message}). Falling back to Persistent InMemoryDataStore.");
-        builder.Services.AddSingleton<IDataStore, InMemoryDataStore>();
-    }
-}
-else
-{
-    Console.WriteLine("[NovaMart] Using high-performance Persistent InMemoryDataStore (store_state.json).");
-    builder.Services.AddSingleton<IDataStore, InMemoryDataStore>();
-}
-
-// 3. Controllers & JSON Formatting
+// 2. Controllers & JSON Formatting
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -52,10 +20,10 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
     });
 
-// 4. OpenAPI Specification
+// 3. OpenAPI Specification
 builder.Services.AddOpenApi();
 
-// 5. CORS Policy
+// 4. CORS Policy
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("NovaMartCorsPolicy", policy =>
@@ -72,8 +40,8 @@ builder.Services.AddCors(options =>
     });
 });
 
-// 6. JWT Authentication
-var jwtKey = builder.Configuration["Jwt:Key"] ?? "NovaMartSuperSecretKey2026WithMinimum256BitsRequiredForHmacSha256!";
+// 5. JWT Authentication
+var jwtKey = builder.Configuration["Jwt:Key"] ?? "NovaMartSuperSecureSecretKey2026WithMinimum256BitsRequiredForHmacSha256!";
 var jwtIssuer = builder.Configuration["Jwt:Issuer"] ?? "NovaMartApi";
 var jwtAudience = builder.Configuration["Jwt:Audience"] ?? "NovaMartClients";
 
@@ -103,14 +71,33 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
+// 6. Database Auto-Migration & Seeding
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var db = services.GetRequiredService<ApplicationDbContext>();
+        Console.WriteLine("[NovaMart] Initializing PostgreSQL database schema (EnsureCreatedAsync)...");
+        await db.Database.EnsureCreatedAsync();
+        await DataSeeder.SeedAsync(db, services);
+        Console.WriteLine("[NovaMart] PostgreSQL database is ready and verified.");
+    }
+    catch (Exception ex)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine($"[NovaMart Error] Failed to initialize PostgreSQL database: {ex.Message}");
+        Console.ResetColor();
+    }
+}
+
 // 7. Middleware Pipeline
 app.UseCors("NovaMartCorsPolicy");
 
-// OpenAPI JSON endpoint and modern interactive API documentation
 app.MapOpenApi();
 app.MapScalarApiReference(options =>
 {
-    options.WithTitle("NovaMart E-Commerce API Documentation")
+    options.WithTitle("NovaMart Clean Architecture E-Commerce API (PostgreSQL + CQRS)")
            .WithTheme(ScalarTheme.Moon);
 });
 
@@ -124,6 +111,8 @@ app.MapGet("/health", () => Results.Ok(new
 {
     status = "Healthy",
     service = "NovaMart.Api",
+    architecture = "Clean Architecture + CQRS (MediatR)",
+    database = "PostgreSQL",
     timestamp = DateTime.UtcNow,
     documentation = "/scalar/v1",
     engine = ".NET 10.0 ASP.NET Core"

@@ -1,7 +1,9 @@
 using System.Security.Claims;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using NovaMart.Api.Models;
-using NovaMart.Api.Repositories;
+using NovaMart.Application.Features.Cart.Commands;
+using NovaMart.Application.Features.Cart.Queries;
+using NovaMart.Domain.Entities;
 
 namespace NovaMart.Api.Controllers;
 
@@ -9,18 +11,18 @@ namespace NovaMart.Api.Controllers;
 [Route("api/[controller]")]
 public class CartController : ControllerBase
 {
-    private readonly IDataStore _dataStore;
+    private readonly ISender _mediator;
 
-    public CartController(IDataStore dataStore)
+    public CartController(ISender mediator)
     {
-        _dataStore = dataStore;
+        _mediator = mediator;
     }
 
     [HttpGet]
     public async Task<ActionResult<UserCart>> GetCart([FromQuery] string? email = null)
     {
         var userEmail = User.FindFirstValue(ClaimTypes.Email) ?? User.FindFirstValue("email") ?? email ?? "guest@novamart.in";
-        var cart = await _dataStore.GetCartAsync(userEmail.Trim().ToLowerInvariant());
+        var cart = await _mediator.Send(new GetCartQuery(userEmail));
         return Ok(cart);
     }
 
@@ -31,8 +33,7 @@ public class CartController : ControllerBase
         if (string.IsNullOrWhiteSpace(userEmail))
             userEmail = "guest@novamart.in";
 
-        cart.UserEmail = userEmail.Trim().ToLowerInvariant();
-        await _dataStore.SaveCartAsync(cart);
+        await _mediator.Send(new SaveCartCommand(userEmail, cart.Items));
         return Ok(new { message = "Cart saved successfully." });
     }
 
@@ -40,7 +41,7 @@ public class CartController : ControllerBase
     public async Task<ActionResult<UserWishlist>> GetWishlist([FromQuery] string? email = null)
     {
         var userEmail = User.FindFirstValue(ClaimTypes.Email) ?? User.FindFirstValue("email") ?? email ?? "guest@novamart.in";
-        var wishlist = await _dataStore.GetWishlistAsync(userEmail.Trim().ToLowerInvariant());
+        var wishlist = await _mediator.Send(new GetWishlistQuery(userEmail));
         return Ok(wishlist);
     }
 
@@ -51,8 +52,7 @@ public class CartController : ControllerBase
         if (string.IsNullOrWhiteSpace(userEmail))
             userEmail = "guest@novamart.in";
 
-        wishlist.UserEmail = userEmail.Trim().ToLowerInvariant();
-        await _dataStore.SaveWishlistAsync(wishlist);
+        await _mediator.Send(new SaveWishlistCommand(userEmail, wishlist.ProductIds));
         return Ok(new { message = "Wishlist saved successfully." });
     }
 }

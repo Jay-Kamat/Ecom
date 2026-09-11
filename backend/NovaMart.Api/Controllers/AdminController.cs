@@ -1,6 +1,7 @@
-using Microsoft.AspNetCore.Authorization;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using NovaMart.Api.Repositories;
+using NovaMart.Application.Features.Admin.Commands;
+using NovaMart.Application.Features.Admin.Queries;
 
 namespace NovaMart.Api.Controllers;
 
@@ -8,87 +9,33 @@ namespace NovaMart.Api.Controllers;
 [Route("api/[controller]")]
 public class AdminController : ControllerBase
 {
-    private readonly IDataStore _dataStore;
+    private readonly ISender _mediator;
 
-    public AdminController(IDataStore dataStore)
+    public AdminController(ISender mediator)
     {
-        _dataStore = dataStore;
+        _mediator = mediator;
     }
 
     [HttpGet("kpis")]
-    public async Task<ActionResult<object>> GetKpis()
+    public async Task<ActionResult<AdminKpisDto>> GetKpis()
     {
-        var orders = (await _dataStore.GetAllOrdersAsync()).ToList();
-        var products = (await _dataStore.GetProductsAsync()).ToList();
-        var users = (await _dataStore.GetUsersAsync()).ToList();
-
-        decimal totalRevenue = orders.Where(o => o.Status != "Cancelled").Sum(o => o.Total);
-        int totalOrders = orders.Count;
-        int customerCount = users.Count(u => u.Role == "Customer");
-        int lowStockCount = products.Count(p => !p.InStock || p.StockCount < 10);
-
-        var statusCounts = orders
-            .GroupBy(o => o.Status)
-            .ToDictionary(g => g.Key, g => g.Count());
-
-        var categoryDistribution = products
-            .GroupBy(p => p.Category)
-            .ToDictionary(g => g.Key, g => g.Count());
-
-        var recentOrders = orders
-            .OrderByDescending(o => o.Id)
-            .Take(5)
-            .Select(o => new
-            {
-                o.Id,
-                o.Customer,
-                o.Date,
-                o.Total,
-                o.Status,
-                ItemsCount = o.Items.Count
-            });
-
-        return Ok(new
-        {
-            totalRevenue,
-            totalOrders,
-            totalCustomers = customerCount > 0 ? customerCount : users.Count,
-            lowStockProducts = lowStockCount,
-            totalProducts = products.Count,
-            statusCounts,
-            categoryDistribution,
-            recentOrders
-        });
+        var kpis = await _mediator.Send(new GetAdminKpisQuery());
+        return Ok(kpis);
     }
 
     [HttpGet("users")]
-    public async Task<ActionResult<IEnumerable<object>>> GetUsers()
+    public async Task<ActionResult<IEnumerable<AdminUserDto>>> GetUsers()
     {
-        var users = await _dataStore.GetUsersAsync();
-        var sanitized = users.Select(u => new
-        {
-            u.Id,
-            u.Name,
-            u.Email,
-            u.Phone,
-            u.Role,
-            u.Status,
-            u.OrdersCount,
-            u.JoinedAt
-        });
-
-        return Ok(sanitized);
+        var users = await _mediator.Send(new GetAdminUsersQuery());
+        return Ok(users);
     }
 
-    public class UpdateStatusRequest
-    {
-        public string Status { get; set; } = "Active";
-    }
+    public record UpdateStatusRequestDto(string Status = "Active");
 
     [HttpPut("users/{id}/status")]
-    public async Task<ActionResult> UpdateUserStatus(string id, [FromBody] UpdateStatusRequest req)
+    public async Task<ActionResult> UpdateUserStatus(string id, [FromBody] UpdateStatusRequestDto req)
     {
-        var success = await _dataStore.UpdateUserStatusAsync(id, req.Status);
+        var success = await _mediator.Send(new UpdateUserStatusCommand(id, req.Status));
         if (!success)
             return NotFound(new { message = $"User with ID '{id}' not found." });
 

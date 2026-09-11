@@ -1,7 +1,9 @@
 using System.Security.Claims;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using NovaMart.Api.Models;
-using NovaMart.Api.Repositories;
+using NovaMart.Application.Features.Addresses.Commands;
+using NovaMart.Application.Features.Addresses.Queries;
+using NovaMart.Domain.Entities;
 
 namespace NovaMart.Api.Controllers;
 
@@ -9,18 +11,18 @@ namespace NovaMart.Api.Controllers;
 [Route("api/[controller]")]
 public class AddressesController : ControllerBase
 {
-    private readonly IDataStore _dataStore;
+    private readonly ISender _mediator;
 
-    public AddressesController(IDataStore dataStore)
+    public AddressesController(ISender mediator)
     {
-        _dataStore = dataStore;
+        _mediator = mediator;
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<SavedAddress>>> GetAddresses([FromQuery] string? email = null)
     {
         var userEmail = User.FindFirstValue(ClaimTypes.Email) ?? User.FindFirstValue("email") ?? email ?? "arun.patel@gmail.com";
-        var addresses = await _dataStore.GetAddressesByUserAsync(userEmail.Trim().ToLowerInvariant());
+        var addresses = await _mediator.Send(new GetAddressesQuery(userEmail));
         return Ok(addresses);
     }
 
@@ -30,14 +32,8 @@ public class AddressesController : ControllerBase
         if (string.IsNullOrWhiteSpace(address.Name) || string.IsNullOrWhiteSpace(address.Street) || string.IsNullOrWhiteSpace(address.Pin))
             return BadRequest(new { message = "Name, street address, and PIN code are required." });
 
-        var userEmail = User.FindFirstValue(ClaimTypes.Email) ?? User.FindFirstValue("email") ?? address.UserEmail;
-        if (string.IsNullOrWhiteSpace(userEmail))
-            userEmail = "arun.patel@gmail.com";
-
-        address.Id = "addr-" + Guid.NewGuid().ToString("N")[..8];
-        address.UserEmail = userEmail.Trim().ToLowerInvariant();
-
-        var created = await _dataStore.CreateAddressAsync(address);
+        var userEmail = User.FindFirstValue(ClaimTypes.Email);
+        var created = await _mediator.Send(new CreateAddressCommand(address, userEmail));
         return Ok(created);
     }
 
@@ -45,7 +41,7 @@ public class AddressesController : ControllerBase
     public async Task<ActionResult> SetDefault(string id, [FromQuery] string? email = null)
     {
         var userEmail = User.FindFirstValue(ClaimTypes.Email) ?? User.FindFirstValue("email") ?? email ?? "arun.patel@gmail.com";
-        var success = await _dataStore.SetDefaultAddressAsync(userEmail.Trim().ToLowerInvariant(), id);
+        var success = await _mediator.Send(new SetDefaultAddressCommand(id, userEmail));
         if (!success)
             return NotFound(new { message = $"Address with ID '{id}' not found." });
 
@@ -55,8 +51,8 @@ public class AddressesController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(string id)
     {
-        var deleted = await _dataStore.DeleteAddressAsync(id);
-        if (!deleted)
+        var success = await _mediator.Send(new DeleteAddressCommand(id));
+        if (!success)
             return NotFound(new { message = $"Address with ID '{id}' not found." });
 
         return Ok(new { message = "Address deleted successfully." });
