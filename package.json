@@ -1,0 +1,14 @@
+{
+  "name": "novamart-ecommerce",
+  "version": "1.0.0",
+  "description": "NovaMart - Modern, responsive e-commerce storefront with Flipkart-style experience",
+  "type": "module",
+  "scripts": {
+    "dev": "npx vite --port 3000 --host",
+    "build": "npx vite build",
+    "preview": "npx vite preview --port 3000"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0"
+  }
+}

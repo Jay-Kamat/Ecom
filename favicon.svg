@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="bagGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B35" />
+      <stop offset="100%" stop-color="#FF5A1F" />
+    </linearGradient>
+    <linearGradient id="boltGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF275" />
+      <stop offset="100%" stop-color="#FFC93C" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#1F2A44" flood-opacity="0.25" />
+    </filter>
+  </defs>
+  <!-- Background rounded shield -->
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="#1F2A44" />
+  <!-- Shopping Bag -->
+  <g filter="url(#shadow)">
+    <!-- Bag handles -->
+    <path d="M24 22 C24 14, 40 14, 40 22" fill="none" stroke="#FFC93C" stroke-width="4" stroke-linecap="round" />
+    <!-- Bag body -->
+    <path d="M16 22 L48 22 L44 52 L20 52 Z" fill="url(#bagGrad)" rx="3" />
+    <!-- Lightning bolt -->
+    <path d="M34 26 L26 38 L32 38 L30 48 L38 36 L32 36 Z" fill="url(#boltGrad)" stroke="#1F2A44" stroke-width="1" stroke-linejoin="round" />
+  </g>
+</svg>
