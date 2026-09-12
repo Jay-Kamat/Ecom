@@ -37,7 +37,7 @@ public class LocalEmbeddingService : IEmbeddingService
         { "appliance", 41 }, { "kitchen", 41 }, { "refrigerator", 41 }, { "washing", 41 },
         // Price/Value
         { "budget", 50 }, { "affordable", 50 }, { "cheap", 50 }, { "value", 50 },
-        { "premium", 51 }, { "luxury", 51 }, { "high-end", 51 }, { "best", 51 }, { "top", 51 },
+        { "premium", 51 }, { "luxury", 51 }, { "high-end", 51 }, { "best", 51 }, { "prime", 51 },
         // Color
         { "black", 60 }, { "white", 61 }, { "blue", 62 }, { "red", 63 }, { "green", 64 },
         { "gray", 65 }, { "gold", 66 }, { "silver", 67 }, { "pink", 68 }, { "yellow", 69 },

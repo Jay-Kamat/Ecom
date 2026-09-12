@@ -1,8 +1,8 @@
 services:
   postgres:
-    image: postgres:18-alpine
+    image: pgvector/pgvector:pg17
     container_name: novamart-postgres
-    restart: always
+    restart: unless-stopped
     environment:
       POSTGRES_DB: novamart_db
       POSTGRES_USER: postgres
@@ -11,6 +11,72 @@ services:
       - "5432:5432"
     volumes:
       - novamart_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d novamart_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - novamart-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: novamart-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - novamart_redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - novamart-network
+
+  api:
+    build:
+      context: .
+      dockerfile: src/ECommerce.API/Dockerfile
+    container_name: novamart-api
+    restart: unless-stopped
+    environment:
+      ConnectionStrings__PostgreSQL: "Host=postgres;Port=5432;Database=novamart_db;Username=postgres;Password=root;"
+      ConnectionStrings__Redis: "redis:6379"
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_URLS: "http://+:5062"
+    ports:
+      - "5062:5062"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - novamart-network
+
+  gateway:
+    build:
+      context: .
+      dockerfile: src/ECommerce.Gateway/Dockerfile
+    container_name: novamart-gateway
+    restart: unless-stopped
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_URLS: "http://+:5000"
+      ReverseProxy__Clusters__ecommerce-api__Destinations__primary__Address: "http://api:5062/"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - api
+    networks:
+      - novamart-network
 
 volumes:
   novamart_pgdata:
+  novamart_redisdata:
+
+networks:
+  novamart-network:
+    driver: bridge
