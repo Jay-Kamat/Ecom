@@ -30,9 +30,13 @@ public class OrdersController : ApiBaseController
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(string id, CancellationToken ct)
-        => OkOrError(await _mediator.Send(new GetOrderByIdQuery(id), ct));
+    {
+        var isAdmin = _currentUser.Role == "Admin";
+        return OkOrError(await _mediator.Send(new GetOrderByIdQuery(id, _currentUser.Email, isAdmin), ct));
+    }
 
     [HttpPost]
+    [Microsoft.AspNetCore.RateLimiting.EnableRateLimiting("Orders")]
     public async Task<IActionResult> Create([FromBody] CreateOrderDto dto, CancellationToken ct)
     {
         var result = await _mediator.Send(new CreateOrderCommand(dto), ct);
@@ -51,7 +55,9 @@ public class OrdersController : ApiBaseController
     {
         if (!Guid.TryParse(id, out var orderId))
             return BadRequest("Invalid order ID");
-        return NoContentOrError(await _mediator.Send(new CancelOrderCommand(orderId, request?.Reason ?? "Customer requested cancellation"), ct));
+
+        var isAdmin = _currentUser.Role == "Admin";
+        return NoContentOrError(await _mediator.Send(new CancelOrderCommand(orderId, request?.Reason ?? "Customer requested cancellation", _currentUser.Email, isAdmin), ct));
     }
 }
 

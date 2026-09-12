@@ -107,14 +107,51 @@ public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
     public RegisterCommandValidator()
     {
         RuleFor(x => x.Dto.Name)
-            .NotEmpty().WithMessage("Name is required.");
+            .NotEmpty().WithMessage("Name is required.")
+            .MaximumLength(100).WithMessage("Name must not exceed 100 characters.");
 
+        RuleFor(x => x.Dto.Email)
+            .NotEmpty().WithMessage("Email is required.")
+            .EmailAddress().WithMessage("A valid email address is required.")
+            .MaximumLength(254).WithMessage("Email must not exceed 254 characters.");
+
+        RuleFor(x => x.Dto.Password)
+            .NotEmpty().WithMessage("Password is required.")
+            .MinimumLength(8).WithMessage("Password must be at least 8 characters long.")
+            .Matches(@"[A-Z]").WithMessage("Password must contain at least one uppercase letter.")
+            .Matches(@"[a-z]").WithMessage("Password must contain at least one lowercase letter.")
+            .Matches(@"\d").WithMessage("Password must contain at least one number.")
+            .Matches(@"[^a-zA-Z0-9]").WithMessage("Password must contain at least one special character.");
+    }
+}
+
+public class ForgotPasswordCommandValidator : AbstractValidator<ForgotPasswordCommand>
+{
+    public ForgotPasswordCommandValidator()
+    {
+        RuleFor(x => x.Email)
+            .NotEmpty().WithMessage("Email is required.")
+            .EmailAddress().WithMessage("A valid email address is required.");
+    }
+}
+
+public class ResetPasswordCommandValidator : AbstractValidator<ResetPasswordCommand>
+{
+    public ResetPasswordCommandValidator()
+    {
         RuleFor(x => x.Dto.Email)
             .NotEmpty().WithMessage("Email is required.")
             .EmailAddress().WithMessage("A valid email address is required.");
 
-        RuleFor(x => x.Dto.Password)
-            .NotEmpty().WithMessage("Password is required.")
-            .MinimumLength(6).WithMessage("Password must be at least 6 characters long.");
+        RuleFor(x => x.Dto.Token)
+            .NotEmpty().WithMessage("Reset token is required.");
+
+        RuleFor(x => x.Dto.NewPassword)
+            .NotEmpty().WithMessage("New password is required.")
+            .MinimumLength(8).WithMessage("Password must be at least 8 characters long.")
+            .Matches(@"[A-Z]").WithMessage("Password must contain at least one uppercase letter.")
+            .Matches(@"[a-z]").WithMessage("Password must contain at least one lowercase letter.")
+            .Matches(@"\d").WithMessage("Password must contain at least one number.")
+            .Matches(@"[^a-zA-Z0-9]").WithMessage("Password must contain at least one special character.");
     }
 }

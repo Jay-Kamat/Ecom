@@ -65,6 +65,7 @@ public static class DependencyInjection
         services.AddScoped<IFileStorageService, LocalFileStorageService>();
         services.AddScoped<IEmbeddingService, LocalEmbeddingService>();
         services.AddScoped<IProductVectorSearchService, ProductVectorSearchService>();
+        services.AddScoped<IAuditLogService, AuditLogService>();
 
         // 6. Background Services
         services.AddHostedService<EmbeddingGenerationBackgroundService>();

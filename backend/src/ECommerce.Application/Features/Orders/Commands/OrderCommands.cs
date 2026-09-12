@@ -150,7 +150,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Res
     }
 }
 
-public record CancelOrderCommand(Guid OrderId, string Reason) : IRequest<Result>;
+public record CancelOrderCommand(Guid OrderId, string Reason, string? RequesterEmail = null, bool IsAdmin = false) : IRequest<Result>;
 
 public class CancelOrderCommandHandler : IRequestHandler<CancelOrderCommand, Result>
 {
@@ -164,11 +164,21 @@ public class CancelOrderCommandHandler : IRequestHandler<CancelOrderCommand, Res
     public async Task<Result> Handle(CancelOrderCommand request, CancellationToken cancellationToken)
     {
         var order = await _context.Orders
+            .Include(o => o.Customer)
             .Include(o => o.StatusHistory)
             .FirstOrDefaultAsync(o => o.Id == request.OrderId, cancellationToken);
 
         if (order == null)
             return Result.Failure(Error.NotFound("Order.NotFound", "Order not found"));
+
+        // IDOR Protection: Non-admin users can only cancel their own orders
+        if (!request.IsAdmin && !string.IsNullOrWhiteSpace(request.RequesterEmail))
+        {
+            if (!string.Equals(order.Customer.Email, request.RequesterEmail, StringComparison.OrdinalIgnoreCase))
+            {
+                return Result.Failure(Error.Forbidden("Order.Forbidden", "You do not have permission to cancel this order."));
+            }
+        }
 
         if (order.Status == OrderStatus.Delivered)
             return Result.Failure(Error.Conflict("Order.CannotCancel", "Delivered order cannot be cancelled."));

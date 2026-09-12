@@ -65,7 +65,7 @@ public class GetOrdersQueryHandler : IRequestHandler<GetOrdersQuery, IReadOnlyLi
     }
 }
 
-public record GetOrderByIdQuery(string Id) : IRequest<Result<OrderDto>>;
+public record GetOrderByIdQuery(string Id, string? RequesterEmail = null, bool IsAdmin = false) : IRequest<Result<OrderDto>>;
 
 public class GetOrderByIdQueryHandler : IRequestHandler<GetOrderByIdQuery, Result<OrderDto>>
 {
@@ -90,6 +90,15 @@ public class GetOrderByIdQueryHandler : IRequestHandler<GetOrderByIdQuery, Resul
 
         if (order == null)
             return Result.Failure<OrderDto>(Error.NotFound("Order.NotFound", "Order not found"));
+
+        // IDOR Protection: Non-admin users can only view their own orders
+        if (!request.IsAdmin && !string.IsNullOrWhiteSpace(request.RequesterEmail))
+        {
+            if (!string.Equals(order.Customer.Email, request.RequesterEmail, StringComparison.OrdinalIgnoreCase))
+            {
+                return Result.Failure<OrderDto>(Error.Forbidden("Order.Forbidden", "You do not have permission to view this order."));
+            }
+        }
 
         return Result.Success(new OrderDto
         {

@@ -20,6 +20,7 @@ public abstract class ApiBaseController : ControllerBase
     {
         var c when c.Contains("NotFound") => NotFound(new { error = error.Code, message = error.Description }),
         var c when c.Contains("Unauthorized") => Unauthorized(new { error = error.Code, message = error.Description }),
+        var c when c.Contains("Forbidden") => StatusCode(StatusCodes.Status403Forbidden, new { error = error.Code, message = error.Description }),
         var c when c.Contains("Conflict") => Conflict(new { error = error.Code, message = error.Description }),
         _ => BadRequest(new { error = error.Code, message = error.Description })
     };

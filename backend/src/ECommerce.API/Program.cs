@@ -1,10 +1,13 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading.RateLimiting;
+using ECommerce.API.Middleware;
 using ECommerce.Application;
 using ECommerce.Application.Common.Interfaces;
 using ECommerce.Infrastructure;
 using ECommerce.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
@@ -53,6 +56,48 @@ try
                   .AllowAnyMethod()
                   .AllowCredentials();
         });
+    });
+
+    // ─── Rate Limiting (Brute-Force & Abuse Defense) ───────────────────────────
+    builder.Services.AddRateLimiter(options =>
+    {
+        options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+
+        // Global Rate Limiter: 100 requests per minute per IP
+        options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context =>
+            RateLimitPartition.GetFixedWindowLimiter(
+                partitionKey: context.Connection.RemoteIpAddress?.ToString() ?? "anonymous",
+                factory: _ => new FixedWindowRateLimiterOptions
+                {
+                    AutoReplenishment = true,
+                    PermitLimit = 100,
+                    QueueLimit = 0,
+                    Window = TimeSpan.FromMinutes(1)
+                }));
+
+        // Strict Limiter for Auth endpoints: 5 requests per minute per IP
+        options.AddPolicy("Auth", context =>
+            RateLimitPartition.GetFixedWindowLimiter(
+                partitionKey: context.Connection.RemoteIpAddress?.ToString() ?? "anonymous",
+                factory: _ => new FixedWindowRateLimiterOptions
+                {
+                    AutoReplenishment = true,
+                    PermitLimit = 5,
+                    QueueLimit = 0,
+                    Window = TimeSpan.FromMinutes(1)
+                }));
+
+        // Orders / Checkout Limiter: 10 requests per minute per IP
+        options.AddPolicy("Orders", context =>
+            RateLimitPartition.GetFixedWindowLimiter(
+                partitionKey: context.Connection.RemoteIpAddress?.ToString() ?? "anonymous",
+                factory: _ => new FixedWindowRateLimiterOptions
+                {
+                    AutoReplenishment = true,
+                    PermitLimit = 10,
+                    QueueLimit = 0,
+                    Window = TimeSpan.FromMinutes(1)
+                }));
     });
 
     // ─── Swagger ───────────────────────────────────────────────────────────────
@@ -154,8 +199,10 @@ try
         });
     });
 
+    app.UseSecurityHeaders();
     app.UseStaticFiles();
     app.UseCors("AllowAll");
+    app.UseRateLimiter();
     app.UseAuthentication();
     app.UseAuthorization();
     app.MapControllers();
