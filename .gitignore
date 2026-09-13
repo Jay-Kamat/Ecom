@@ -24,3 +24,6 @@ bin/
 obj/
 *.user
 App_Data/
+
+# Local Netlify folder
+.netlify

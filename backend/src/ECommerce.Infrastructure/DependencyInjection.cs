@@ -62,7 +62,23 @@ public static class DependencyInjection
         services.AddHttpContextAccessor();
         services.AddScoped<ICurrentUserService, CurrentUserService>();
         services.AddSingleton<IDateTimeService, DateTimeService>();
-        services.AddScoped<IFileStorageService, LocalFileStorageService>();
+        services.AddSingleton<IImageCompressionService, ImageCompressionService>();
+        services.AddHttpClient<SupabaseStorageService>();
+
+        var supabaseUrl = configuration["Supabase:Url"];
+        var supabaseKey = configuration["Supabase:ApiKey"] 
+            ?? configuration["Supabase:PublishableKey"] 
+            ?? configuration["Supabase:AnonKey"];
+
+        if (!string.IsNullOrWhiteSpace(supabaseUrl) && !string.IsNullOrWhiteSpace(supabaseKey))
+        {
+            services.AddScoped<IFileStorageService, SupabaseStorageService>();
+        }
+        else
+        {
+            services.AddScoped<IFileStorageService, LocalFileStorageService>();
+        }
+
         services.AddScoped<IEmbeddingService, LocalEmbeddingService>();
         services.AddScoped<IProductVectorSearchService, ProductVectorSearchService>();
         services.AddScoped<IAuditLogService, AuditLogService>();

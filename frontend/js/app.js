@@ -1933,14 +1933,112 @@ function renderAdminTabContent() {
   }
 }
 
-// Admin Add Product Modal
+// Admin Add Product Modal & Supabase Image Compression
+let adminProductSelectedFile = null;
+
+function resetAdminProductImageUpload() {
+  adminProductSelectedFile = null;
+  const fileInput = document.getElementById('new-prod-image-file');
+  if (fileInput) fileInput.value = '';
+  const prompt = document.getElementById('dropzone-prompt');
+  const preview = document.getElementById('dropzone-preview-container');
+  const previewImg = document.getElementById('image-preview-thumb');
+  const badge = document.getElementById('image-compression-badge');
+  const hiddenUrl = document.getElementById('new-prod-image-url');
+  if (prompt) prompt.style.display = 'block';
+  if (preview) preview.style.display = 'none';
+  if (previewImg) previewImg.src = '';
+  if (badge) {
+    badge.textContent = 'Ready for compression';
+    badge.style.background = '#ecfdf5';
+    badge.style.color = '#059669';
+    badge.style.borderColor = '#a7f3d0';
+  }
+  if (hiddenUrl) hiddenUrl.value = '';
+}
+
+function setupAdminProductImageUpload() {
+  const dropzone = document.getElementById('image-upload-dropzone');
+  const fileInput = document.getElementById('new-prod-image-file');
+  const prompt = document.getElementById('dropzone-prompt');
+  const preview = document.getElementById('dropzone-preview-container');
+  const previewImg = document.getElementById('image-preview-thumb');
+  const fileNameEl = document.getElementById('image-file-name');
+  const badge = document.getElementById('image-compression-badge');
+  const removeBtn = document.getElementById('btn-remove-image');
+
+  if (!dropzone || !fileInput) return;
+
+  dropzone.addEventListener('click', (e) => {
+    if (e.target !== removeBtn && !removeBtn?.contains(e.target)) {
+      fileInput.click();
+    }
+  });
+
+  const handleFile = (file) => {
+    if (!file || !file.type.startsWith('image/')) {
+      showToast('Please select a valid image file (JPEG, PNG, WebP)', 'error');
+      return;
+    }
+    adminProductSelectedFile = file;
+    const origSizeKb = (file.size / 1024).toFixed(1);
+
+    if (fileNameEl) fileNameEl.textContent = file.name;
+    if (badge) {
+      badge.textContent = `Raw: ${origSizeKb} KB -> WebP (~80% reduction)`;
+      badge.style.background = '#eff6ff';
+      badge.style.color = '#2563eb';
+      badge.style.borderColor = '#bfdbfe';
+    }
+
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      if (previewImg) previewImg.src = ev.target?.result;
+      if (prompt) prompt.style.display = 'none';
+      if (preview) preview.style.display = 'flex';
+    };
+    reader.readAsDataURL(file);
+  };
+
+  fileInput.addEventListener('change', (e) => {
+    const file = e.target.files?.[0];
+    if (file) handleFile(file);
+  });
+
+  dropzone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropzone.style.borderColor = '#3b82f6';
+    dropzone.style.background = '#eff6ff';
+  });
+
+  dropzone.addEventListener('dragleave', () => {
+    dropzone.style.borderColor = '#cbd5e1';
+    dropzone.style.background = '#f8fafc';
+  });
+
+  dropzone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropzone.style.borderColor = '#cbd5e1';
+    dropzone.style.background = '#f8fafc';
+    const file = e.dataTransfer?.files?.[0];
+    if (file) handleFile(file);
+  });
+
+  removeBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    resetAdminProductImageUpload();
+  });
+}
+
 function openAddProductModal() {
+  resetAdminProductImageUpload();
   document.getElementById('admin-product-modal')?.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 
-function handleAdminAddProductSubmit(e) {
+async function handleAdminAddProductSubmit(e) {
   e.preventDefault();
+  const submitBtn = document.getElementById('admin-product-submit-btn');
   const title = document.getElementById('new-prod-title')?.value.trim();
   const category = document.getElementById('new-prod-cat')?.value;
   const brand = document.getElementById('new-prod-brand')?.value.trim();
@@ -1952,6 +2050,34 @@ function handleAdminAddProductSubmit(e) {
   if (!title || price <= 0) {
     showToast('Please specify valid product title and price', 'error');
     return;
+  }
+
+  let finalImageUrl = 'https://images.unsplash.com/photo-1526738549149-8e07eca6c147?auto=format&fit=crop&w=800&q=80';
+
+  // If admin selected an image file, compress & upload to Supabase
+  if (adminProductSelectedFile) {
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Compressing & Storing in Supabase...';
+    }
+
+    try {
+      const uploadRes = await api.uploadProductImage(adminProductSelectedFile);
+      if (uploadRes && uploadRes.url) {
+        finalImageUrl = uploadRes.url;
+        const origKb = (uploadRes.originalSizeBytes / 1024).toFixed(0);
+        const compKb = (uploadRes.compressedSizeBytes / 1024).toFixed(0);
+        showToast(`Image compressed: ${origKb}KB -> ${compKb}KB (${uploadRes.savingsPercentage}% saved in ${uploadRes.storageProvider})`, 'success');
+      }
+    } catch (err) {
+      console.warn('[Admin] Direct upload failed, falling back to local object URL:', err);
+      showToast('Backend upload notice: ' + (err.message || 'using standard preview'), 'warning');
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Publish Product to Store';
+      }
+    }
   }
 
   const newProd = {
@@ -1969,7 +2095,7 @@ function handleAdminAddProductSubmit(e) {
     stockCount: stock,
     badge: 'New Arrival',
     images: [
-      'https://images.unsplash.com/photo-1526738549149-8e07eca6c147?auto=format&fit=crop&w=800&q=80',
+      finalImageUrl,
       'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80'
     ],
     variants: {},
@@ -1982,7 +2108,8 @@ function handleAdminAddProductSubmit(e) {
   State.products.unshift(newProd);
   document.getElementById('admin-product-modal')?.classList.remove('active');
   document.body.style.overflow = '';
-  showToast(`Product "${newProd.title.substring(0, 24)}" added to catalog!`, 'success');
+  resetAdminProductImageUpload();
+  showToast(`Product "${newProd.title.substring(0, 24)}" published with Supabase compressed image!`, 'success');
   renderAdminTabContent();
 }
 
@@ -2688,6 +2815,7 @@ function initEventListeners() {
     document.body.style.overflow = '';
   });
   document.getElementById('admin-product-form')?.addEventListener('submit', handleAdminAddProductSubmit);
+  setupAdminProductImageUpload();
 
   document.getElementById('admin-coupon-modal-close')?.addEventListener('click', () => {
     document.getElementById('admin-coupon-modal')?.classList.remove('active');

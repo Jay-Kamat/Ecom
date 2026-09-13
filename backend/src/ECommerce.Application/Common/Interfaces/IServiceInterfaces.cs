@@ -31,9 +31,42 @@ public interface IProductVectorSearchService
         CancellationToken cancellationToken = default);
 }
 
+public record CompressedImageResult(
+    byte[] Data,
+    string ContentType,
+    string FileExtension,
+    long OriginalSizeBytes,
+    long CompressedSizeBytes,
+    double SavingsPercentage,
+    int Width,
+    int Height
+);
+
+public record ImageUploadResult(
+    string Url,
+    long OriginalSizeBytes,
+    long CompressedSizeBytes,
+    double SavingsPercentage,
+    int Width,
+    int Height,
+    string StorageProvider
+);
+
+public interface IImageCompressionService
+{
+    Task<CompressedImageResult> CompressImageAsync(
+        Stream inputStream,
+        string originalFileName,
+        int maxWidth = 1200,
+        int maxHeight = 1200,
+        int quality = 80,
+        CancellationToken cancellationToken = default);
+}
+
 public interface IFileStorageService
 {
     Task<string> UploadFileAsync(Stream stream, string fileName, string contentType, CancellationToken cancellationToken = default);
+    Task<ImageUploadResult> CompressAndUploadImageAsync(Stream stream, string fileName, string contentType, CancellationToken cancellationToken = default);
     Task<bool> DeleteFileAsync(string fileUrl, CancellationToken cancellationToken = default);
 }
 

@@ -52,6 +52,58 @@ public class ProductsController : ApiBaseController
     public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
         => NoContentOrError(await _mediator.Send(new DeleteProductCommand(id), ct));
 
+    [HttpPost("images/upload")]
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> UploadImage(
+        IFormFile file,
+        [FromQuery] Guid? productId,
+        [FromQuery] bool isPrimary = false,
+        [FromQuery] string? altText = null,
+        CancellationToken ct = default)
+    {
+        if (file == null || file.Length == 0)
+            return BadRequest(new { error = "Image.Empty", message = "No image file provided." });
+
+        await using var stream = file.OpenReadStream();
+        var command = new UploadProductImageCommand(
+            FileStream: stream,
+            FileName: file.FileName,
+            ContentType: file.ContentType,
+            ProductId: productId,
+            IsPrimary: isPrimary,
+            AltText: altText
+        );
+
+        var result = await _mediator.Send(command, ct);
+        return OkOrError(result);
+    }
+
+    [HttpPost("{id:guid}/images")]
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> UploadProductImage(
+        Guid id,
+        IFormFile file,
+        [FromQuery] bool isPrimary = false,
+        [FromQuery] string? altText = null,
+        CancellationToken ct = default)
+    {
+        if (file == null || file.Length == 0)
+            return BadRequest(new { error = "Image.Empty", message = "No image file provided." });
+
+        await using var stream = file.OpenReadStream();
+        var command = new UploadProductImageCommand(
+            FileStream: stream,
+            FileName: file.FileName,
+            ContentType: file.ContentType,
+            ProductId: id,
+            IsPrimary: isPrimary,
+            AltText: altText
+        );
+
+        var result = await _mediator.Send(command, ct);
+        return OkOrError(result);
+    }
+
     [HttpPost("{id:guid}/reviews")]
     [Authorize]
     public async Task<IActionResult> AddReview(Guid id, [FromBody] Application.DTOs.ReviewDto review, CancellationToken ct)

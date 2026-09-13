@@ -1,9 +1,11 @@
 // NovaMart REST API Client with JWT Bearer Auth & Fallback
-export const API_BASE = 'http://localhost:5000/api';
+export const API_BASE = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE)
+  ? import.meta.env.VITE_API_BASE
+  : 'http://localhost:5000/api';
 
 class ApiClient {
   constructor() {
-    this.token = localStorage.getItem('novamart_jwt') || null;
+    this.token = typeof localStorage !== 'undefined' ? localStorage.getItem('novamart_jwt') : null;
     this.isOnline = false;
   }
 
@@ -28,7 +30,10 @@ class ApiClient {
 
   async checkHealth() {
     try {
-      const res = await fetch('http://localhost:5000/health', { method: 'GET', mode: 'cors' });
+      const healthUrl = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE)
+        ? `${import.meta.env.VITE_API_BASE.replace(/\/api\/?$/, '')}/health`
+        : 'http://localhost:5000/health';
+      const res = await fetch(healthUrl, { method: 'GET', mode: 'cors' });
       this.isOnline = res.ok;
       return res.ok;
     } catch {
@@ -110,6 +115,7 @@ class ApiClient {
     return await res.json();
   }
 
+  // Supabase Image Compression Upload Endpoint
   async uploadProductImage(file, productId = null, isPrimary = true) {
     const formData = new FormData();
     formData.append('file', file);

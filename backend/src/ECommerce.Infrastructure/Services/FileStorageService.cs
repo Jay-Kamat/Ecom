@@ -16,15 +16,59 @@ public class LocalFileStorageService : IFileStorageService
     };
 
     private readonly ILogger<LocalFileStorageService> _logger;
+    private readonly IImageCompressionService? _compressionService;
     private readonly string _storagePath;
     private readonly string _baseUrl;
 
-    public LocalFileStorageService(ILogger<LocalFileStorageService> logger)
+    public LocalFileStorageService(ILogger<LocalFileStorageService> logger, IImageCompressionService? compressionService = null)
     {
         _logger = logger;
+        _compressionService = compressionService;
         _storagePath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads"));
         _baseUrl = "/uploads";
         Directory.CreateDirectory(_storagePath);
+    }
+
+    public async Task<ImageUploadResult> CompressAndUploadImageAsync(
+        Stream stream,
+        string fileName,
+        string contentType,
+        CancellationToken cancellationToken = default)
+    {
+        if (_compressionService != null)
+        {
+            var compressed = await _compressionService.CompressImageAsync(stream, fileName, cancellationToken: cancellationToken);
+            using var ms = new MemoryStream(compressed.Data);
+            var safeName = $"{Guid.NewGuid():N}.webp";
+            var filePath = Path.GetFullPath(Path.Combine(_storagePath, safeName));
+
+            await using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                await ms.CopyToAsync(fileStream, cancellationToken);
+            }
+
+            var url = $"{_baseUrl}/{safeName}";
+            return new ImageUploadResult(
+                Url: url,
+                OriginalSizeBytes: compressed.OriginalSizeBytes,
+                CompressedSizeBytes: compressed.CompressedSizeBytes,
+                SavingsPercentage: compressed.SavingsPercentage,
+                Width: compressed.Width,
+                Height: compressed.Height,
+                StorageProvider: "Local"
+            );
+        }
+
+        var uploadedUrl = await UploadFileAsync(stream, fileName, contentType, cancellationToken);
+        return new ImageUploadResult(
+            Url: uploadedUrl,
+            OriginalSizeBytes: stream.CanSeek ? stream.Length : 0,
+            CompressedSizeBytes: stream.CanSeek ? stream.Length : 0,
+            SavingsPercentage: 0,
+            Width: 0,
+            Height: 0,
+            StorageProvider: "Local"
+        );
     }
 
     public async Task<string> UploadFileAsync(Stream stream, string fileName, string contentType, CancellationToken cancellationToken = default)
