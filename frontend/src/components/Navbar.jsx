@@ -350,8 +350,8 @@ export default function Navbar() {
                     onClick={() => handleSelectSuggestion(prod)}
                   >
                     <img
-                      src={prod.images[0]}
-                      alt={`${prod.title} - ${prod.brand || 'AaryaMart'} search thumbnail`}
+                      src={prod.images?.[0] || prod.image || ''}
+                      alt={`${prod.title || 'Product'} - ${prod.brand || 'AaryaMart'} search thumbnail`}
                       style={{ width: '36px', height: '36px', objectFit: 'contain', background: '#f8fafc', borderRadius: '6px', padding: '2px', border: '1px solid #e2e8f0' }}
                     />
                     <div style={{ flex: 1, minWidth: 0 }}>
@@ -359,7 +359,7 @@ export default function Navbar() {
                         {prod.title}
                       </div>
                       <div style={{ fontSize: '0.72rem', color: '#64748b' }}>
-                        {prod.brand} • <span style={{ color: '#0284c7', fontWeight: '700' }}>₹{prod.price.toLocaleString()}</span>
+                        {prod.brand} • <span style={{ color: '#0284c7', fontWeight: '700' }}>₹{prod.price != null ? Number(prod.price).toLocaleString() : '0'}</span>
                       </div>
                     </div>
                   </div>

@@ -5,7 +5,7 @@ import { getCategoryIcon } from './Icons.jsx';
 import './MotionGraphics.css';
 
 export default function CategoryHeader() {
-  const { filters, setCategory, filteredProducts } = useStore();
+  const { filters, setCategory, setSearchQuery, filteredProducts } = useStore();
 
   if (!filters.category || filters.category === 'all') {
     return null;
@@ -16,6 +16,7 @@ export default function CategoryHeader() {
 
   const handleResetCategory = () => {
     setCategory('all');
+    setSearchQuery('');
     if (window.__lenis) {
       window.__lenis.scrollTo(0, { duration: 1.2 });
     } else {

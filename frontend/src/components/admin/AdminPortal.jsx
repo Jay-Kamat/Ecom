@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useStore } from '../../context/StoreContext.jsx';
 import AdminProductModal from '../AdminProductModal.jsx';
 import ToastContainer from '../ToastContainer.jsx';
+import { API_BASE } from '../../services/api.js';
 import './AdminPortal.css';
 
 export default function AdminPortal({ onReturnToStore }) {
@@ -40,17 +41,22 @@ export default function AdminPortal({ onReturnToStore }) {
 
   // System Diagnostics Ping
   useEffect(() => {
+    const controller = new AbortController();
     const startTime = performance.now();
-    fetch('http://localhost:5062/health', { method: 'GET' })
+    const healthUrl = API_BASE.replace(/\/api\/?$/, '/health');
+    fetch(healthUrl, { method: 'GET', signal: controller.signal })
       .then(res => {
         const latency = Math.round(performance.now() - startTime);
         setApiLatency(`${latency} ms`);
         setIsApiOnline(res.ok);
       })
-      .catch(() => {
+      .catch(err => {
+        if (err.name === 'AbortError') return;
         setApiLatency('Offline / Fallback Local');
         setIsApiOnline(false);
       });
+
+    return () => controller.abort();
   }, [currentTab]);
 
   // Calculations
@@ -69,6 +75,16 @@ export default function AdminPortal({ onReturnToStore }) {
     if (window.confirm('Are you sure you want to remove this product from the live catalog?')) {
       const updated = products.filter(p => p.id !== productId);
       setProducts(updated);
+      try {
+        const removedSaved = localStorage.getItem('aaryamart_removed_products');
+        const removedList = removedSaved ? JSON.parse(removedSaved) : [];
+        if (!removedList.includes(productId)) {
+          removedList.push(productId);
+          localStorage.setItem('aaryamart_removed_products', JSON.stringify(removedList));
+        }
+      } catch {
+        // ignore storage error
+      }
       showToast('Product successfully removed from catalog', 'info');
     }
   };
@@ -676,8 +692,12 @@ export default function AdminPortal({ onReturnToStore }) {
                     transition: 'all 0.2s ease'
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                  <label
+                    htmlFor="banner-mode-random"
+                    style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px', cursor: 'pointer' }}
+                  >
                     <input
+                      id="banner-mode-random"
                       type="radio"
                       name="banner_mode"
                       checked={authBannerConfig?.mode === 'random'}
@@ -687,7 +707,7 @@ export default function AdminPortal({ onReturnToStore }) {
                     <span style={{ fontWeight: '800', fontSize: '0.94rem', color: '#f8fafc' }}>
                       🎲 Random Product Image (Default)
                     </span>
-                  </div>
+                  </label>
                   <p style={{ margin: 0, fontSize: '0.78rem', color: '#94a3b8', paddingLeft: '24px', lineHeight: 1.45 }}>
                     Randomly picks a different product image from your catalog every time any customer opens the login/register dialog.
                   </p>
@@ -707,8 +727,12 @@ export default function AdminPortal({ onReturnToStore }) {
                     transition: 'all 0.2s ease'
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                  <label
+                    htmlFor="banner-mode-custom"
+                    style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px', cursor: 'pointer' }}
+                  >
                     <input
+                      id="banner-mode-custom"
                       type="radio"
                       name="banner_mode"
                       checked={authBannerConfig?.mode === 'custom'}
@@ -718,7 +742,7 @@ export default function AdminPortal({ onReturnToStore }) {
                     <span style={{ fontWeight: '800', fontSize: '0.94rem', color: '#f8fafc' }}>
                       📌 Fixed Selected Product or Custom URL
                     </span>
-                  </div>
+                  </label>
                   <p style={{ margin: 0, fontSize: '0.78rem', color: '#94a3b8', paddingLeft: '24px', lineHeight: 1.45 }}>
                     Select a featured product from below or paste a custom promotional campaign banner URL.
                   </p>

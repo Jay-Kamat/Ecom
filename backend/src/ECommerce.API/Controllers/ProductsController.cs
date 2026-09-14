@@ -53,6 +53,7 @@ public class ProductsController : ApiBaseController
         => NoContentOrError(await _mediator.Send(new DeleteProductCommand(id), ct));
 
     [HttpPost("images/upload")]
+    [Authorize(Roles = "Admin")]
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> UploadImage(
         IFormFile file,

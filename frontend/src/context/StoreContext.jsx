@@ -9,14 +9,26 @@ export function StoreProvider({ children }) {
   // Products state (loads initial and checks API)
   const [products, setProducts] = useState(() => {
     const saved = localStorage.getItem('aaryamart_products');
-    if (!saved) return INITIAL_PRODUCTS;
+    const removedSaved = localStorage.getItem('aaryamart_removed_products');
+    let removedIds = new Set();
+    try {
+      if (removedSaved) {
+        removedIds = new Set(JSON.parse(removedSaved));
+      }
+    } catch {
+      // ignore parsing error
+    }
+
+    if (!saved) {
+      return INITIAL_PRODUCTS.filter(p => !removedIds.has(p.id));
+    }
     try {
       const parsed = JSON.parse(saved);
       const existingIds = new Set(parsed.map(p => p.id));
-      const missing = INITIAL_PRODUCTS.filter(p => !existingIds.has(p.id));
+      const missing = INITIAL_PRODUCTS.filter(p => !existingIds.has(p.id) && !removedIds.has(p.id));
       return [...parsed, ...missing];
     } catch {
-      return INITIAL_PRODUCTS;
+      return INITIAL_PRODUCTS.filter(p => !removedIds.has(p.id));
     }
   });
 
@@ -221,10 +233,16 @@ export function StoreProvider({ children }) {
       return false;
     }
 
+    const subtotal = cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+
     if (api.isOnline) {
       try {
         const res = await api.validateCoupon(trimmed);
         if (res && res.isValid) {
+          if (res.minCart && subtotal < res.minCart) {
+            showToast(`Minimum cart value of ₹${res.minCart} required for this coupon`, 'error');
+            return false;
+          }
           setAppliedCoupon({
             code: res.code,
             discountPercent: res.discountPercentage || 0,
@@ -241,6 +259,10 @@ export function StoreProvider({ children }) {
 
     if (VALID_COUPONS[trimmed]) {
       const c = VALID_COUPONS[trimmed];
+      if (c.minCart && subtotal < c.minCart) {
+        showToast(`Minimum cart value of ₹${c.minCart} required for coupon "${trimmed}"`, 'error');
+        return false;
+      }
       setAppliedCoupon({
         code: trimmed,
         discountPercent: c.discountPercent || 0,
@@ -398,26 +420,26 @@ export function StoreProvider({ children }) {
       const userProfile = {
         name: data.name || email.split('@')[0],
         email: data.email || email,
-        role: data.role || (email.toLowerCase().includes('admin') ? 'Admin' : 'Customer'),
+        role: data.role || 'Customer',
         token: data.token
       };
       setUser(userProfile);
       showToast(`Welcome back, ${userProfile.name}!`, 'success');
       setIsAuthOpen(false);
-      return true;
-    } catch {
-      // Local fallback for quick testing
-      const found = INITIAL_USERS.find(u => u.email.toLowerCase() === email.toLowerCase());
-      const userProfile = found ? { ...found, token: 'mock-jwt-token' } : {
-        name: email.split('@')[0],
-        email: email,
-        role: email.toLowerCase().includes('admin') ? 'Admin' : 'Customer',
-        token: 'mock-jwt-token'
-      };
-      setUser(userProfile);
-      showToast(`Signed in as ${userProfile.name}`, 'success');
-      setIsAuthOpen(false);
-      return true;
+      return userProfile;
+    } catch (err) {
+      if (!api.isOnline) {
+        // Local fallback for offline testing
+        const found = INITIAL_USERS.find(u => u.email.toLowerCase() === email.toLowerCase());
+        if (found) {
+          const userProfile = { ...found, token: 'mock-jwt-token' };
+          setUser(userProfile);
+          showToast(`Signed in as ${userProfile.name}`, 'success');
+          setIsAuthOpen(false);
+          return userProfile;
+        }
+      }
+      throw err;
     }
   };
 

@@ -31,10 +31,10 @@
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(14, 165, 233, 0.15) inset;
   position: relative;
   z-index: 10;
-  animation: adminCardSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: admin-card-slide 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes adminCardSlide {
+@keyframes admin-card-slide {
   from {
     opacity: 0;
     transform: translateY(16px) scale(0.98);
@@ -67,10 +67,10 @@
   border-radius: 50%;
   background: #38bdf8;
   box-shadow: 0 0 8px #38bdf8;
-  animation: pulseDot 2s infinite;
+  animation: pulse-dot 2s infinite;
 }
 
-@keyframes pulseDot {
+@keyframes pulse-dot {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.4; transform: scale(0.85); }
 }

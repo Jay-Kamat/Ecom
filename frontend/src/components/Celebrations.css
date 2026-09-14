@@ -50,8 +50,17 @@ button, .nav-action-pill-btn, .nav-cat-item, .product-card {
 }
 
 button:active:not(:disabled) {
-  transform: scale(0.96);
-  transition: transform 0.1s ease;
+  scale: 0.96;
+  transition: scale 0.1s ease;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ==========================================================================

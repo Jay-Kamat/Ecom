@@ -164,12 +164,34 @@ public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, PagedRe
             var rawSearch = request.Search.Trim().ToLower();
             var tokens = rawSearch.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-            bool isMobileSearch = rawSearch.Contains("mobile") || rawSearch.Contains("phone") || rawSearch.Contains("smartphone");
-            bool isAudioSearch = rawSearch.Contains("headphone") || rawSearch.Contains("earphone") || rawSearch.Contains("earbud") || rawSearch.Contains("audio") || rawSearch.Contains("speaker");
-            bool isLaptopSearch = rawSearch.Contains("laptop") || rawSearch.Contains("computer") || rawSearch.Contains("notebook") || rawSearch.Contains("pc") || rawSearch.Contains("macbook");
+            bool isMobileSearch = tokens.Any(t => t is "mobile" or "mobiles" or "phone" or "phones" or "smartphone" or "smartphones");
+            bool isAudioSearch = tokens.Any(t => t is "headphone" or "headphones" or "earphone" or "earphones" or "earbud" or "earbuds" or "audio" or "speaker" or "speakers");
+            bool isLaptopSearch = tokens.Any(t => t is "laptop" or "laptops" or "computer" or "computers" or "notebook" or "notebooks" or "pc" or "macbook" or "macbooks");
+
+            if (isMobileSearch)
+            {
+                query = query.Where(p => p.Category.Slug == "smartphones" || p.Category.Slug == "mobiles" || p.Category.Name.ToLower().Contains("phone") || p.Category.Name.ToLower().Contains("mobile"));
+            }
+            if (isAudioSearch)
+            {
+                query = query.Where(p => p.Category.Slug == "audio" || p.Category.Name.ToLower().Contains("audio"));
+            }
+            if (isLaptopSearch)
+            {
+                query = query.Where(p => p.Category.Slug == "laptops" || p.Category.Name.ToLower().Contains("laptop"));
+            }
 
             foreach (var t in tokens)
             {
+                bool isCategoryToken = t is "mobile" or "mobiles" or "phone" or "phones" or "smartphone" or "smartphones"
+                    or "headphone" or "headphones" or "earphone" or "earphones" or "earbud" or "earbuds" or "audio" or "speaker" or "speakers"
+                    or "laptop" or "laptops" or "computer" or "computers" or "notebook" or "notebooks" or "pc" or "macbook" or "macbooks";
+
+                if (isCategoryToken)
+                {
+                    continue;
+                }
+
                 var norm = t.EndsWith("s") && t.Length > 3 ? t[..^1] : t;
                 query = query.Where(p =>
                     p.Name.ToLower().Contains(t) ||
@@ -177,10 +199,7 @@ public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, PagedRe
                     p.Description.ToLower().Contains(t) ||
                     p.Category.Name.ToLower().Contains(t) ||
                     p.Category.Name.ToLower().Contains(norm) ||
-                    p.Brand.Name.ToLower().Contains(t) ||
-                    (isMobileSearch && (p.Category.Slug == "smartphones" || p.Category.Slug == "mobiles" || p.Category.Name.ToLower().Contains("phone") || p.Category.Name.ToLower().Contains("mobile"))) ||
-                    (isAudioSearch && (p.Category.Slug == "audio" || p.Category.Name.ToLower().Contains("audio"))) ||
-                    (isLaptopSearch && (p.Category.Slug == "laptops" || p.Category.Name.ToLower().Contains("laptop"))));
+                    p.Brand.Name.ToLower().Contains(t));
             }
         }
 

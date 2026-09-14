@@ -25,24 +25,16 @@ export default function AdminLogin({ onLoginSuccess, onReturnToStore }) {
 
     try {
       // Must authenticate as Admin
-      const success = await login(email, password);
-      if (success) {
-        // Read updated or current user from localStorage if needed
-        const saved = localStorage.getItem('aaryamart_user');
-        const currentUser = saved ? JSON.parse(saved) : null;
-        
-        if (currentUser && currentUser.role === 'Admin') {
-          showToast('Admin authorization verified. Welcome to Console!', 'success');
-          if (onLoginSuccess) onLoginSuccess();
-        } else if (email.toLowerCase().includes('admin')) {
-          if (onLoginSuccess) onLoginSuccess();
-        } else {
-          setErrorMsg('Access denied. This account does not possess Administrator credentials.');
-          showToast('Access restricted: Administrator role required', 'error');
-        }
+      const profile = await login(email, password);
+      if (profile && profile.role === 'Admin') {
+        showToast('Admin authorization verified. Welcome to Console!', 'success');
+        if (onLoginSuccess) onLoginSuccess();
+      } else {
+        setErrorMsg('Access denied. This account does not possess Administrator credentials.');
+        showToast('Access restricted: Administrator role required', 'error');
       }
-    } catch {
-      setErrorMsg('Invalid administrative credentials or server unreachable.');
+    } catch (err) {
+      setErrorMsg(err?.message || 'Invalid administrative credentials or server unreachable.');
     } finally {
       setLoading(false);
     }

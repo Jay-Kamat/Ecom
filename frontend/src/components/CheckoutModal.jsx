@@ -30,13 +30,21 @@ export default function CheckoutModal() {
   const [city, setCity] = useState('Bengaluru');
   const [pin, setPin] = useState('560103');
 
-  if (!isCheckoutOpen) return null;
+  React.useEffect(() => {
+    if (!isCheckoutOpen) {
+      setPlacedOrder(null);
+      setIsSubmitting(false);
+    }
+  }, [isCheckoutOpen]);
 
   const handleClose = () => {
+    if (isSubmitting) return;
     setIsCheckoutOpen(false);
     setPlacedOrder(null);
     setIsSubmitting(false);
   };
+
+  if (!isCheckoutOpen) return null;
 
   const handlePlaceOrder = async (e) => {
     e.preventDefault();

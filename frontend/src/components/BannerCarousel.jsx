@@ -253,20 +253,28 @@ export default function BannerCarousel() {
               style={{
                 all: 'unset',
                 cursor: 'pointer',
-                display: 'inline-block',
-                minHeight: 'unset',
-                minWidth: 'unset',
-                width: idx === currentIndex ? '20px' : '5px',
-                height: '4px',
-                borderRadius: '9999px',
-                background: idx === currentIndex ? '#ffffff' : 'rgba(255, 255, 255, 0.3)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                minHeight: '44px',
+                minWidth: '44px',
                 padding: 0,
                 margin: 0,
-                border: 'none',
-                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+                border: 'none'
               }}
               aria-label={`Show slide ${idx + 1} of ${BANNERS.length}`}
-            />
+            >
+              <span
+                style={{
+                  display: 'block',
+                  width: idx === currentIndex ? '20px' : '5px',
+                  height: '4px',
+                  borderRadius: '9999px',
+                  background: idx === currentIndex ? '#ffffff' : 'rgba(255, 255, 255, 0.3)',
+                  transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+                }}
+              />
+            </button>
           ))}
         </div>
       </div>

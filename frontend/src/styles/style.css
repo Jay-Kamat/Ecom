@@ -1484,10 +1484,10 @@ button:disabled {
   height: 90px;
   margin-bottom: 20px;
   color: var(--color-primary);
-  animation: pulseFloat 3s ease-in-out infinite;
+  animation: pulse-float 3s ease-in-out infinite;
 }
 
-@keyframes pulseFloat {
+@keyframes pulse-float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
 }
@@ -1558,16 +1558,16 @@ button:disabled {
   gap: 12px;
   font-size: 0.9rem;
   font-weight: 600;
-  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1), shakeError 0.4s ease 0.3s;
+  animation: slide-in-right 0.3s cubic-bezier(0.16, 1, 0.3, 1), shake-error 0.4s ease 0.3s;
   color: #FFFFFF;
 }
 
-@keyframes slideInRight {
+@keyframes slide-in-right {
   from { transform: translateX(120%); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
 }
 
-@keyframes shakeError {
+@keyframes shake-error {
   0%, 100% { transform: translateX(0); }
   25% { transform: translateX(-4px); }
   75% { transform: translateX(4px); }
