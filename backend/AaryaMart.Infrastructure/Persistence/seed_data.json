@@ -1,0 +1,581 @@
+{
+  "Products": [
+    {
+      "Id": "prod-1",
+      "Title": "AaryaPro 15 Ultra 5G (Phantom Titanium, 256 GB)",
+      "Category": "mobiles",
+      "Brand": "AaryaTech",
+      "Price": 69999,
+      "Mrp": 84999,
+      "Discount": 18,
+      "Rating": 4.8,
+      "RatingCount": 14230,
+      "ReviewsCount": 2840,
+      "InStock": true,
+      "StockCount": 24,
+      "Badge": "Trending Deal",
+      "Images": [
+        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+      ],
+      "Variants": {
+        "Color": [
+          "Phantom Titanium",
+          "Deep Ocean Blue",
+          "Midnight Obsidian"
+        ],
+        "Storage": [
+          "128 GB",
+          "256 GB",
+          "512 GB"
+        ],
+        "Size": null,
+        "DisplaySize": null
+      },
+      "Description": "Experience ultra-fast 5G connectivity with the flagship AaryaPro 15 Ultra. Featuring a 6.8-inch Dynamic AMOLED 120Hz display, ProGrade 200MP camera system, and all-day 5000mAh battery with 68W fast charge.",
+      "Specs": [
+        {
+          "Key": "Processor",
+          "Value": "Octa-Core Snapdragon 8 Gen 3"
+        },
+        {
+          "Key": "Display",
+          "Value": "6.8-inch QHD\u002B 120Hz Dynamic AMOLED"
+        },
+        {
+          "Key": "Camera",
+          "Value": "200MP Main \u002B 50MP Periscope \u002B 12MP Ultra-wide"
+        },
+        {
+          "Key": "Battery",
+          "Value": "5000 mAh with 68W HyperCharge"
+        }
+      ],
+      "Offers": [
+        "Bank Offer: Flat \u20B94,000 instant discount on HDFC Bank Credit Cards",
+        "Special Price: Get extra 10% off (price inclusive of discount)",
+        "No Cost EMI available from \u20B95,833/month"
+      ],
+      "Reviews": [
+        {
+          "Author": "Vikram Mehta",
+          "Rating": 5,
+          "Date": "05 Sep 2026",
+          "Title": "Absolute powerhouse phone!",
+          "Text": "Camera quality matches DSLRs and the battery easily lasts 1.5 days."
+        }
+      ]
+    },
+    {
+      "Id": "prod-2",
+      "Title": "SonicWave Elite Active Noise Cancelling Headphones",
+      "Category": "electronics",
+      "Brand": "SonicWave",
+      "Price": 14999,
+      "Mrp": 24999,
+      "Discount": 40,
+      "Rating": 4.6,
+      "RatingCount": 8430,
+      "ReviewsCount": 1210,
+      "InStock": true,
+      "StockCount": 42,
+      "Badge": "Super Saver",
+      "Images": [
+        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format\u0026fit=crop\u0026w=800\u0026q=80",
+        "https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+      ],
+      "Variants": {
+        "Color": [
+          "Matte Black",
+          "Silver Frost",
+          "Midnight Navy"
+        ],
+        "Storage": null,
+        "Size": null,
+        "DisplaySize": null
+      },
+      "Description": "Premium wireless headphones with industry-leading hybrid ANC, 40-hour playtime, Hi-Res LDAC audio decoding, and ultra-plush memory foam earcups.",
+      "Specs": [
+        {
+          "Key": "Driver Size",
+          "Value": "40mm Custom Titanium Drivers"
+        },
+        {
+          "Key": "Battery Life",
+          "Value": "40 Hours (ANC on)"
+        },
+        {
+          "Key": "Connectivity",
+          "Value": "Bluetooth 5.3 \u002B 3.5mm Aux"
+        }
+      ],
+      "Offers": [
+        "Apply coupon NOVA20 for an extra 20% off at checkout"
+      ],
+      "Reviews": [
+        {
+          "Author": "Karan Malhotra",
+          "Rating": 5,
+          "Date": "08 Sep 2026",
+          "Title": "Noise cancellation is magic",
+          "Text": "Blocks out all airplane drone and office chatter effortlessly."
+        }
+      ]
+    },
+    {
+      "Id": "prod-3",
+      "Title": "AuraCraft Pure Cotton Casual Slim Fit Shirt",
+      "Category": "fashion",
+      "Brand": "AuraCraft",
+      "Price": 1299,
+      "Mrp": 2999,
+      "Discount": 57,
+      "Rating": 4.4,
+      "RatingCount": 3120,
+      "ReviewsCount": 520,
+      "InStock": true,
+      "StockCount": 80,
+      "Badge": "Bestseller",
+      "Images": [
+        "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+      ],
+      "Variants": {
+        "Color": null,
+        "Storage": null,
+        "Size": [
+          "S",
+          "M",
+          "L",
+          "XL",
+          "XXL"
+        ],
+        "DisplaySize": null
+      },
+      "Description": "Tailored to perfection from 100% breathable organic combed cotton.",
+      "Specs": [
+        {
+          "Key": "Material",
+          "Value": "100% Combed Organic Cotton"
+        },
+        {
+          "Key": "Fit",
+          "Value": "Modern Slim Fit"
+        }
+      ],
+      "Offers": [
+        "Buy 2 Get Additional 15% Off automatically in Cart"
+      ],
+      "Reviews": [
+        {
+          "Author": "Rohan Joshi",
+          "Rating": 5,
+          "Date": "04 Sep 2026",
+          "Title": "Perfect office shirt",
+          "Text": "Fabric has a great handfeel and does not wrinkle easily."
+        }
+      ]
+    },
+    {
+      "Id": "prod-4",
+      "Title": "MasterChef Smart Rapid Air Fryer (5.5 Liters, 1500W)",
+      "Category": "home",
+      "Brand": "MasterChef",
+      "Price": 5499,
+      "Mrp": 9999,
+      "Discount": 45,
+      "Rating": 4.7,
+      "RatingCount": 5690,
+      "ReviewsCount": 940,
+      "InStock": true,
+      "StockCount": 15,
+      "Badge": "Limited Stock",
+      "Images": [
+        "https://images.unsplash.com/photo-1585659722983-3a675dabf23d?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+      ],
+      "Variants": {
+        "Color": null,
+        "Storage": null,
+        "Size": null,
+        "DisplaySize": null
+      },
+      "Description": "Crisp, healthy meals with up to 90% less oil.",
+      "Specs": [
+        {
+          "Key": "Capacity",
+          "Value": "5.5 Liters (serves 4-6)"
+        },
+        {
+          "Key": "Power",
+          "Value": "1500 Watts High Efficiency"
+        }
+      ],
+      "Offers": [
+        "Complimentary Recipe E-Book with 100\u002B Chef Recipes"
+      ],
+      "Reviews": [
+        {
+          "Author": "Deepa Narang",
+          "Rating": 5,
+          "Date": "02 Sep 2026",
+          "Title": "Crispy samosas without oil!",
+          "Text": "Best kitchen purchase this year."
+        }
+      ]
+    },
+    {
+      "Id": "prod-5",
+      "Title": "FrostKing 340L Double Door Inverter Refrigerator",
+      "Category": "appliances",
+      "Brand": "FrostKing",
+      "Price": 32490,
+      "Mrp": 44990,
+      "Discount": 28,
+      "Rating": 4.5,
+      "RatingCount": 2190,
+      "ReviewsCount": 380,
+      "InStock": false,
+      "StockCount": 0,
+      "Badge": "Out of Stock",
+      "Images": [
+        "https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+      ],
+      "Variants": {
+        "Color": null,
+        "Storage": null,
+        "Size": null,
+        "DisplaySize": null
+      },
+      "Description": "Advanced 3-Star energy rated Frost-Free double door refrigerator.",
+      "Specs": [
+        {
+          "Key": "Capacity",
+          "Value": "340 Liters"
+        },
+        {
+          "Key": "Energy Rating",
+          "Value": "3 Star (BEE Compliant)"
+        }
+      ],
+      "Offers": [
+        "Free scheduled installation by brand technician"
+      ],
+      "Reviews": [
+        {
+          "Author": "Rajesh Nair",
+          "Rating": 4,
+          "Date": "15 Aug 2026",
+          "Title": "Silent and cools fast",
+          "Text": "Hardly makes any noise."
+        }
+      ]
+    },
+    {
+      "Id": "prod-6",
+      "Title": "GlowRadiance 10% Niacinamide \u0026 Zinc Face Serum (30ml)",
+      "Category": "beauty",
+      "Brand": "GlowRadiance",
+      "Price": 599,
+      "Mrp": 999,
+      "Discount": 40,
+      "Rating": 4.9,
+      "RatingCount": 19800,
+      "ReviewsCount": 4520,
+      "InStock": true,
+      "StockCount": 120,
+      "Badge": "Dermatologist Approved",
+      "Images": [
+        "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+      ],
+      "Variants": {
+        "Color": null,
+        "Storage": null,
+        "Size": null,
+        "DisplaySize": null
+      },
+      "Description": "Clinically formulated to visibly minimize pores and fade dark spots.",
+      "Specs": [
+        {
+          "Key": "Key Ingredients",
+          "Value": "10% Pure Niacinamide \u002B 1% Zinc PCA"
+        }
+      ],
+      "Offers": [
+        "Buy 3 Pay for 2 Combo offer automatically applied"
+      ],
+      "Reviews": [
+        {
+          "Author": "Kavita Singh",
+          "Rating": 5,
+          "Date": "07 Sep 2026",
+          "Title": "Cleared my stubborn marks",
+          "Text": "Visible difference in 2 weeks."
+        }
+      ]
+    }
+  ],
+  "Users": [
+    {
+      "Id": "usr-1",
+      "Name": "Jay Vardhan",
+      "Email": "jay@aaryamart.com",
+      "Phone": "9876543210",
+      "PasswordHash": "mooF7Oxaft7Yzj2zVeGZjncH157TjFU7vIX6sPcZrYQ=",
+      "PasswordSalt": "BIBH3MWRetdgobAmVgz/wA==",
+      "Role": "Admin",
+      "Status": "Active",
+      "OrdersCount": 5,
+      "JoinedAt": "2026-09-11T05:55:05.5998985Z"
+    },
+    {
+      "Id": "usr-admin-2",
+      "Name": "AaryaMart Administrator",
+      "Email": "admin@aaryamart.in",
+      "Phone": "9876543211",
+      "PasswordHash": "mooF7Oxaft7Yzj2zVeGZjncH157TjFU7vIX6sPcZrYQ=",
+      "PasswordSalt": "BIBH3MWRetdgobAmVgz/wA==",
+      "Role": "Admin",
+      "Status": "Active",
+      "OrdersCount": 0,
+      "JoinedAt": "2026-09-11T05:55:05.6009557Z"
+    },
+    {
+      "Id": "usr-2",
+      "Name": "Priya Sharma",
+      "Email": "priya@gmail.com",
+      "Phone": "9811223344",
+      "PasswordHash": "J9hTXGrap2nwHo9iD6zlFtAzULlR3ote8j4E5RdAjik=",
+      "PasswordSalt": "KKE3ZJxKjD2tqclbRB6MMQ==",
+      "Role": "Customer",
+      "Status": "Active",
+      "OrdersCount": 2,
+      "JoinedAt": "2026-09-11T05:55:05.6009568Z"
+    },
+    {
+      "Id": "usr-3",
+      "Name": "Arun Patel",
+      "Email": "arun.patel@gmail.com",
+      "Phone": "9876501234",
+      "PasswordHash": "J9hTXGrap2nwHo9iD6zlFtAzULlR3ote8j4E5RdAjik=",
+      "PasswordSalt": "KKE3ZJxKjD2tqclbRB6MMQ==",
+      "Role": "Customer",
+      "Status": "Active",
+      "OrdersCount": 1,
+      "JoinedAt": "2026-09-11T05:55:05.600957Z"
+    }
+  ],
+  "Orders": [
+    {
+      "Id": "NM-2026-8346",
+      "Date": "11 Sept 2026",
+      "Customer": "Jay Vardhan",
+      "Email": "jay@aaryamart.com",
+      "Phone": "9876543210",
+      "Address": "Flat 402, Lotus Heights, Outer Ring Road, PIN: 560103",
+      "Status": "Placed",
+      "TrackingId": "TRK-IND-B4B29AA9",
+      "DeliverySpeed": "Standard Free",
+      "Subtotal": 69999,
+      "Discount": 0,
+      "DeliveryFee": 0,
+      "Tax": 3499.95,
+      "Total": 73498.95,
+      "Items": [
+        {
+          "ProductId": "prod-1",
+          "Title": "AaryaPro 15 Ultra 5G (Phantom Titanium, 256 GB)",
+          "Qty": 1,
+          "Price": 69999,
+          "Img": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+        }
+      ],
+      "PaymentMethod": "UPI / Card"
+    },
+    {
+      "Id": "NM-2026-2012",
+      "Date": "11 Sept 2026",
+      "Customer": "Pooja Sharma",
+      "Email": "pooja.sharma@example.com",
+      "Phone": "\u002B91 98765 43210",
+      "Address": "Flat 402, Lotus Heights, Bengaluru, 560001",
+      "Status": "Confirmed",
+      "TrackingId": "TRK-IND-B95D9043",
+      "DeliverySpeed": "Express Next-Day",
+      "Subtotal": 64999,
+      "Discount": 100,
+      "DeliveryFee": 99,
+      "Tax": 3244.95,
+      "Total": 68242.95,
+      "Items": [
+        {
+          "ProductId": "prod-1",
+          "Title": "AaryaPro X1 Ultra 5G (Celestial Blue, 256GB)",
+          "Qty": 1,
+          "Price": 64999,
+          "Img": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600"
+        }
+      ],
+      "PaymentMethod": "UPI"
+    },
+    {
+      "Id": "NM-982410",
+      "Date": "10 Sep 2026",
+      "Customer": "Jay Vardhan",
+      "Email": "jay@aaryamart.com",
+      "Phone": "9876543210",
+      "Address": "Flat 402, Lotus Heights, Bengaluru - 560103",
+      "Status": "Shipped",
+      "TrackingId": "TRK-IN-88992",
+      "DeliverySpeed": "Standard Free",
+      "Subtotal": 14999,
+      "Discount": 0,
+      "DeliveryFee": 0,
+      "Tax": 750,
+      "Total": 14999,
+      "Items": [
+        {
+          "ProductId": "prod-2",
+          "Title": "SonicWave Elite Active Noise Cancelling Headphones",
+          "Qty": 1,
+          "Price": 14999,
+          "Img": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+        }
+      ],
+      "PaymentMethod": "UPI"
+    },
+    {
+      "Id": "NM-981042",
+      "Date": "02 Sep 2026",
+      "Customer": "Priya Sharma",
+      "Email": "priya@gmail.com",
+      "Phone": "9811223344",
+      "Address": "12 Brigade Road, Bengaluru - 560001",
+      "Status": "Delivered",
+      "TrackingId": "TRK-IN-77123",
+      "DeliverySpeed": "Express Next-Day",
+      "Subtotal": 2499,
+      "Discount": 0,
+      "DeliveryFee": 99,
+      "Tax": 125,
+      "Total": 2499,
+      "Items": [
+        {
+          "ProductId": "prod-8",
+          "Title": "UrbanStride Breathable Athletic Running Sneakers",
+          "Qty": 1,
+          "Price": 2499,
+          "Img": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format\u0026fit=crop\u0026w=800\u0026q=80"
+        }
+      ],
+      "PaymentMethod": "UPI"
+    }
+  ],
+  "Coupons": [
+    {
+      "Code": "NOVA20",
+      "DiscountPercent": 20,
+      "DiscountFlat": null,
+      "MinCart": 0,
+      "Description": "20% off on your entire cart",
+      "UsageCount": 142,
+      "Validity": "31 Dec 2026"
+    },
+    {
+      "Code": "WELCOME100",
+      "DiscountPercent": null,
+      "DiscountFlat": 100,
+      "MinCart": 500,
+      "Description": "\u20B9100 flat discount on welcome orders over \u20B9500",
+      "UsageCount": 120,
+      "Validity": "31 Dec 2026"
+    },
+    {
+      "Code": "FESTIVE20",
+      "DiscountPercent": 20,
+      "DiscountFlat": null,
+      "MinCart": 1000,
+      "Description": "20% festive discount on orders above \u20B91000",
+      "UsageCount": 95,
+      "Validity": "31 Dec 2026"
+    },
+    {
+      "Code": "FIRST100",
+      "DiscountPercent": null,
+      "DiscountFlat": 100,
+      "MinCart": 500,
+      "Description": "\u20B9100 flat discount on orders over \u20B9500",
+      "UsageCount": 89,
+      "Validity": "30 Nov 2026"
+    },
+    {
+      "Code": "FESTIVE500",
+      "DiscountPercent": null,
+      "DiscountFlat": 500,
+      "MinCart": 2000,
+      "Description": "\u20B9500 festive discount on orders above \u20B92000",
+      "UsageCount": 65,
+      "Validity": "15 Oct 2026"
+    }
+  ],
+  "Addresses": [
+    {
+      "Id": "addr-1",
+      "UserEmail": "jay@aaryamart.com",
+      "Tag": "Home",
+      "Name": "Jay Vardhan",
+      "Phone": "9876543210",
+      "Street": "Flat 402, Lotus Heights, Outer Ring Road",
+      "City": "Bengaluru",
+      "State": "Karnataka",
+      "Pin": "560103",
+      "IsDefault": true
+    },
+    {
+      "Id": "addr-2",
+      "UserEmail": "jay@aaryamart.com",
+      "Tag": "Work",
+      "Name": "Jay Vardhan",
+      "Phone": "9876543210",
+      "Street": "Building 7B, Embassy TechVillage",
+      "City": "Bengaluru",
+      "State": "Karnataka",
+      "Pin": "560103",
+      "IsDefault": false
+    },
+    {
+      "Id": "addr-3",
+      "UserEmail": "admin@aaryamart.in",
+      "Tag": "HQ",
+      "Name": "AaryaMart Admin",
+      "Phone": "9876543211",
+      "Street": "Level 8, Nova Tower, Cyber City",
+      "City": "Bengaluru",
+      "State": "Karnataka",
+      "Pin": "560001",
+      "IsDefault": true
+    },
+    {
+      "Id": "addr-4",
+      "UserEmail": "arun.patel@gmail.com",
+      "Tag": "Home",
+      "Name": "Arun Patel",
+      "Phone": "9876501234",
+      "Street": "Flat 302, Skyline Residency, Koramangala 4th Block",
+      "City": "Bengaluru",
+      "State": "Karnataka",
+      "Pin": "560034",
+      "IsDefault": true
+    },
+    {
+      "Id": "addr-5",
+      "UserEmail": "arun.patel@gmail.com",
+      "Tag": "Work",
+      "Name": "Arun Patel",
+      "Phone": "9876501234",
+      "Street": "Indiranagar 100ft Road, Stage 2",
+      "City": "Bengaluru",
+      "State": "Karnataka",
+      "Pin": "560038",
+      "IsDefault": false
+    }
+  ]
+}

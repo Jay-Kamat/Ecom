@@ -248,7 +248,7 @@ export default function ProductDetailsModal() {
                 )}
               </div>
               <div style={{ fontSize: '0.78rem', color: '#64748b', marginTop: '4px' }}>
-                Inclusive of all taxes • Free delivery with NovaMart Plus
+                Inclusive of all taxes • Free delivery with AaryaMart Plus
               </div>
             </div>
 

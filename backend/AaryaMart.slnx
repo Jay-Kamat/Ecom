@@ -1,0 +1,6 @@
+﻿<Solution>
+  <Project Path="AaryaMart.Api/AaryaMart.Api.csproj" />
+  <Project Path="AaryaMart.Application/AaryaMart.Application.csproj" />
+  <Project Path="AaryaMart.Domain/AaryaMart.Domain.csproj" />
+  <Project Path="AaryaMart.Infrastructure/AaryaMart.Infrastructure.csproj" />
+</Solution>

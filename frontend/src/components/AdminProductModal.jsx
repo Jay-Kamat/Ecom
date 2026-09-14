@@ -7,7 +7,7 @@ export default function AdminProductModal() {
   
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('mobiles');
-  const [brand, setBrand] = useState('NovaTech');
+  const [brand, setBrand] = useState('AaryaTech');
   const [price, setPrice] = useState('');
   const [mrp, setMrp] = useState('');
   const [stock, setStock] = useState('25');
@@ -163,7 +163,7 @@ export default function AdminProductModal() {
             <label style={{ fontSize: '0.8rem', fontWeight: '700', color: '#475569' }}>Product Title *</label>
             <input
               type="text"
-              placeholder="e.g. NovaPad Pro 12-inch Tablet 5G"
+              placeholder="e.g. AaryaPad Pro 12-inch Tablet 5G"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required

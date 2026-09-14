@@ -1,18 +1,18 @@
-// NovaMart REST API Client with JWT Bearer Auth & Fallback
+// AaryaMart REST API Client with JWT Bearer Auth & Fallback
 export const API_BASE = 'http://localhost:5000/api';
 
 class ApiClient {
   constructor() {
-    this.token = localStorage.getItem('novamart_jwt') || null;
+    this.token = localStorage.getItem('aaryamart_jwt') || null;
     this.isOnline = false;
   }
 
   setToken(token) {
     this.token = token;
     if (token) {
-      localStorage.setItem('novamart_jwt', token);
+      localStorage.setItem('aaryamart_jwt', token);
     } else {
-      localStorage.removeItem('novamart_jwt');
+      localStorage.removeItem('aaryamart_jwt');
     }
   }
 

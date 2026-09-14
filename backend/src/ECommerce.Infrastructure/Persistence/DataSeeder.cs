@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ECommerce.Infrastructure.Persistence;
 
 /// <summary>
-/// Seeds the database with realistic NovaMart-compatible demo data.
+/// Seeds the database with realistic AaryaMart-compatible demo data.
 /// Runs at startup; idempotent – only seeds if no data exists.
 /// </summary>
 public static class DataSeeder
@@ -33,8 +33,8 @@ public static class DataSeeder
         var adminUser = new User
         {
             FirstName = "Admin",
-            LastName = "NovaMart",
-            Email = "admin@novamart.in",
+            LastName = "AaryaMart",
+            Email = "admin@aaryamart.in",
             PasswordHash = adminHash,
             PasswordSalt = adminSalt,
             Phone = "+91 99887 76655",
@@ -106,13 +106,13 @@ public static class DataSeeder
         await context.SaveChangesAsync();
 
         // 6. Brands
-        var novaTech = new Brand { Name = "NovaTech", Slug = "novatech", Description = "Premium NovaMart in-house brand" };
+        var aaryaTech = new Brand { Name = "AaryaTech", Slug = "aaryatech", Description = "Premium AaryaMart in-house brand" };
         var samsung = new Brand { Name = "Samsung", Slug = "samsung", Description = "Samsung Electronics" };
         var apple = new Brand { Name = "Apple", Slug = "apple", Description = "Apple Inc." };
         var sony = new Brand { Name = "Sony", Slug = "sony", Description = "Sony Corporation" };
         var nike = new Brand { Name = "Nike", Slug = "nike", Description = "Nike Sportswear" };
         var bose = new Brand { Name = "Bose", Slug = "bose", Description = "Bose Audio" };
-        context.Brands.AddRange(novaTech, samsung, apple, sony, nike, bose);
+        context.Brands.AddRange(aaryaTech, samsung, apple, sony, nike, bose);
         await context.SaveChangesAsync();
 
         // 7. Products
@@ -120,10 +120,10 @@ public static class DataSeeder
         {
             new Product
             {
-                Name = "NovaPro X1 Ultra 5G (Celestial Blue, 256GB)", SKU = "NPRO-X1-256-BLUE",
-                Description = "The NovaPro X1 Ultra is NovaMart's flagship 5G smartphone, featuring the latest Snapdragon 8 Gen 3 chipset, 12GB RAM, and a stunning 6.8\" AMOLED display. With its triple-camera system boasting a 200MP primary sensor, 12x optical zoom, and 8K video recording, it redefines mobile photography. The 5000mAh battery with 120W HyperCharge technology ensures you stay powered all day.",
+                Name = "AaryaPro X1 Ultra 5G (Celestial Blue, 256GB)", SKU = "NPRO-X1-256-BLUE",
+                Description = "The AaryaPro X1 Ultra is AaryaMart's flagship 5G smartphone, featuring the latest Snapdragon 8 Gen 3 chipset, 12GB RAM, and a stunning 6.8\" AMOLED display. With its triple-camera system boasting a 200MP primary sensor, 12x optical zoom, and 8K video recording, it redefines mobile photography. The 5000mAh battery with 120W HyperCharge technology ensures you stay powered all day.",
                 ShortDescription = "Flagship 5G phone with 200MP camera and 120W charging",
-                CategoryId = smartphones.Id, BrandId = novaTech.Id,
+                CategoryId = smartphones.Id, BrandId = aaryaTech.Id,
                 Price = 64999, Mrp = 74999, DiscountPercentage = 13,
                 StockQuantity = 45, Rating = 4.8, RatingCount = 3247, ReviewsCount = 892,
                 IsFeatured = true, Badge = "Bestseller", Status = ProductStatus.Active
@@ -180,10 +180,10 @@ public static class DataSeeder
             },
             new Product
             {
-                Name = "NovaTech UltraBook Pro 14 (Silver, Core i7, 16GB/1TB SSD)", SKU = "NOVA-ULTP14-I7-1TB",
-                Description = "NovaTech UltraBook Pro 14 powered by Intel Core i7-13th Gen, 16GB DDR5 RAM, 1TB NVMe SSD, and a stunning 2.8K 120Hz OLED display. Weighs just 1.2kg with a 72Wh battery.",
+                Name = "AaryaTech UltraBook Pro 14 (Silver, Core i7, 16GB/1TB SSD)", SKU = "AARYA-ULTP14-I7-1TB",
+                Description = "AaryaTech UltraBook Pro 14 powered by Intel Core i7-13th Gen, 16GB DDR5 RAM, 1TB NVMe SSD, and a stunning 2.8K 120Hz OLED display. Weighs just 1.2kg with a 72Wh battery.",
                 ShortDescription = "Ultra-thin OLED laptop with Core i7 and 1TB SSD",
-                CategoryId = laptops.Id, BrandId = novaTech.Id,
+                CategoryId = laptops.Id, BrandId = aaryaTech.Id,
                 Price = 89999, Mrp = 99999, DiscountPercentage = 10,
                 StockQuantity = 34, Rating = 4.6, RatingCount = 1234, ReviewsCount = 389,
                 IsFeatured = true, Badge = "New Launch", Status = ProductStatus.Active
@@ -220,7 +220,7 @@ public static class DataSeeder
                 "https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?w=600" },
             ["BOSE-QC45-WHITE"] = new() {
                 "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600" },
-            ["NOVA-ULTP14-I7-1TB"] = new() {
+            ["AARYA-ULTP14-I7-1TB"] = new() {
                 "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600",
                 "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=600" },
             ["SAMSUNG-TABS9U-256-WIFI"] = new() {
@@ -258,7 +258,7 @@ public static class DataSeeder
                 DiscountType = DiscountType.Flat, DiscountAmount = 200, MinimumPurchase = 1000, IsActive = true },
             new Coupon { Code = "FLAT10PCT", Description = "Flat 10% off on all orders",
                 DiscountType = DiscountType.Percentage, DiscountAmount = 10, MinimumPurchase = 0, MaxDiscount = 500, IsActive = true },
-            new Coupon { Code = "NOVA500", Description = "₹500 off on orders above ₹2000",
+            new Coupon { Code = "AARYA500", Description = "₹500 off on orders above ₹2000",
                 DiscountType = DiscountType.Flat, DiscountAmount = 500, MinimumPurchase = 2000, IsActive = true },
             new Coupon { Code = "FIRST15", Description = "15% off for first-time buyers",
                 DiscountType = DiscountType.Percentage, DiscountAmount = 15, MinimumPurchase = 0, MaxDiscount = 1500, IsActive = true }

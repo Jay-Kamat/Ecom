@@ -1,6 +1,6 @@
 {
-  "name": "NovaMart Online Shopping",
-  "short_name": "NovaMart",
+  "name": "AaryaMart Online Shopping",
+  "short_name": "AaryaMart",
   "description": "Modern, responsive multi-category e-commerce storefront",
   "start_url": "/",
   "display": "standalone",

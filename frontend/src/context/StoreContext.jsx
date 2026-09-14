@@ -7,31 +7,31 @@ const StoreContext = createContext(null);
 export function StoreProvider({ children }) {
   // Products state (loads initial and checks API)
   const [products, setProducts] = useState(() => {
-    const saved = localStorage.getItem('novamart_products');
+    const saved = localStorage.getItem('aaryamart_products');
     return saved ? JSON.parse(saved) : INITIAL_PRODUCTS;
   });
 
   // Cart state
   const [cart, setCart] = useState(() => {
-    const saved = localStorage.getItem('novamart_cart');
+    const saved = localStorage.getItem('aaryamart_cart');
     return saved ? JSON.parse(saved) : [];
   });
 
   // Wishlist state
   const [wishlist, setWishlist] = useState(() => {
-    const saved = localStorage.getItem('novamart_wishlist');
+    const saved = localStorage.getItem('aaryamart_wishlist');
     return saved ? JSON.parse(saved) : [];
   });
 
   // User auth state
   const [user, setUser] = useState(() => {
-    const saved = localStorage.getItem('novamart_user');
+    const saved = localStorage.getItem('aaryamart_user');
     return saved ? JSON.parse(saved) : null;
   });
 
   // Orders state
   const [orders, setOrders] = useState(() => {
-    const saved = localStorage.getItem('novamart_orders');
+    const saved = localStorage.getItem('aaryamart_orders');
     return saved ? JSON.parse(saved) : [];
   });
 
@@ -62,27 +62,27 @@ export function StoreProvider({ children }) {
 
   // Sync products, cart, wishlist to localStorage
   useEffect(() => {
-    localStorage.setItem('novamart_products', JSON.stringify(products));
+    localStorage.setItem('aaryamart_products', JSON.stringify(products));
   }, [products]);
 
   useEffect(() => {
-    localStorage.setItem('novamart_cart', JSON.stringify(cart));
+    localStorage.setItem('aaryamart_cart', JSON.stringify(cart));
   }, [cart]);
 
   useEffect(() => {
-    localStorage.setItem('novamart_wishlist', JSON.stringify(wishlist));
+    localStorage.setItem('aaryamart_wishlist', JSON.stringify(wishlist));
   }, [wishlist]);
 
   useEffect(() => {
     if (user) {
-      localStorage.setItem('novamart_user', JSON.stringify(user));
+      localStorage.setItem('aaryamart_user', JSON.stringify(user));
     } else {
-      localStorage.removeItem('novamart_user');
+      localStorage.removeItem('aaryamart_user');
     }
   }, [user]);
 
   useEffect(() => {
-    localStorage.setItem('novamart_orders', JSON.stringify(orders));
+    localStorage.setItem('aaryamart_orders', JSON.stringify(orders));
   }, [orders]);
 
   // Try to load products from live API if online
@@ -96,7 +96,7 @@ export function StoreProvider({ children }) {
               id: p.id,
               title: p.name,
               category: p.category?.toLowerCase() || 'electronics',
-              brand: p.brand || 'NovaTech',
+              brand: p.brand || 'AaryaTech',
               price: p.price,
               mrp: p.mrp || p.price,
               discount: p.discountPercentage || 0,

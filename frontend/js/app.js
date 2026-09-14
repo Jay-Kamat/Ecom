@@ -1,4 +1,4 @@
-// NovaMart Comprehensive E-Commerce Engine & Admin Panel
+// AaryaMart Comprehensive E-Commerce Engine & Admin Panel
 import { CATEGORIES, BRANDS, PRODUCTS, INITIAL_SAVED_ADDRESSES, INITIAL_USERS, VALID_COUPONS } from './data.js';
 import { CookieManager } from './cookies.js';
 import { api } from './api.js';
@@ -7,7 +7,7 @@ import { api } from './api.js';
 export const Storage = {
   get(key, fallback) {
     try {
-      const data = localStorage.getItem(`novamart_${key}`);
+      const data = localStorage.getItem(`AaryaMart_${key}`);
       return data ? JSON.parse(data) : fallback;
     } catch {
       return fallback;
@@ -15,7 +15,7 @@ export const Storage = {
   },
   set(key, val) {
     try {
-      localStorage.setItem(`novamart_${key}`, JSON.stringify(val));
+      localStorage.setItem(`AaryaMart_${key}`, JSON.stringify(val));
     } catch {}
   }
 };
@@ -32,7 +32,7 @@ export const State = {
   currentUser: Storage.get('currentUser', {
     id: 'usr-1',
     name: 'Jay Vardhan',
-    email: 'jay@novamart.com',
+    email: 'jay@AaryaMart.com',
     phone: '9876543210',
     role: 'Admin',
     isLoggedIn: true
@@ -59,7 +59,7 @@ export const State = {
       id: 'NM-982410',
       date: '10 Sep 2026',
       customer: 'Jay Vardhan',
-      email: 'jay@novamart.com',
+      email: 'jay@AaryaMart.com',
       status: 'Shipped',
       trackingId: 'TRK-IN-88992',
       deliverySpeed: 'Standard Free',
@@ -201,8 +201,8 @@ function selectCategory(catId) {
   const catObj = State.categories.find(c => c.id === catId);
   const catName = catObj ? catObj.name : 'All Products';
   updateMetadata(
-    `NovaMart | ${catName} - Mega Deals & Fast Shipping`,
-    `Shop latest ${catName} at NovaMart with massive discounts, verified customer reviews, and swift delivery.`
+    `AaryaMart | ${catName} - Mega Deals & Fast Shipping`,
+    `Shop latest ${catName} at AaryaMart with massive discounts, verified customer reviews, and swift delivery.`
   );
 }
 
@@ -678,8 +678,8 @@ function openPDP(productId) {
   switchView('pdp');
 
   updateMetadata(
-    `NovaMart | ${product.title} - Price, Reviews & Specs`,
-    `Buy ${product.title} online at best price on NovaMart. Flat discounts, verified specs, manufacturer warranty and fast delivery.`
+    `AaryaMart | ${product.title} - Price, Reviews & Specs`,
+    `Buy ${product.title} online at best price on AaryaMart. Flat discounts, verified specs, manufacturer warranty and fast delivery.`
   );
 }
 
@@ -1039,8 +1039,8 @@ function renderFullCartPage() {
   });
 
   updateMetadata(
-    `NovaMart | Shopping Cart (${State.cart.length} items)`,
-    `Review your items in NovaMart cart. Apply discount coupons, calculate taxes, and enjoy free delivery on eligible orders.`
+    `AaryaMart | Shopping Cart (${State.cart.length} items)`,
+    `Review your items in AaryaMart cart. Apply discount coupons, calculate taxes, and enjoy free delivery on eligible orders.`
   );
 }
 
@@ -1155,8 +1155,8 @@ function renderWishlistPage() {
   });
 
   updateMetadata(
-    `NovaMart | My Wishlist (${items.length} items)`,
-    `View and manage your saved products on NovaMart.`
+    `AaryaMart | My Wishlist (${items.length} items)`,
+    `View and manage your saved products on AaryaMart.`
   );
 }
 
@@ -1222,7 +1222,7 @@ function renderAddressBook() {
     };
   });
 
-  updateMetadata('NovaMart | Saved Address Book', 'Manage your saved home and office delivery addresses on NovaMart.');
+  updateMetadata('AaryaMart | Saved Address Book', 'Manage your saved home and office delivery addresses on AaryaMart.');
 }
 
 function openAddressModal() {
@@ -1335,7 +1335,7 @@ function renderOrdersPage() {
           `).join('')}
 
           <div style="margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--color-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-            <span style="font-size: 0.85rem; color: var(--color-text-muted);">Need help? <a href="mailto:support@novamart.com?subject=Order%20Help%20-${order.id}" class="clickable-email">support@novamart.com</a></span>
+            <span style="font-size: 0.85rem; color: var(--color-text-muted);">Need help? <a href="mailto:support@AaryaMart.com?subject=Order%20Help%20-${order.id}" class="clickable-email">support@AaryaMart.com</a></span>
             <div style="display: flex; align-items: center; gap: 12px;">
               <button class="btn-outline-navy" style="font-size: 0.8rem; padding: 6px 12px; min-height: 36px;" onclick="window.print()">
                 🖨️ Print Invoice
@@ -1349,8 +1349,8 @@ function renderOrdersPage() {
   `;
 
   updateMetadata(
-    `NovaMart | My Orders & Live Tracking`,
-    `Track your orders, view item details, and download delivery receipts on NovaMart.`
+    `AaryaMart | My Orders & Live Tracking`,
+    `Track your orders, view item details, and download delivery receipts on AaryaMart.`
   );
 }
 
@@ -1467,7 +1467,7 @@ function handleCheckoutSubmit(e) {
     id: newOrderId,
     date: 'Just Now',
     customer: nameInput.value.trim(),
-    email: State.currentUser.email || 'customer@novamart.com',
+    email: State.currentUser.email || 'customer@AaryaMart.com',
     status: 'Placed',
     trackingId: 'TRK-IN-' + Math.floor(10000 + Math.random() * 90000),
     deliverySpeed: deliverySpeedLabel,
@@ -1530,7 +1530,7 @@ function renderAdminPanel() {
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
       <div>
         <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--color-navy);">
-          NovaMart Merchant Admin Center
+          AaryaMart Merchant Admin Center
         </h2>
         <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 4px;">
           <span class="admin-badge">⚡ Store Owner Operations Active</span>
@@ -1584,7 +1584,7 @@ function renderAdminPanel() {
   });
 
   renderAdminTabContent();
-  updateMetadata('NovaMart | Merchant Admin Operations', 'Manage catalog, orders, promotions and inventory on NovaMart Admin Panel.');
+  updateMetadata('AaryaMart | Merchant Admin Operations', 'Manage catalog, orders, promotions and inventory on AaryaMart Admin Panel.');
 }
 
 function renderAdminTabContent() {
@@ -2084,7 +2084,7 @@ async function handleAdminAddProductSubmit(e) {
     id: 'prod-' + (State.products.length + 1),
     title,
     category: category || 'electronics',
-    brand: brand || 'NovaTech',
+    brand: brand || 'AaryaTech',
     price,
     mrp,
     discount: Math.round(((mrp - price) / mrp) * 100),
@@ -2333,8 +2333,8 @@ function renderProfileView() {
             Have questions about billing, warranties or address change? Our dedicated team is ready to assist:
           </p>
           <div style="margin-top: 10px;">
-            <a href="mailto:support@novamart.com?subject=Profile%20Assistance" class="clickable-email">
-              ✉️ support@novamart.com
+            <a href="mailto:support@AaryaMart.com?subject=Profile%20Assistance" class="clickable-email">
+              ✉️ support@AaryaMart.com
             </a>
           </div>
         </div>
@@ -2352,7 +2352,7 @@ function renderProfileView() {
   });
   document.getElementById('btn-profile-logout')?.addEventListener('click', handleLogout);
 
-  updateMetadata('NovaMart | User Profile & Security', 'Manage your personal account settings, addresses, and orders on NovaMart.');
+  updateMetadata('AaryaMart | User Profile & Security', 'Manage your personal account settings, addresses, and orders on AaryaMart.');
 }
 
 // ==========================================================================
@@ -2364,7 +2364,7 @@ function openPolicyView(policyType) {
       title: 'Return & Refund Policy',
       content: `
         <h3>7-Day Easy Returns Guarantee</h3>
-        <p>At NovaMart, customer satisfaction is our top priority. Most products are eligible for a free return or exchange within 7 days of delivery.</p>
+        <p>At AaryaMart, customer satisfaction is our top priority. Most products are eligible for a free return or exchange within 7 days of delivery.</p>
         <h4>Eligibility Conditions</h4>
         <ul>
           <li>The product must be in unused, unwashed, and original condition with all tags and barcodes intact.</li>
@@ -2373,31 +2373,31 @@ function openPolicyView(policyType) {
         </ul>
         <h4>Instant Refund Processing</h4>
         <p>Refunds are initiated immediately upon quality inspection at our warehouse. UPI and Net Banking refunds reflect within 2-4 business days.</p>
-        <p>For return pickup queries, email us at <a href="mailto:support@novamart.com?subject=Return%20Inquiry" class="clickable-email">support@novamart.com</a>.</p>
+        <p>For return pickup queries, email us at <a href="mailto:support@AaryaMart.com?subject=Return%20Inquiry" class="clickable-email">support@AaryaMart.com</a>.</p>
       `
     },
     privacy: {
       title: 'Privacy & Cookie Security Policy',
       content: `
         <h3>Your Privacy &amp; Data Protection</h3>
-        <p>NovaMart is committed to protecting your personal information with enterprise-grade encryption and strict confidentiality standards.</p>
+        <p>AaryaMart is committed to protecting your personal information with enterprise-grade encryption and strict confidentiality standards.</p>
         <h4>Information We Collect</h4>
         <p>We only collect information necessary to fulfill your orders, provide shipment tracking notifications, and personalize your shopping experience.</p>
         <h4>Cookie Security Architecture</h4>
         <p>All authentication tokens and user consent preferences are stored utilizing strict <code>SameSite=Strict</code> and <code>Secure</code> flags to prevent cross-site request forgery (CSRF).</p>
-        <p>Questions regarding data privacy? Contact our Data Officer at <a href="mailto:privacy@novamart.com?subject=Privacy%20Question" class="clickable-email">privacy@novamart.com</a>.</p>
+        <p>Questions regarding data privacy? Contact our Data Officer at <a href="mailto:privacy@AaryaMart.com?subject=Privacy%20Question" class="clickable-email">privacy@AaryaMart.com</a>.</p>
       `
     },
     terms: {
       title: 'Terms of Use &amp; Service',
       content: `
-        <h3>NovaMart Terms &amp; Conditions</h3>
-        <p>By accessing and placing orders on NovaMart, you agree to adhere to these Terms of Service.</p>
+        <h3>AaryaMart Terms &amp; Conditions</h3>
+        <p>By accessing and placing orders on AaryaMart, you agree to adhere to these Terms of Service.</p>
         <h4>Orders &amp; Pricing</h4>
         <p>All prices are listed in Indian Rupees (INR) and are inclusive of applicable GST unless explicitly stated otherwise.</p>
         <h4>Authorized Usage</h4>
         <p>You agree not to misuse our website for fraudulent transactions or automated catalog scraping.</p>
-        <p>Legal inquiries: <a href="mailto:legal@novamart.com?subject=Terms%20Inquiry" class="clickable-email">legal@novamart.com</a>.</p>
+        <p>Legal inquiries: <a href="mailto:legal@AaryaMart.com?subject=Terms%20Inquiry" class="clickable-email">legal@AaryaMart.com</a>.</p>
       `
     },
     contact: {
@@ -2406,9 +2406,9 @@ function openPolicyView(policyType) {
         <h3>We're Here to Help 24/7</h3>
         <p>Have an inquiry about an order, delivery status, or bulk purchase? Our friendly customer support team is available around the clock.</p>
         <div style="background: var(--color-bg); padding: 16px; border-radius: var(--radius-sm); margin: 16px 0;">
-          <p>📧 Email Us: <a href="mailto:support@novamart.com?subject=Customer%20Support" class="clickable-email" style="font-size: 1.05rem;">support@novamart.com</a></p>
-          <p style="margin-top: 8px;">📞 Toll-Free Helpline: <strong>1800-123-NOVAMART</strong></p>
-          <p style="margin-top: 8px;">🏢 Headquarters: NovaMart Retail Park, Outer Ring Road, Bengaluru, Karnataka 560103</p>
+          <p>📧 Email Us: <a href="mailto:support@AaryaMart.com?subject=Customer%20Support" class="clickable-email" style="font-size: 1.05rem;">support@AaryaMart.com</a></p>
+          <p style="margin-top: 8px;">📞 Toll-Free Helpline: <strong>1800-123-AaryaMart</strong></p>
+          <p style="margin-top: 8px;">🏢 Headquarters: AaryaMart Retail Park, Outer Ring Road, Bengaluru, Karnataka 560103</p>
         </div>
       `
     },
@@ -2422,7 +2422,7 @@ function openPolicyView(policyType) {
         <p>We support UPI (GPay, PhonePe, Paytm), Credit/Debit Cards, Net Banking, and Cash on Delivery (COD).</p>
         <h4>3. How do I track my shipment?</h4>
         <p>Visit the 'My Orders' section anytime to view the live timeline from dispatch to delivery.</p>
-        <p>Still have queries? Email <a href="mailto:support@novamart.com?subject=FAQ%20Question" class="clickable-email">support@novamart.com</a>.</p>
+        <p>Still have queries? Email <a href="mailto:support@AaryaMart.com?subject=FAQ%20Question" class="clickable-email">support@AaryaMart.com</a>.</p>
       `
     }
   };
@@ -2437,7 +2437,7 @@ function openPolicyView(policyType) {
   if (modal) modal.classList.add('active');
   document.body.style.overflow = 'hidden';
 
-  updateMetadata(`NovaMart | ${policy.title}`, `Official documentation and guidelines for ${policy.title} on NovaMart.`);
+  updateMetadata(`AaryaMart | ${policy.title}`, `Official documentation and guidelines for ${policy.title} on AaryaMart.`);
 }
 
 function closePolicyModal() {
@@ -2499,8 +2499,8 @@ export function switchView(viewName) {
     renderBrandFilters();
     renderProductGrid();
     updateMetadata(
-      'NovaMart | Mega Online Shopping - Best Deals, Electronics, Fashion & More',
-      'Discover unbeatable deals on Electronics, Fashion, Home appliances, Beauty and more at NovaMart. Enjoy lightning-fast delivery, secure checkout, and easy returns.'
+      'AaryaMart | Mega Online Shopping - Best Deals, Electronics, Fashion & More',
+      'Discover unbeatable deals on Electronics, Fashion, Home appliances, Beauty and more at AaryaMart. Enjoy lightning-fast delivery, secure checkout, and easy returns.'
     );
   } else if (viewName === 'cart') {
     renderFullCartPage();
@@ -2516,8 +2516,8 @@ export function switchView(viewName) {
     renderAdminPanel();
   } else if (viewName === 'notfound') {
     updateMetadata(
-      'NovaMart | 404 - Page Not Found',
-      'The page you are looking for does not exist on NovaMart. Search thousands of products or return to homepage.'
+      'AaryaMart | 404 - Page Not Found',
+      'The page you are looking for does not exist on AaryaMart. Search thousands of products or return to homepage.'
     );
   }
 }
@@ -2885,7 +2885,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Probe .NET 10 backend API health
   api.checkHealth().then(isOnline => {
     if (isOnline) {
-      console.log('[NovaMart] Connected to ASP.NET Core REST API at http://localhost:5000');
+      console.log('[AaryaMart] Connected to ASP.NET Core REST API at http://localhost:5000');
     }
   });
 

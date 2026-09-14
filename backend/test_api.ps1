@@ -7,12 +7,12 @@ $prods = Invoke-RestMethod -Uri "http://localhost:5000/api/products"
 Write-Host "Total products returned: $($prods.Count)"
 $prods[0] | Select-Object id, title, category, brand, price, rating | ConvertTo-Json
 
-Write-Host "`n=== 3. Filter by brand=NovaTech ==="
-$novatech = Invoke-RestMethod -Uri "http://localhost:5000/api/products?brand=NovaTech"
-Write-Host "NovaTech products: $($novatech.Count)"
+Write-Host "`n=== 3. Filter by brand=AaryaTech ==="
+$AaryaTech = Invoke-RestMethod -Uri "http://localhost:5000/api/products?brand=AaryaTech"
+Write-Host "AaryaTech products: $($AaryaTech.Count)"
 
 Write-Host "`n=== 4. Admin Login ==="
-$adminBody = @{ email = "admin@novamart.in"; password = "Admin@123" } | ConvertTo-Json
+$adminBody = @{ email = "admin@aaryamart.in"; password = "Admin@123" } | ConvertTo-Json
 $adminAuth = Invoke-RestMethod -Uri "http://localhost:5000/api/auth/login" -Method Post -Body $adminBody -ContentType "application/json"
 Write-Host "Logged in as: $($adminAuth.name) ($($adminAuth.role))"
 Write-Host "Token: $($adminAuth.token.Substring(0, 35))..."
@@ -42,7 +42,7 @@ $orderBody = @{
     items = @(
         @{
             productId = "prod-1"
-            title = "NovaPro X1 Ultra 5G (Celestial Blue, 256GB)"
+            title = "AaryaPro X1 Ultra 5G (Celestial Blue, 256GB)"
             qty = 1
             price = 64999
             img = "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600"

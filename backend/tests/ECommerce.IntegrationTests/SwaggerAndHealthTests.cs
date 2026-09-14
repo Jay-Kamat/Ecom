@@ -13,7 +13,7 @@ public class SwaggerAndHealthTests : IClassFixture<WebApplicationFactory<Program
     {
         _factory = factory.WithWebHostBuilder(builder =>
         {
-            builder.UseSetting("ConnectionStrings:PostgreSQL", "Host=localhost;Port=5432;Database=novamart_test_db;Username=postgres;Password=root;");
+            builder.UseSetting("ConnectionStrings:PostgreSQL", "Host=localhost;Port=5432;Database=aaryamart_test_db;Username=postgres;Password=root;");
             builder.UseSetting("ConnectionStrings:Redis", "");
         });
     }
@@ -47,6 +47,6 @@ public class SwaggerAndHealthTests : IClassFixture<WebApplicationFactory<Program
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var content = await response.Content.ReadAsStringAsync();
-        content.Should().Contain("NovaMart E-Commerce API");
+        content.Should().Contain("AaryaMart E-Commerce API");
     }
 }

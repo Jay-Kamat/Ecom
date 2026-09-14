@@ -19,7 +19,7 @@ public class TokenService : ITokenService
 
     public string GenerateJwtToken(User user, IEnumerable<string> roles)
     {
-        var key = _configuration["Jwt:Key"] ?? "NovaMartSuperSecretKey2026WithMinimum256BitsRequiredForHmacSha256!";
+        var key = _configuration["Jwt:Key"] ?? "AaryaMartSuperSecretKey2026WithMinimum256BitsRequiredForHmacSha256!";
         var issuer = _configuration["Jwt:Issuer"] ?? "ECommerceApi";
         var audience = _configuration["Jwt:Audience"] ?? "ECommerceClients";
         var expiryDays = int.TryParse(_configuration["Jwt:ExpiryDays"], out var d) ? d : 7;

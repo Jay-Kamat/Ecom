@@ -1,6 +1,6 @@
 // Cookie Security & Consent Management System
 export const CookieManager = {
-  COOKIE_KEY: 'novamart_cookie_consent',
+  COOKIE_KEY: 'aaryamart_cookie_consent',
 
   // Set secure cookie with SameSite=Strict and Secure flag
   setSecureCookie(name, value, days = 365) {

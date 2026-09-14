@@ -84,7 +84,7 @@ export default function Navbar() {
             style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column' }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ fontSize: '1.45rem', fontWeight: '900', color: '#38bdf8', letterSpacing: '-0.5px' }}>Nova</span>
+              <span style={{ fontSize: '1.45rem', fontWeight: '900', color: '#38bdf8', letterSpacing: '-0.5px' }}>Aarya</span>
               <span style={{ fontSize: '1.45rem', fontWeight: '900', color: '#f8fafc', letterSpacing: '-0.5px' }}>Mart</span>
               <span style={{ background: '#38bdf8', color: '#0f172a', fontSize: '0.65rem', fontWeight: '800', padding: '1px 5px', borderRadius: '4px', textTransform: 'uppercase' }}>Plus</span>
             </div>

@@ -12,7 +12,7 @@ public class SecurityHeadersIntegrationTests : IClassFixture<WebApplicationFacto
     {
         _factory = factory.WithWebHostBuilder(builder =>
         {
-            builder.UseSetting("ConnectionStrings:PostgreSQL", "Host=localhost;Port=5432;Database=novamart_sec_test_db;Username=postgres;Password=root;");
+            builder.UseSetting("ConnectionStrings:PostgreSQL", "Host=localhost;Port=5432;Database=aaryamart_sec_test_db;Username=postgres;Password=root;");
             builder.UseSetting("ConnectionStrings:Redis", "");
         });
     }

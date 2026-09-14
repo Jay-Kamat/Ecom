@@ -1,4 +1,4 @@
-// NovaMart Product Catalog, Categories, Reviews, Users & Initial Data
+// AaryaMart Product Catalog, Categories, Reviews, Users & Initial Data
 export const CATEGORIES = [
   { 
     id: 'all', 
@@ -45,7 +45,7 @@ export const CATEGORIES = [
 ];
 
 export const BRANDS = [
-  'NovaTech',
+  'AaryaTech',
   'SonicWave',
   'AuraCraft',
   'MasterChef',
@@ -56,9 +56,9 @@ export const BRANDS = [
 export const PRODUCTS = [
   {
     id: 'prod-1',
-    title: 'NovaPro 15 Ultra 5G (Phantom Titanium, 256 GB)',
+    title: 'AaryaPro 15 Ultra 5G (Phantom Titanium, 256 GB)',
     category: 'mobiles',
-    brand: 'NovaTech',
+    brand: 'AaryaTech',
     price: 69999,
     mrp: 84999,
     discount: 18,
@@ -77,7 +77,7 @@ export const PRODUCTS = [
       color: ['Phantom Titanium', 'Deep Ocean Blue', 'Midnight Obsidian'],
       storage: ['128 GB', '256 GB', '512 GB']
     },
-    description: 'Experience ultra-fast 5G connectivity with the flagship NovaPro 15 Ultra. Featuring a 6.8-inch Dynamic AMOLED 120Hz display, ProGrade 200MP camera system, and all-day 5000mAh battery with 68W fast charge.',
+    description: 'Experience ultra-fast 5G connectivity with the flagship AaryaPro 15 Ultra. Featuring a 6.8-inch Dynamic AMOLED 120Hz display, ProGrade 200MP camera system, and all-day 5000mAh battery with 68W fast charge.',
     specs: [
       { key: 'Processor', value: 'Octa-Core Snapdragon 8 Gen 3' },
       { key: 'Display', value: '6.8-inch QHD+ 120Hz Dynamic AMOLED' },
@@ -91,7 +91,7 @@ export const PRODUCTS = [
       'No Cost EMI available from ₹5,833/month'
     ],
     reviews: [
-      { author: 'Vikram Mehta', rating: 5, date: '05 Sep 2026', title: 'Absolute powerhouse phone!', text: 'Camera quality matches DSLRs and the battery easily lasts 1.5 days. Unboxing and delivery by NovaMart was spotless.' },
+      { author: 'Vikram Mehta', rating: 5, date: '05 Sep 2026', title: 'Absolute powerhouse phone!', text: 'Camera quality matches DSLRs and the battery easily lasts 1.5 days. Unboxing and delivery by AaryaMart was spotless.' },
       { author: 'Ananya Roy', rating: 5, date: '01 Sep 2026', title: 'Top notch display and build', text: 'Titanium finish feels incredibly premium in hand. Highly recommend!' }
     ]
   },
@@ -284,7 +284,7 @@ export const PRODUCTS = [
     id: 'prod-7',
     title: 'QuantumView 55-inch 4K Ultra HD Smart QLED TV',
     category: 'electronics',
-    brand: 'NovaTech',
+    brand: 'AaryaTech',
     price: 42999,
     mrp: 69999,
     discount: 38,
@@ -381,13 +381,14 @@ export const INITIAL_SAVED_ADDRESSES = [
 ];
 
 export const INITIAL_USERS = [
-  { id: 'usr-1', name: 'Jay Vardhan', email: 'jay@novamart.com', phone: '9876543210', role: 'Customer', status: 'Active', ordersCount: 4, joinedDate: '10 Aug 2026' },
+  { id: 'usr-1', name: 'Jay Vardhan', email: 'jay@aaryamart.com', phone: '9876543210', role: 'Customer', status: 'Active', ordersCount: 4, joinedDate: '10 Aug 2026' },
   { id: 'usr-2', name: 'Priya Sharma', email: 'priya@gmail.com', phone: '9811223344', role: 'Customer', status: 'Active', ordersCount: 2, joinedDate: '18 Aug 2026' },
   { id: 'usr-3', name: 'Ravi Teja', email: 'ravi.teja@yahoo.com', phone: '9900112233', role: 'Customer', status: 'Disabled', ordersCount: 0, joinedDate: '01 Sep 2026' },
-  { id: 'usr-4', name: 'Admin Store Manager', email: 'admin@novamart.com', phone: '1800123000', role: 'Admin', status: 'Active', ordersCount: 15, joinedDate: '01 Jul 2026' }
+  { id: 'usr-4', name: 'Admin Store Manager', email: 'admin@aaryamart.com', phone: '1800123000', role: 'Admin', status: 'Active', ordersCount: 15, joinedDate: '01 Jul 2026' }
 ];
 
 export const VALID_COUPONS = {
+  'AARYA20': { discountPercent: 20, description: '20% off on your entire cart', usageCount: 142, validity: '31 Dec 2026' },
   'NOVA20': { discountPercent: 20, description: '20% off on your entire cart', usageCount: 142, validity: '31 Dec 2026' },
   'FIRST100': { discountFlat: 100, minCart: 500, description: '₹100 flat discount on orders over ₹500', usageCount: 89, validity: '30 Nov 2026' },
   'FESTIVE500': { discountFlat: 500, minCart: 2000, description: '₹500 festive discount on orders above ₹2000', usageCount: 65, validity: '15 Oct 2026' }

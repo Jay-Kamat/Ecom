@@ -107,10 +107,10 @@ try
     {
         c.SwaggerDoc("v1", new OpenApiInfo
         {
-            Title = "NovaMart E-Commerce API",
+            Title = "AaryaMart E-Commerce API",
             Version = "v1",
             Description = "Production-ready E-Commerce backend with Clean Architecture, CQRS, and pgvector semantic search.",
-            Contact = new OpenApiContact { Name = "NovaMart Dev Team" }
+            Contact = new OpenApiContact { Name = "AaryaMart Dev Team" }
         });
 
         // JWT Bearer token in Swagger UI
@@ -144,7 +144,7 @@ try
     builder.Services.AddHealthChecks()
         .AddNpgSql(
             builder.Configuration.GetConnectionString("PostgreSQL")
-                ?? "Host=localhost;Port=5432;Database=novamart_db;Username=postgres;Password=root;",
+                ?? "Host=localhost;Port=5432;Database=aaryamart_db;Username=postgres;Password=root;",
             name: "postgresql",
             tags: new[] { "db", "ready" });
 
@@ -178,7 +178,7 @@ try
         app.UseSwagger();
         app.UseSwaggerUI(c =>
         {
-            c.SwaggerEndpoint("/swagger/v1/swagger.json", "NovaMart API v1");
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "AaryaMart API v1");
             c.RoutePrefix = "swagger";
             c.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
         });

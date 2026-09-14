@@ -43,7 +43,7 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
         }
 
         // Resolve or create brand
-        var brandName = string.IsNullOrWhiteSpace(dto.Brand) ? "NovaMart" : dto.Brand;
+        var brandName = string.IsNullOrWhiteSpace(dto.Brand) ? "AaryaMart" : dto.Brand;
         var brand = await _context.Brands.FirstOrDefaultAsync(b => b.Name.ToLower() == brandName.ToLower(), cancellationToken);
         if (brand == null)
         {

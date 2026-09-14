@@ -1,48 +1,48 @@
 services:
   postgres:
     image: pgvector/pgvector:pg17
-    container_name: novamart-postgres
+    container_name: aaryamart-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_DB: novamart_db
+      POSTGRES_DB: aaryamart_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
     ports:
       - "5432:5432"
     volumes:
-      - novamart_pgdata:/var/lib/postgresql/data
+      - aaryamart_pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d novamart_db"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d aaryamart_db"]
       interval: 5s
       timeout: 5s
       retries: 5
     networks:
-      - novamart-network
+      - aaryamart-network
 
   redis:
     image: redis:7-alpine
-    container_name: novamart-redis
+    container_name: aaryamart-redis
     restart: unless-stopped
     ports:
       - "6379:6379"
     volumes:
-      - novamart_redisdata:/data
+      - aaryamart_redisdata:/data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
       timeout: 5s
       retries: 5
     networks:
-      - novamart-network
+      - aaryamart-network
 
   api:
     build:
       context: .
       dockerfile: src/ECommerce.API/Dockerfile
-    container_name: novamart-api
+    container_name: aaryamart-api
     restart: unless-stopped
     environment:
-      ConnectionStrings__PostgreSQL: "Host=postgres;Port=5432;Database=novamart_db;Username=postgres;Password=root;"
+      ConnectionStrings__PostgreSQL: "Host=postgres;Port=5432;Database=aaryamart_db;Username=postgres;Password=root;"
       ConnectionStrings__Redis: "redis:6379"
       ASPNETCORE_ENVIRONMENT: "Development"
       ASPNETCORE_URLS: "http://+:5062"
@@ -54,13 +54,13 @@ services:
       redis:
         condition: service_healthy
     networks:
-      - novamart-network
+      - aaryamart-network
 
   gateway:
     build:
       context: .
       dockerfile: src/ECommerce.Gateway/Dockerfile
-    container_name: novamart-gateway
+    container_name: aaryamart-gateway
     restart: unless-stopped
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
@@ -71,12 +71,12 @@ services:
     depends_on:
       - api
     networks:
-      - novamart-network
+      - aaryamart-network
 
 volumes:
-  novamart_pgdata:
-  novamart_redisdata:
+  aaryamart_pgdata:
+  aaryamart_redisdata:
 
 networks:
-  novamart-network:
+  aaryamart-network:
     driver: bridge

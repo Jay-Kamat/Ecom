@@ -1,7 +1,7 @@
 {
-  "name": "novamart-ecommerce",
+  "name": "aaryamart-ecommerce",
   "version": "1.0.0",
-  "description": "NovaMart - Modern, responsive e-commerce storefront with Flipkart-style experience",
+  "description": "AaryaMart - Modern, responsive e-commerce storefront with Flipkart-style experience",
   "type": "module",
   "scripts": {
     "dev": "npx vite --port 3000 --host",

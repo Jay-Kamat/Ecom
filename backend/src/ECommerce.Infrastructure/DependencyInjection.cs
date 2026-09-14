@@ -24,7 +24,7 @@ public static class DependencyInjection
         {
             options.UseNpgsql(
                 configuration.GetConnectionString("PostgreSQL")
-                    ?? "Host=localhost;Port=5432;Database=novamart_db;Username=postgres;Password=root;",
+                    ?? "Host=localhost;Port=5432;Database=aaryamart_db;Username=postgres;Password=root;",
                 npgsql =>
                 {
                     npgsql.UseVector();
@@ -87,7 +87,7 @@ public static class DependencyInjection
         services.AddHostedService<EmbeddingGenerationBackgroundService>();
 
         // 7. JWT Authentication
-        var jwtKey = configuration["Jwt:Key"] ?? "NovaMartSuperSecretKey2026WithMinimum256BitsRequiredForHmacSha256!";
+        var jwtKey = configuration["Jwt:Key"] ?? "AaryaMartSuperSecretKey2026WithMinimum256BitsRequiredForHmacSha256!";
         var jwtIssuer = configuration["Jwt:Issuer"] ?? "ECommerceApi";
         var jwtAudience = configuration["Jwt:Audience"] ?? "ECommerceClients";
 

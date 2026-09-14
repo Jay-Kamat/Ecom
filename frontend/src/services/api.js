@@ -1,20 +1,18 @@
-// NovaMart REST API Client with JWT Bearer Auth & Fallback
-export const API_BASE = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE)
-  ? import.meta.env.VITE_API_BASE
-  : 'http://localhost:5000/api';
+// AaryaMart REST API Client with JWT Bearer Auth & Fallback
+export const API_BASE = 'http://localhost:5000/api';
 
 class ApiClient {
   constructor() {
-    this.token = typeof localStorage !== 'undefined' ? localStorage.getItem('novamart_jwt') : null;
+    this.token = typeof localStorage !== 'undefined' ? localStorage.getItem('aaryamart_jwt') : null;
     this.isOnline = false;
   }
 
   setToken(token) {
     this.token = token;
     if (token) {
-      localStorage.setItem('novamart_jwt', token);
+      localStorage.setItem('aaryamart_jwt', token);
     } else {
-      localStorage.removeItem('novamart_jwt');
+      localStorage.removeItem('aaryamart_jwt');
     }
   }
 
@@ -30,10 +28,7 @@ class ApiClient {
 
   async checkHealth() {
     try {
-      const healthUrl = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_BASE)
-        ? `${import.meta.env.VITE_API_BASE.replace(/\/api\/?$/, '')}/health`
-        : 'http://localhost:5000/health';
-      const res = await fetch(healthUrl, { method: 'GET', mode: 'cors' });
+      const res = await fetch('http://localhost:5000/health', { method: 'GET', mode: 'cors' });
       this.isOnline = res.ok;
       return res.ok;
     } catch {

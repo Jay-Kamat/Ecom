@@ -172,7 +172,7 @@ export default function AuthModal() {
               boxShadow: '0 4px 12px rgba(2, 132, 199, 0.3)'
             }}
           >
-            {loading ? 'Authenticating...' : authMode === 'login' ? 'Sign In to NovaMart' : 'Create Account'}
+            {loading ? 'Authenticating...' : authMode === 'login' ? 'Sign In to AaryaMart' : 'Create Account'}
           </button>
         </form>
       </div>

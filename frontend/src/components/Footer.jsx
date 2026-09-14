@@ -11,11 +11,11 @@ export default function Footer() {
         {/* About */}
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '12px' }}>
-            <span style={{ fontSize: '1.4rem', fontWeight: '900', color: '#38bdf8' }}>Nova</span>
+            <span style={{ fontSize: '1.4rem', fontWeight: '900', color: '#38bdf8' }}>Aarya</span>
             <span style={{ fontSize: '1.4rem', fontWeight: '900', color: '#f8fafc' }}>Mart</span>
           </div>
           <p style={{ fontSize: '0.85rem', lineHeight: 1.6, color: '#94a3b8' }}>
-            NovaMart is India's next-generation e-commerce platform offering 100% authentic electronics, fashion, home essentials, and gadgets with lightning-fast delivery and secure cloud storage.
+            AaryaMart is India's next-generation e-commerce platform offering 100% authentic electronics, fashion, home essentials, and gadgets with lightning-fast delivery and secure cloud storage.
           </p>
         </div>
 
@@ -38,8 +38,8 @@ export default function Footer() {
             Customer Service
           </h4>
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.85rem' }}>
-            <li><span>24/7 Helpline: 1800-123-NOVAMART</span></li>
-            <li><span>support@novamart.com</span></li>
+            <li><span>24/7 Helpline: 1800-123-AARYAMART</span></li>
+            <li><span>support@aaryamart.com</span></li>
             <li><span>7-Day Return Policy</span></li>
             <li><span>Warranty Support &amp; Service Centers</span></li>
           </ul>
@@ -69,7 +69,7 @@ export default function Footer() {
       </div>
 
       <div style={{ borderTop: '1px solid #1e293b', paddingTop: '20px', textAlign: 'center', fontSize: '0.78rem', color: '#64748b' }}>
-        © 2026 NovaMart E-Commerce Technologies. All rights reserved. Built with modern React and Supabase.
+        © 2026 AaryaMart E-Commerce Technologies. All rights reserved. Built with modern React and Supabase.
       </div>
     </footer>
   );
