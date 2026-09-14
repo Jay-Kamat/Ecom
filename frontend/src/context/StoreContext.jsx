@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
-import { PRODUCTS as INITIAL_PRODUCTS, CATEGORIES, BRANDS, VALID_COUPONS, INITIAL_USERS, INITIAL_SAVED_ADDRESSES } from '../../js/data.js';
+import { PRODUCTS as INITIAL_PRODUCTS, CATEGORIES, BRANDS, VALID_COUPONS, INITIAL_USERS, INITIAL_SAVED_ADDRESSES } from '../data/data.js';
 import { api } from '../services/api.js';
+import { scoreProductMatch, filterAndRankProducts } from '../utils/searchEngine.js';
 
 const StoreContext = createContext(null);
 
@@ -8,7 +9,15 @@ export function StoreProvider({ children }) {
   // Products state (loads initial and checks API)
   const [products, setProducts] = useState(() => {
     const saved = localStorage.getItem('aaryamart_products');
-    return saved ? JSON.parse(saved) : INITIAL_PRODUCTS;
+    if (!saved) return INITIAL_PRODUCTS;
+    try {
+      const parsed = JSON.parse(saved);
+      const existingIds = new Set(parsed.map(p => p.id));
+      const missing = INITIAL_PRODUCTS.filter(p => !existingIds.has(p.id));
+      return [...parsed, ...missing];
+    } catch {
+      return INITIAL_PRODUCTS;
+    }
   });
 
   // Cart state
@@ -36,6 +45,7 @@ export function StoreProvider({ children }) {
   });
 
   // UI modal / navigation states
+  const [currentPath, setCurrentPath] = useState(() => window.location.pathname || '/');
   const [activeView, setActiveView] = useState('catalog'); // 'catalog' | 'orders' | 'admin' | 'notfound'
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -45,6 +55,36 @@ export function StoreProvider({ children }) {
   const [isAdminProductModalOpen, setIsAdminProductModalOpen] = useState(false);
   const [isFilterDrawerOpen, setIsFilterDrawerOpen] = useState(false);
   const [appliedCoupon, setAppliedCoupon] = useState(null);
+
+  // Customer Auth Banner Settings (Admin customizable & random product by default)
+  const [authBannerConfig, setAuthBannerConfig] = useState(() => {
+    const saved = localStorage.getItem('aaryamart_auth_banner');
+    return saved ? JSON.parse(saved) : {
+      mode: 'random', // 'random' | 'custom'
+      customImage: '',
+      customTitle: ''
+    };
+  });
+
+  useEffect(() => {
+    localStorage.setItem('aaryamart_auth_banner', JSON.stringify(authBannerConfig));
+  }, [authBannerConfig]);
+
+  // URL Path Synchronization
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname || '/');
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const navigateTo = (path) => {
+    setCurrentPath(path);
+    if (window.location.pathname !== path) {
+      window.history.pushState(null, '', path);
+    }
+  };
 
   // Filters state
   const [filters, setFilters] = useState({
@@ -306,7 +346,7 @@ export function StoreProvider({ children }) {
 
   // Filtered and Sorted Products
   const filteredProducts = useMemo(() => {
-    return products.filter(p => {
+    let result = products.filter(p => {
       if (filters.category && filters.category !== 'all') {
         if (p.category.toLowerCase() !== filters.category.toLowerCase()) return false;
       }
@@ -316,15 +356,28 @@ export function StoreProvider({ children }) {
       if (p.price > filters.maxPrice) return false;
       if (filters.inStockOnly && !p.inStock) return false;
       if (filters.minRating > 0 && p.rating < filters.minRating) return false;
-      if (filters.searchQuery) {
-        const q = filters.searchQuery.toLowerCase();
-        const matchTitle = p.title.toLowerCase().includes(q);
-        const matchBrand = p.brand.toLowerCase().includes(q);
-        const matchDesc = p.description.toLowerCase().includes(q);
-        if (!matchTitle && !matchBrand && !matchDesc) return false;
-      }
       return true;
-    }).sort((a, b) => {
+    });
+
+    if (filters.searchQuery && filters.searchQuery.trim()) {
+      const query = filters.searchQuery.trim();
+      const scored = [];
+      for (const p of result) {
+        const score = scoreProductMatch(p, query);
+        if (score > 0) {
+          scored.push({ product: p, score });
+        }
+      }
+
+      if (filters.sortBy === 'popularity') {
+        scored.sort((a, b) => b.score - a.score);
+        return scored.map(s => s.product);
+      } else {
+        result = scored.map(s => s.product);
+      }
+    }
+
+    return result.sort((a, b) => {
       switch (filters.sortBy) {
         case 'price-low': return a.price - b.price;
         case 'price-high': return b.price - a.price;
@@ -423,9 +476,6 @@ export function StoreProvider({ children }) {
 
     setOrders(prev => [orderData, ...prev]);
     clearCart();
-    setIsCheckoutOpen(false);
-    showToast(`Order #${orderData.id} placed successfully!`, 'success');
-    setActiveView('orders');
     return orderData;
   };
 
@@ -437,12 +487,16 @@ export function StoreProvider({ children }) {
 
   return (
     <StoreContext.Provider value={{
+      currentPath,
+      navigateTo,
       products,
+      setProducts,
       filteredProducts,
       cart,
       wishlist,
       user,
       orders,
+      setOrders,
       activeView,
       setActiveView,
       selectedProduct,
@@ -485,7 +539,9 @@ export function StoreProvider({ children }) {
       register,
       logout,
       createOrder,
-      addProduct
+      addProduct,
+      authBannerConfig,
+      setAuthBannerConfig
     }}>
       {children}
     </StoreContext.Provider>

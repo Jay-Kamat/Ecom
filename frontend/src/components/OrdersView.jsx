@@ -1,5 +1,6 @@
 import React from 'react';
 import { useStore } from '../context/StoreContext.jsx';
+import { PackageIcon } from './Icons.jsx';
 
 export default function OrdersView() {
   const { orders, setActiveView } = useStore();
@@ -81,7 +82,7 @@ export default function OrdersView() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
                   {order.items.map((item, i) => (
                     <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                      <img src={item.image} alt={item.title} style={{ width: '56px', height: '56px', objectFit: 'contain', border: '1px solid #e2e8f0', borderRadius: '6px', padding: '2px' }} />
+                      <img src={item.image} alt={`${item.title} - Ordered item`} style={{ width: '56px', height: '56px', objectFit: 'contain', border: '1px solid #e2e8f0', borderRadius: '6px', padding: '2px' }} />
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <div style={{ fontSize: '0.9rem', fontWeight: '700', color: '#0f172a', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                           {item.title}
@@ -128,7 +129,9 @@ export default function OrdersView() {
         </div>
       ) : (
         <div style={{ background: '#fff', borderRadius: '12px', border: '1px solid #e2e8f0', padding: '60px 20px', textAlign: 'center' }}>
-          <div style={{ fontSize: '3rem', marginBottom: '12px' }}>📦</div>
+          <div style={{ color: '#cbd5e1', marginBottom: '16px', display: 'flex', justifyContent: 'center' }}>
+            <PackageIcon size={52} strokeWidth={1.5} />
+          </div>
           <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: '#0f172a', margin: '0 0 6px' }}>
             No orders placed yet
           </h3>

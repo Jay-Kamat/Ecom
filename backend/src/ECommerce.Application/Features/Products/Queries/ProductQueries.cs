@@ -161,12 +161,27 @@ public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, PagedRe
 
         if (!string.IsNullOrWhiteSpace(request.Search))
         {
-            var term = request.Search.Trim().ToLower();
-            query = query.Where(p =>
-                p.Name.ToLower().Contains(term) ||
-                p.Description.ToLower().Contains(term) ||
-                p.Category.Name.ToLower().Contains(term) ||
-                p.Brand.Name.ToLower().Contains(term));
+            var rawSearch = request.Search.Trim().ToLower();
+            var tokens = rawSearch.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            bool isMobileSearch = rawSearch.Contains("mobile") || rawSearch.Contains("phone") || rawSearch.Contains("smartphone");
+            bool isAudioSearch = rawSearch.Contains("headphone") || rawSearch.Contains("earphone") || rawSearch.Contains("earbud") || rawSearch.Contains("audio") || rawSearch.Contains("speaker");
+            bool isLaptopSearch = rawSearch.Contains("laptop") || rawSearch.Contains("computer") || rawSearch.Contains("notebook") || rawSearch.Contains("pc") || rawSearch.Contains("macbook");
+
+            foreach (var t in tokens)
+            {
+                var norm = t.EndsWith("s") && t.Length > 3 ? t[..^1] : t;
+                query = query.Where(p =>
+                    p.Name.ToLower().Contains(t) ||
+                    p.Name.ToLower().Contains(norm) ||
+                    p.Description.ToLower().Contains(t) ||
+                    p.Category.Name.ToLower().Contains(t) ||
+                    p.Category.Name.ToLower().Contains(norm) ||
+                    p.Brand.Name.ToLower().Contains(t) ||
+                    (isMobileSearch && (p.Category.Slug == "smartphones" || p.Category.Slug == "mobiles" || p.Category.Name.ToLower().Contains("phone") || p.Category.Name.ToLower().Contains("mobile"))) ||
+                    (isAudioSearch && (p.Category.Slug == "audio" || p.Category.Name.ToLower().Contains("audio"))) ||
+                    (isLaptopSearch && (p.Category.Slug == "laptops" || p.Category.Name.ToLower().Contains("laptop"))));
+            }
         }
 
         // 2. Sorting

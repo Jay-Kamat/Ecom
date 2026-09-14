@@ -1,0 +1,479 @@
+2026-09-14 09:51:43.680 +05:30 [INF] Starting ECommerce API...
+2026-09-14 09:51:45.672 +05:30 [WRN] Entity 'Cart' has a global query filter defined and is the required end of a relationship with the entity 'CartItem'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 09:51:45.675 +05:30 [WRN] Entity 'Inventory' has a global query filter defined and is the required end of a relationship with the entity 'InventoryTransaction'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 09:51:45.676 +05:30 [WRN] Entity 'User' has a global query filter defined and is the required end of a relationship with the entity 'Notification'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 09:51:45.677 +05:30 [WRN] Entity 'Order' has a global query filter defined and is the required end of a relationship with the entity 'OrderItem'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 09:51:45.678 +05:30 [WRN] Entity 'Order' has a global query filter defined and is the required end of a relationship with the entity 'OrderStatusHistory'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 09:51:45.679 +05:30 [WRN] Entity 'Payment' has a global query filter defined and is the required end of a relationship with the entity 'PaymentTransaction'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 09:51:45.680 +05:30 [WRN] Entity 'Product' has a global query filter defined and is the required end of a relationship with the entity 'ProductAttributeValue'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 09:51:45.681 +05:30 [WRN] Entity 'Product' has a global query filter defined and is the required end of a relationship with the entity 'ProductImage'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 09:51:45.682 +05:30 [WRN] Entity 'Review' has a global query filter defined and is the required end of a relationship with the entity 'ReviewImage'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 09:51:45.684 +05:30 [WRN] Entity 'User' has a global query filter defined and is the required end of a relationship with the entity 'UserRole'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 09:51:45.685 +05:30 [WRN] Entity 'Product' has a global query filter defined and is the required end of a relationship with the entity 'WishlistItem'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 09:51:45.750 +05:30 [WRN] The foreign key property 'SubCategory.CategoryId1' was created in shadow state because a conflicting property with the simple name 'CategoryId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+2026-09-14 09:51:48.415 +05:30 [INF] ECommerce API listening...
+2026-09-14 09:51:48.432 +05:30 [INF] [EmbeddingService] Background embedding generator started.
+2026-09-14 09:51:48.508 +05:30 [WRN] The WebRootPath was not found: D:\Ecom\backend\src\ECommerce.API\wwwroot. Static files may be unavailable.
+2026-09-14 09:51:48.807 +05:30 [INF] [EmbeddingService] Generated embedding for Product "8a440635-e00d-491f-8c84-5565be6dee0d" (AaryaPro X1 Ultra 5G (Celestial Blue, 256GB))
+2026-09-14 09:51:48.884 +05:30 [INF] [EmbeddingService] Generated embedding for Product "3841d834-396a-4107-b331-6a1010e9950d" (Samsung Galaxy S25 Ultra (Phantom Black, 512GB))
+2026-09-14 09:51:48.890 +05:30 [INF] [EmbeddingService] Generated embedding for Product "93898661-59e9-45cd-b42b-a90b7852c532" (Apple MacBook Air M3 (Midnight, 16GB/512GB))
+2026-09-14 09:51:48.896 +05:30 [INF] [EmbeddingService] Generated embedding for Product "1c292363-b4a1-4413-bf01-796370f39df6" (Sony WH-1000XM5 Wireless Headphones (Black))
+2026-09-14 09:51:48.903 +05:30 [INF] [EmbeddingService] Generated embedding for Product "c46deb69-d2dc-4829-991d-436a54315e5c" (Nike Air Max 270 Running Shoes (Black/White, Size 9))
+2026-09-14 09:51:48.912 +05:30 [INF] [EmbeddingService] Generated embedding for Product "c669756b-1af8-411c-a159-a1eb2ca66ebc" (Bose QuietComfort 45 Wireless Headphones (White Smoke))
+2026-09-14 09:51:48.921 +05:30 [INF] [EmbeddingService] Generated embedding for Product "4152bcfc-29b1-44d6-aa7f-ac988ccfce0d" (AaryaTech UltraBook Pro 14 (Silver, Core i7, 16GB/1TB SSD))
+2026-09-14 09:51:48.928 +05:30 [INF] [EmbeddingService] Generated embedding for Product "ca2d3017-ee3c-407e-b848-ec330f236a2a" (Samsung Galaxy Tab S9 Ultra (Graphite, 256GB, Wi-Fi))
+2026-09-14 09:52:11.272 +05:30 [INF] HTTP GET /health responded 200 in 1133.2821 ms
+2026-09-14 09:52:11.276 +05:30 [INF] HTTP GET /health responded 200 in 3.7058 ms
+2026-09-14 09:52:11.276 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.9277 ms
+2026-09-14 09:52:11.280 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.1315 ms
+2026-09-14 09:52:11.323 +05:30 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-09-14 09:52:11.349 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 09:52:11.521 +05:30 [INF] [CQRS Completed] GetProductsQuery in 161ms
+2026-09-14 09:52:11.583 +05:30 [INF] HTTP GET /api/products responded 200 in 300.9386 ms
+2026-09-14 09:52:11.588 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 09:52:11.602 +05:30 [INF] [CQRS Completed] GetProductsQuery in 6ms
+2026-09-14 09:52:11.605 +05:30 [INF] HTTP GET /api/products responded 200 in 20.6028 ms
+2026-09-14 09:56:27.823 +05:30 [INF] HTTP GET /health responded 200 in 2.0906 ms
+2026-09-14 09:56:27.827 +05:30 [INF] HTTP GET /health responded 200 in 0.8929 ms
+2026-09-14 09:56:27.831 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.1064 ms
+2026-09-14 09:56:27.834 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.1522 ms
+2026-09-14 09:56:27.841 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 09:56:27.854 +05:30 [INF] [CQRS Completed] GetProductsQuery in 6ms
+2026-09-14 09:56:27.856 +05:30 [INF] HTTP GET /api/products responded 200 in 18.0161 ms
+2026-09-14 09:56:27.857 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 09:56:27.866 +05:30 [INF] [CQRS Completed] GetProductsQuery in 3ms
+2026-09-14 09:56:27.867 +05:30 [INF] HTTP GET /api/products responded 200 in 10.1664 ms
+2026-09-14 09:56:36.663 +05:30 [INF] HTTP GET /health responded 200 in 1.4780 ms
+2026-09-14 09:56:36.669 +05:30 [INF] HTTP GET /health responded 200 in 0.7471 ms
+2026-09-14 09:56:36.673 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.1637 ms
+2026-09-14 09:56:36.675 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0681 ms
+2026-09-14 09:56:36.682 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 09:56:36.697 +05:30 [INF] [CQRS Completed] GetProductsQuery in 4ms
+2026-09-14 09:56:36.699 +05:30 [INF] HTTP GET /api/products responded 200 in 17.5069 ms
+2026-09-14 09:56:36.701 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 09:56:36.710 +05:30 [INF] [CQRS Completed] GetProductsQuery in 3ms
+2026-09-14 09:56:36.712 +05:30 [INF] HTTP GET /api/products responded 200 in 12.2500 ms
+2026-09-14 09:56:49.592 +05:30 [INF] HTTP GET /health responded 200 in 1.4473 ms
+2026-09-14 09:56:49.595 +05:30 [INF] HTTP GET /health responded 200 in 1.0164 ms
+2026-09-14 09:56:49.600 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.1569 ms
+2026-09-14 09:56:49.601 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0709 ms
+2026-09-14 09:56:49.605 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 09:56:49.691 +05:30 [INF] [CQRS Completed] GetProductsQuery in 78ms
+2026-09-14 09:56:49.694 +05:30 [INF] HTTP GET /api/products responded 200 in 89.1395 ms
+2026-09-14 09:56:49.695 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 09:56:49.704 +05:30 [INF] [CQRS Completed] GetProductsQuery in 3ms
+2026-09-14 09:56:49.706 +05:30 [INF] HTTP GET /api/products responded 200 in 10.9237 ms
+2026-09-14 09:57:00.598 +05:30 [INF] HTTP GET /health responded 200 in 0.9867 ms
+2026-09-14 09:57:00.603 +05:30 [INF] HTTP GET /health responded 200 in 1.1663 ms
+2026-09-14 09:57:00.607 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.3459 ms
+2026-09-14 09:57:00.609 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0991 ms
+2026-09-14 09:57:00.616 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 09:57:00.628 +05:30 [INF] [CQRS Completed] GetProductsQuery in 7ms
+2026-09-14 09:57:00.639 +05:30 [INF] HTTP GET /api/products responded 200 in 24.5280 ms
+2026-09-14 09:57:00.641 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 09:57:00.681 +05:30 [INF] [CQRS Completed] GetProductsQuery in 31ms
+2026-09-14 09:57:00.683 +05:30 [INF] HTTP GET /api/products responded 200 in 43.2629 ms
+2026-09-14 09:59:09.870 +05:30 [INF] HTTP GET /health responded 200 in 74.6649 ms
+2026-09-14 09:59:09.872 +05:30 [INF] HTTP GET /health responded 200 in 0.9606 ms
+2026-09-14 09:59:09.873 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0682 ms
+2026-09-14 09:59:09.875 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.1460 ms
+2026-09-14 09:59:09.879 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 09:59:09.892 +05:30 [INF] [CQRS Completed] GetProductsQuery in 4ms
+2026-09-14 09:59:09.894 +05:30 [INF] HTTP GET /api/products responded 200 in 15.5540 ms
+2026-09-14 09:59:09.895 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 09:59:09.909 +05:30 [INF] [CQRS Completed] GetProductsQuery in 3ms
+2026-09-14 09:59:09.911 +05:30 [INF] HTTP GET /api/products responded 200 in 16.5004 ms
+2026-09-14 09:59:43.952 +05:30 [INF] HTTP GET /health responded 200 in 1.1708 ms
+2026-09-14 09:59:43.957 +05:30 [INF] HTTP GET /health responded 200 in 1.3605 ms
+2026-09-14 09:59:43.967 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.5351 ms
+2026-09-14 09:59:43.971 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.1695 ms
+2026-09-14 09:59:43.983 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 09:59:44.008 +05:30 [INF] [CQRS Completed] GetProductsQuery in 7ms
+2026-09-14 09:59:44.012 +05:30 [INF] HTTP GET /api/products responded 200 in 30.1855 ms
+2026-09-14 09:59:44.015 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 09:59:44.034 +05:30 [INF] [CQRS Completed] GetProductsQuery in 5ms
+2026-09-14 09:59:44.038 +05:30 [INF] HTTP GET /api/products responded 200 in 23.8735 ms
+2026-09-14 09:59:53.129 +05:30 [INF] HTTP GET /health responded 200 in 1.6598 ms
+2026-09-14 09:59:53.142 +05:30 [INF] HTTP GET /health responded 200 in 1.8973 ms
+2026-09-14 09:59:53.146 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.1030 ms
+2026-09-14 09:59:53.165 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 2.8662 ms
+2026-09-14 09:59:53.167 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 09:59:53.195 +05:30 [INF] [CQRS Completed] GetProductsQuery in 9ms
+2026-09-14 09:59:53.198 +05:30 [INF] HTTP GET /api/products responded 200 in 32.9994 ms
+2026-09-14 09:59:53.200 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 09:59:53.222 +05:30 [INF] [CQRS Completed] GetProductsQuery in 10ms
+2026-09-14 09:59:53.225 +05:30 [INF] HTTP GET /api/products responded 200 in 25.5722 ms
+2026-09-14 10:00:04.101 +05:30 [INF] HTTP GET /health responded 200 in 4.9631 ms
+2026-09-14 10:00:04.113 +05:30 [INF] HTTP GET /health responded 200 in 1.4395 ms
+2026-09-14 10:00:04.137 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.4933 ms
+2026-09-14 10:00:04.139 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.1404 ms
+2026-09-14 10:00:04.148 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:00:04.176 +05:30 [INF] [CQRS Completed] GetProductsQuery in 9ms
+2026-09-14 10:00:04.180 +05:30 [INF] HTTP GET /api/products responded 200 in 32.2169 ms
+2026-09-14 10:00:04.183 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:00:04.201 +05:30 [INF] [CQRS Completed] GetProductsQuery in 7ms
+2026-09-14 10:00:04.204 +05:30 [INF] HTTP GET /api/products responded 200 in 22.4900 ms
+2026-09-14 10:04:36.257 +05:30 [INF] HTTP GET /health responded 200 in 75.1998 ms
+2026-09-14 10:04:36.259 +05:30 [INF] HTTP GET /health responded 200 in 0.6137 ms
+2026-09-14 10:04:36.284 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0722 ms
+2026-09-14 10:04:36.285 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0452 ms
+2026-09-14 10:04:36.290 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:04:36.362 +05:30 [INF] [CQRS Completed] GetProductsQuery in 63ms
+2026-09-14 10:04:36.363 +05:30 [INF] HTTP GET /api/products responded 200 in 73.9726 ms
+2026-09-14 10:04:36.365 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:04:36.376 +05:30 [INF] [CQRS Completed] GetProductsQuery in 3ms
+2026-09-14 10:04:36.377 +05:30 [INF] HTTP GET /api/products responded 200 in 13.0617 ms
+2026-09-14 10:04:36.900 +05:30 [INF] HTTP GET /health responded 200 in 0.6880 ms
+2026-09-14 10:04:36.903 +05:30 [INF] HTTP GET /health responded 200 in 0.9939 ms
+2026-09-14 10:04:36.921 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:04:36.945 +05:30 [INF] [CQRS Completed] GetProductsQuery in 6ms
+2026-09-14 10:04:36.949 +05:30 [INF] HTTP GET /api/products responded 200 in 29.1669 ms
+2026-09-14 10:04:36.951 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:04:36.965 +05:30 [INF] [CQRS Completed] GetProductsQuery in 4ms
+2026-09-14 10:04:36.967 +05:30 [INF] HTTP GET /api/products responded 200 in 16.6039 ms
+2026-09-14 10:04:37.415 +05:30 [INF] HTTP GET /health responded 200 in 1.3114 ms
+2026-09-14 10:04:37.418 +05:30 [INF] HTTP GET /health responded 200 in 0.7734 ms
+2026-09-14 10:04:37.434 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:04:37.450 +05:30 [INF] [CQRS Completed] GetProductsQuery in 6ms
+2026-09-14 10:04:37.453 +05:30 [INF] HTTP GET /api/products responded 200 in 19.3471 ms
+2026-09-14 10:04:37.455 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:04:37.468 +05:30 [INF] [CQRS Completed] GetProductsQuery in 3ms
+2026-09-14 10:04:37.470 +05:30 [INF] HTTP GET /api/products responded 200 in 15.5908 ms
+2026-09-14 10:04:37.882 +05:30 [INF] HTTP GET /health responded 200 in 1.1684 ms
+2026-09-14 10:04:37.885 +05:30 [INF] HTTP GET /health responded 200 in 0.8500 ms
+2026-09-14 10:04:37.896 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:04:37.914 +05:30 [INF] [CQRS Completed] GetProductsQuery in 3ms
+2026-09-14 10:04:37.916 +05:30 [INF] HTTP GET /api/products responded 200 in 20.3788 ms
+2026-09-14 10:04:37.917 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:04:37.928 +05:30 [INF] [CQRS Completed] GetProductsQuery in 2ms
+2026-09-14 10:04:37.930 +05:30 [INF] HTTP GET /api/products responded 200 in 12.6736 ms
+2026-09-14 10:04:38.327 +05:30 [INF] HTTP GET /health responded 200 in 0.6081 ms
+2026-09-14 10:04:38.329 +05:30 [INF] HTTP GET /health responded 200 in 1.1562 ms
+2026-09-14 10:04:38.350 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:04:38.364 +05:30 [INF] [CQRS Completed] GetProductsQuery in 4ms
+2026-09-14 10:04:38.365 +05:30 [INF] HTTP GET /api/products responded 200 in 15.9699 ms
+2026-09-14 10:04:38.367 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:04:38.379 +05:30 [INF] [CQRS Completed] GetProductsQuery in 3ms
+2026-09-14 10:04:38.381 +05:30 [INF] HTTP GET /api/products responded 200 in 15.0262 ms
+2026-09-14 10:05:01.434 +05:30 [INF] HTTP GET /health responded 200 in 0.7504 ms
+2026-09-14 10:05:01.436 +05:30 [INF] HTTP GET /health responded 200 in 0.7449 ms
+2026-09-14 10:05:01.447 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0564 ms
+2026-09-14 10:05:01.453 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.1304 ms
+2026-09-14 10:05:01.454 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:05:01.472 +05:30 [INF] [CQRS Completed] GetProductsQuery in 5ms
+2026-09-14 10:05:01.474 +05:30 [INF] HTTP GET /api/products responded 200 in 20.1082 ms
+2026-09-14 10:05:01.475 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:05:01.493 +05:30 [INF] [CQRS Completed] GetProductsQuery in 7ms
+2026-09-14 10:05:01.495 +05:30 [INF] HTTP GET /api/products responded 200 in 20.2828 ms
+2026-09-14 10:05:47.522 +05:30 [INF] HTTP GET /health responded 200 in 2.7901 ms
+2026-09-14 10:05:47.539 +05:30 [INF] HTTP GET /health responded 200 in 2.4781 ms
+2026-09-14 10:05:47.690 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0792 ms
+2026-09-14 10:05:47.690 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.2606 ms
+2026-09-14 10:05:47.695 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:05:47.709 +05:30 [INF] [CQRS Completed] GetProductsQuery in 4ms
+2026-09-14 10:05:47.712 +05:30 [INF] HTTP GET /api/products responded 200 in 17.5472 ms
+2026-09-14 10:05:47.714 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:05:47.726 +05:30 [INF] [CQRS Completed] GetProductsQuery in 3ms
+2026-09-14 10:05:47.728 +05:30 [INF] HTTP GET /api/products responded 200 in 15.3438 ms
+2026-09-14 10:11:22.875 +05:30 [INF] HTTP GET /health responded 200 in 88.0181 ms
+2026-09-14 10:11:22.885 +05:30 [INF] HTTP GET /health responded 200 in 1.1183 ms
+2026-09-14 10:11:22.892 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0581 ms
+2026-09-14 10:11:22.898 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0623 ms
+2026-09-14 10:11:22.906 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:11:22.994 +05:30 [INF] [CQRS Completed] GetProductsQuery in 77ms
+2026-09-14 10:11:22.997 +05:30 [INF] HTTP GET /api/products responded 200 in 93.0340 ms
+2026-09-14 10:11:22.999 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:11:23.013 +05:30 [INF] [CQRS Completed] GetProductsQuery in 5ms
+2026-09-14 10:11:23.015 +05:30 [INF] HTTP GET /api/products responded 200 in 16.6705 ms
+2026-09-14 10:11:23.278 +05:30 [INF] HTTP GET /health responded 200 in 1.2247 ms
+2026-09-14 10:11:23.283 +05:30 [INF] HTTP GET /health responded 200 in 1.3855 ms
+2026-09-14 10:11:23.286 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0484 ms
+2026-09-14 10:11:23.287 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0343 ms
+2026-09-14 10:11:23.291 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:11:23.305 +05:30 [INF] [CQRS Completed] GetProductsQuery in 4ms
+2026-09-14 10:11:23.308 +05:30 [INF] HTTP GET /api/products responded 200 in 17.5482 ms
+2026-09-14 10:11:23.310 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:11:23.328 +05:30 [INF] [CQRS Completed] GetProductsQuery in 6ms
+2026-09-14 10:11:23.331 +05:30 [INF] HTTP GET /api/products responded 200 in 21.1670 ms
+2026-09-14 10:12:32.424 +05:30 [INF] HTTP GET /health responded 200 in 0.7545 ms
+2026-09-14 10:12:32.428 +05:30 [INF] HTTP GET /health responded 200 in 1.3526 ms
+2026-09-14 10:12:32.447 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.2984 ms
+2026-09-14 10:12:32.448 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0517 ms
+2026-09-14 10:12:32.456 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:12:32.477 +05:30 [INF] [CQRS Completed] GetProductsQuery in 7ms
+2026-09-14 10:12:32.479 +05:30 [INF] HTTP GET /api/products responded 200 in 23.3162 ms
+2026-09-14 10:12:32.481 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:12:32.496 +05:30 [INF] [CQRS Completed] GetProductsQuery in 3ms
+2026-09-14 10:12:32.499 +05:30 [INF] HTTP GET /api/products responded 200 in 17.9581 ms
+2026-09-14 10:13:25.118 +05:30 [INF] HTTP GET /health responded 200 in 0.8904 ms
+2026-09-14 10:13:25.120 +05:30 [INF] HTTP GET /health responded 200 in 0.6788 ms
+2026-09-14 10:13:25.131 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.1902 ms
+2026-09-14 10:13:25.132 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.1005 ms
+2026-09-14 10:13:25.141 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:13:25.158 +05:30 [INF] [CQRS Completed] GetProductsQuery in 5ms
+2026-09-14 10:13:25.161 +05:30 [INF] HTTP GET /api/products responded 200 in 20.4036 ms
+2026-09-14 10:13:25.163 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:13:25.178 +05:30 [INF] [CQRS Completed] GetProductsQuery in 4ms
+2026-09-14 10:13:25.181 +05:30 [INF] HTTP GET /api/products responded 200 in 18.0671 ms
+2026-09-14 10:15:11.730 +05:30 [INF] HTTP GET /health responded 200 in 2.5243 ms
+2026-09-14 10:15:11.734 +05:30 [INF] HTTP GET /health responded 200 in 0.9686 ms
+2026-09-14 10:15:11.810 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.1436 ms
+2026-09-14 10:15:11.812 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0951 ms
+2026-09-14 10:15:11.830 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:15:11.851 +05:30 [INF] [CQRS Completed] GetProductsQuery in 6ms
+2026-09-14 10:15:11.855 +05:30 [INF] HTTP GET /api/products responded 200 in 25.0247 ms
+2026-09-14 10:15:11.857 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:15:11.873 +05:30 [INF] [CQRS Completed] GetProductsQuery in 4ms
+2026-09-14 10:15:11.875 +05:30 [INF] HTTP GET /api/products responded 200 in 18.8710 ms
+2026-09-14 10:26:17.617 +05:30 [INF] HTTP GET /health responded 200 in 109.1946 ms
+2026-09-14 10:26:17.622 +05:30 [INF] HTTP GET /health responded 200 in 2.4297 ms
+2026-09-14 10:26:17.670 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.1380 ms
+2026-09-14 10:26:17.681 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0784 ms
+2026-09-14 10:26:17.684 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:26:17.825 +05:30 [INF] [CQRS Completed] GetProductsQuery in 127ms
+2026-09-14 10:26:17.828 +05:30 [INF] HTTP GET /api/products responded 200 in 144.0711 ms
+2026-09-14 10:26:17.829 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:26:17.845 +05:30 [INF] [CQRS Completed] GetProductsQuery in 5ms
+2026-09-14 10:26:17.847 +05:30 [INF] HTTP GET /api/products responded 200 in 18.1945 ms
+2026-09-14 10:26:50.365 +05:30 [INF] HTTP GET /health responded 200 in 13.7911 ms
+2026-09-14 10:26:50.370 +05:30 [INF] HTTP GET /health responded 200 in 1.2082 ms
+2026-09-14 10:26:50.533 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0557 ms
+2026-09-14 10:26:50.533 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0241 ms
+2026-09-14 10:26:50.580 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:26:50.682 +05:30 [INF] [CQRS Completed] GetProductsQuery in 8ms
+2026-09-14 10:26:50.689 +05:30 [INF] HTTP GET /api/products responded 200 in 110.5906 ms
+2026-09-14 10:26:50.696 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:26:50.748 +05:30 [INF] [CQRS Completed] GetProductsQuery in 6ms
+2026-09-14 10:26:50.753 +05:30 [INF] HTTP GET /api/products responded 200 in 57.1889 ms
+2026-09-14 10:28:03.290 +05:30 [INF] HTTP GET /health responded 200 in 0.6253 ms
+2026-09-14 10:28:03.296 +05:30 [INF] HTTP GET /health responded 200 in 0.7344 ms
+2026-09-14 10:28:03.297 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0524 ms
+2026-09-14 10:28:03.301 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0574 ms
+2026-09-14 10:28:03.305 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:28:03.320 +05:30 [INF] [CQRS Completed] GetProductsQuery in 5ms
+2026-09-14 10:28:03.322 +05:30 [INF] HTTP GET /api/products responded 200 in 17.4407 ms
+2026-09-14 10:28:03.324 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:28:03.341 +05:30 [INF] [CQRS Completed] GetProductsQuery in 4ms
+2026-09-14 10:28:03.343 +05:30 [INF] HTTP GET /api/products responded 200 in 20.3545 ms
+2026-09-14 10:30:37.535 +05:30 [INF] HTTP GET /health responded 200 in 7.3426 ms
+2026-09-14 10:30:37.540 +05:30 [INF] HTTP GET /health responded 200 in 0.8408 ms
+2026-09-14 10:30:37.557 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0513 ms
+2026-09-14 10:30:37.566 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0846 ms
+2026-09-14 10:30:37.573 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:30:37.591 +05:30 [INF] [CQRS Completed] GetProductsQuery in 3ms
+2026-09-14 10:30:37.593 +05:30 [INF] HTTP GET /api/products responded 200 in 20.0098 ms
+2026-09-14 10:30:37.595 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:30:37.616 +05:30 [INF] [CQRS Completed] GetProductsQuery in 9ms
+2026-09-14 10:30:37.618 +05:30 [INF] HTTP GET /api/products responded 200 in 23.7033 ms
+2026-09-14 10:34:08.855 +05:30 [INF] HTTP GET /health responded 200 in 82.0532 ms
+2026-09-14 10:34:08.859 +05:30 [INF] HTTP GET /health responded 200 in 2.0135 ms
+2026-09-14 10:34:08.860 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0368 ms
+2026-09-14 10:34:08.861 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0266 ms
+2026-09-14 10:34:08.865 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:34:08.964 +05:30 [INF] [CQRS Completed] GetProductsQuery in 91ms
+2026-09-14 10:34:08.966 +05:30 [INF] HTTP GET /api/products responded 200 in 102.1244 ms
+2026-09-14 10:34:08.968 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:34:08.983 +05:30 [INF] [CQRS Completed] GetProductsQuery in 4ms
+2026-09-14 10:34:08.985 +05:30 [INF] HTTP GET /api/products responded 200 in 18.2537 ms
+2026-09-14 10:34:49.712 +05:30 [INF] HTTP GET /health responded 200 in 2.2492 ms
+2026-09-14 10:34:49.723 +05:30 [INF] HTTP GET /health responded 200 in 0.8461 ms
+2026-09-14 10:34:49.727 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0548 ms
+2026-09-14 10:34:49.735 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.1033 ms
+2026-09-14 10:34:49.741 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:34:49.772 +05:30 [INF] [CQRS Completed] GetProductsQuery in 9ms
+2026-09-14 10:34:49.776 +05:30 [INF] HTTP GET /api/products responded 200 in 35.8198 ms
+2026-09-14 10:34:49.778 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:34:49.805 +05:30 [INF] [CQRS Completed] GetProductsQuery in 10ms
+2026-09-14 10:34:49.809 +05:30 [INF] HTTP GET /api/products responded 200 in 31.1345 ms
+2026-09-14 10:34:56.813 +05:30 [INF] HTTP GET /health responded 200 in 0.6060 ms
+2026-09-14 10:34:56.816 +05:30 [INF] HTTP GET /health responded 200 in 1.2993 ms
+2026-09-14 10:34:56.838 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0626 ms
+2026-09-14 10:34:56.838 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0285 ms
+2026-09-14 10:34:56.911 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:34:56.937 +05:30 [INF] [CQRS Completed] GetProductsQuery in 11ms
+2026-09-14 10:34:56.942 +05:30 [INF] HTTP GET /api/products responded 200 in 30.6593 ms
+2026-09-14 10:34:56.943 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 10:34:56.970 +05:30 [INF] [CQRS Completed] GetProductsQuery in 10ms
+2026-09-14 10:34:56.975 +05:30 [INF] HTTP GET /api/products responded 200 in 32.4907 ms
+2026-09-14 11:09:14.848 +05:30 [INF] HTTP GET /health responded 200 in 126.7595 ms
+2026-09-14 11:09:14.852 +05:30 [INF] HTTP GET /health responded 200 in 1.6116 ms
+2026-09-14 11:09:14.878 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0424 ms
+2026-09-14 11:09:14.878 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.9389 ms
+2026-09-14 11:09:14.887 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 11:09:15.045 +05:30 [INF] [CQRS Completed] GetProductsQuery in 138ms
+2026-09-14 11:09:15.048 +05:30 [INF] HTTP GET /api/products responded 200 in 162.0424 ms
+2026-09-14 11:09:15.049 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 11:09:15.072 +05:30 [INF] [CQRS Completed] GetProductsQuery in 5ms
+2026-09-14 11:09:15.076 +05:30 [INF] HTTP GET /api/products responded 200 in 26.9209 ms
+2026-09-14 11:10:39.126 +05:30 [INF] [CQRS Executing] UploadProductImageCommand {"FileStream":{"CanRead":true,"CanSeek":true,"CanWrite":false,"Length":78263,"Position":0,"CanTimeout":false,"ReadTimeout":"The property accessor threw an exception: InvalidOperationException","WriteTimeout":"The property accessor threw an exception: InvalidOperationException","$type":"ReferenceReadStream"},"FileName":"IMG-20260723-WA0013.jpg","ContentType":"image/jpeg","ProductId":null,"IsPrimary":true,"AltText":null,"$type":"UploadProductImageCommand"}
+2026-09-14 11:10:41.926 +05:30 [INF] [ImageCompression] Compressed 'IMG-20260723-WA0013.jpg': 78,263 B -> 27,634 B (64.7% saved) | 800x1200 WebP
+2026-09-14 11:10:41.953 +05:30 [INF] Start processing HTTP request POST https://rdyucasfiycvizpatmcs.supabase.co/storage/v1/object/product-images/products/20260914_d4353500c96f45e48eb49561a14d2548.webp
+2026-09-14 11:10:41.957 +05:30 [INF] Sending HTTP request POST https://rdyucasfiycvizpatmcs.supabase.co/storage/v1/object/product-images/products/20260914_d4353500c96f45e48eb49561a14d2548.webp
+2026-09-14 11:10:42.782 +05:30 [INF] Received HTTP response headers after 818.1794ms - 200
+2026-09-14 11:10:42.785 +05:30 [INF] End processing HTTP request after 834.2116ms - 200
+2026-09-14 11:10:42.794 +05:30 [INF] [SupabaseStorage] Successfully stored image: https://rdyucasfiycvizpatmcs.supabase.co/storage/v1/object/public/product-images/products/20260914_d4353500c96f45e48eb49561a14d2548.webp (Size: 27,634 bytes, Saved: 64.7%)
+2026-09-14 11:10:42.803 +05:30 [WRN] [CQRS Long Running Request] UploadProductImageCommand (3664ms) {"FileStream":{"CanRead":true,"CanSeek":true,"CanWrite":false,"Length":78263,"Position":78263,"CanTimeout":false,"ReadTimeout":"The property accessor threw an exception: InvalidOperationException","WriteTimeout":"The property accessor threw an exception: InvalidOperationException","$type":"ReferenceReadStream"},"FileName":"IMG-20260723-WA0013.jpg","ContentType":"image/jpeg","ProductId":null,"IsPrimary":true,"AltText":null,"$type":"UploadProductImageCommand"}
+2026-09-14 11:10:42.815 +05:30 [INF] [CQRS Completed] UploadProductImageCommand in 3677ms
+2026-09-14 11:10:42.851 +05:30 [INF] HTTP POST /api/products/images/upload responded 200 in 3904.4967 ms
+2026-09-14 11:14:48.755 +05:30 [INF] HTTP OPTIONS /api/auth/register responded 204 in 0.1388 ms
+2026-09-14 11:14:48.901 +05:30 [INF] HTTP POST /api/auth/register responded 400 in 125.3522 ms
+2026-09-14 11:23:51.333 +05:30 [INF] HTTP GET /health responded 200 in 100.0172 ms
+2026-09-14 11:23:51.337 +05:30 [INF] HTTP GET /health responded 200 in 0.6848 ms
+2026-09-14 11:23:51.366 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0599 ms
+2026-09-14 11:23:51.368 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0478 ms
+2026-09-14 11:23:51.376 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 11:23:51.528 +05:30 [INF] [CQRS Completed] GetProductsQuery in 126ms
+2026-09-14 11:23:51.531 +05:30 [INF] HTTP GET /api/products responded 200 in 155.8160 ms
+2026-09-14 11:23:51.535 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 11:23:51.553 +05:30 [INF] [CQRS Completed] GetProductsQuery in 6ms
+2026-09-14 11:23:51.555 +05:30 [INF] HTTP GET /api/products responded 200 in 20.7927 ms
+2026-09-14 11:28:25.987 +05:30 [INF] HTTP GET /health responded 200 in 1.3961 ms
+2026-09-14 11:28:25.999 +05:30 [INF] HTTP GET /health responded 200 in 1.0761 ms
+2026-09-14 11:28:26.074 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0703 ms
+2026-09-14 11:28:26.074 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0271 ms
+2026-09-14 11:28:26.079 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 11:28:26.098 +05:30 [INF] [CQRS Completed] GetProductsQuery in 4ms
+2026-09-14 11:28:26.103 +05:30 [INF] HTTP GET /api/products responded 200 in 24.5224 ms
+2026-09-14 11:28:26.104 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 11:28:26.128 +05:30 [INF] [CQRS Completed] GetProductsQuery in 9ms
+2026-09-14 11:28:26.158 +05:30 [INF] HTTP GET /api/products responded 200 in 53.9218 ms
+2026-09-14 11:32:49.128 +05:30 [INF] HTTP GET /health responded 200 in 92.6853 ms
+2026-09-14 11:32:49.134 +05:30 [INF] HTTP GET /health responded 200 in 0.7645 ms
+2026-09-14 11:32:49.155 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0920 ms
+2026-09-14 11:32:49.167 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0613 ms
+2026-09-14 11:32:49.177 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 11:32:49.282 +05:30 [INF] [CQRS Completed] GetProductsQuery in 91ms
+2026-09-14 11:32:49.284 +05:30 [INF] HTTP GET /api/products responded 200 in 107.6058 ms
+2026-09-14 11:32:49.285 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 11:32:49.299 +05:30 [INF] [CQRS Completed] GetProductsQuery in 4ms
+2026-09-14 11:32:49.301 +05:30 [INF] HTTP GET /api/products responded 200 in 16.6665 ms
+2026-09-14 11:32:59.550 +05:30 [INF] HTTP GET /health responded 200 in 1.9373 ms
+2026-09-14 11:32:59.563 +05:30 [INF] HTTP GET /health responded 200 in 0.9809 ms
+2026-09-14 11:32:59.575 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0434 ms
+2026-09-14 11:32:59.575 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.9277 ms
+2026-09-14 11:32:59.580 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 11:32:59.593 +05:30 [INF] [CQRS Completed] GetProductsQuery in 4ms
+2026-09-14 11:32:59.596 +05:30 [INF] HTTP GET /api/products responded 200 in 16.1542 ms
+2026-09-14 11:32:59.601 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 11:32:59.621 +05:30 [INF] [CQRS Completed] GetProductsQuery in 5ms
+2026-09-14 11:32:59.624 +05:30 [INF] HTTP GET /api/products responded 200 in 23.2744 ms
+2026-09-14 13:55:50.898 +05:30 [INF] Starting ECommerce API...
+2026-09-14 13:55:53.141 +05:30 [WRN] Entity 'Cart' has a global query filter defined and is the required end of a relationship with the entity 'CartItem'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:55:53.144 +05:30 [WRN] Entity 'Inventory' has a global query filter defined and is the required end of a relationship with the entity 'InventoryTransaction'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:55:53.144 +05:30 [WRN] Entity 'User' has a global query filter defined and is the required end of a relationship with the entity 'Notification'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:55:53.144 +05:30 [WRN] Entity 'Order' has a global query filter defined and is the required end of a relationship with the entity 'OrderItem'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:55:53.144 +05:30 [WRN] Entity 'Order' has a global query filter defined and is the required end of a relationship with the entity 'OrderStatusHistory'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:55:53.144 +05:30 [WRN] Entity 'Payment' has a global query filter defined and is the required end of a relationship with the entity 'PaymentTransaction'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:55:53.144 +05:30 [WRN] Entity 'Product' has a global query filter defined and is the required end of a relationship with the entity 'ProductAttributeValue'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:55:53.144 +05:30 [WRN] Entity 'Product' has a global query filter defined and is the required end of a relationship with the entity 'ProductImage'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:55:53.144 +05:30 [WRN] Entity 'Review' has a global query filter defined and is the required end of a relationship with the entity 'ReviewImage'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:55:53.144 +05:30 [WRN] Entity 'User' has a global query filter defined and is the required end of a relationship with the entity 'UserRole'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:55:53.144 +05:30 [WRN] Entity 'Product' has a global query filter defined and is the required end of a relationship with the entity 'WishlistItem'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:55:53.211 +05:30 [WRN] The foreign key property 'SubCategory.CategoryId1' was created in shadow state because a conflicting property with the simple name 'CategoryId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+2026-09-14 13:55:54.332 +05:30 [INF] ECommerce API listening...
+2026-09-14 13:55:54.375 +05:30 [INF] [EmbeddingService] Background embedding generator started.
+2026-09-14 13:55:54.493 +05:30 [WRN] The WebRootPath was not found: D:\Ecom\backend\src\ECommerce.API\wwwroot. Static files may be unavailable.
+2026-09-14 13:57:12.643 +05:30 [INF] Starting ECommerce API...
+2026-09-14 13:57:13.848 +05:30 [WRN] Entity 'Cart' has a global query filter defined and is the required end of a relationship with the entity 'CartItem'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:57:13.894 +05:30 [WRN] Entity 'Inventory' has a global query filter defined and is the required end of a relationship with the entity 'InventoryTransaction'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:57:13.911 +05:30 [WRN] Entity 'User' has a global query filter defined and is the required end of a relationship with the entity 'Notification'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:57:13.915 +05:30 [WRN] Entity 'Order' has a global query filter defined and is the required end of a relationship with the entity 'OrderItem'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:57:13.921 +05:30 [WRN] Entity 'Order' has a global query filter defined and is the required end of a relationship with the entity 'OrderStatusHistory'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:57:13.927 +05:30 [WRN] Entity 'Payment' has a global query filter defined and is the required end of a relationship with the entity 'PaymentTransaction'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:57:13.951 +05:30 [WRN] Entity 'Product' has a global query filter defined and is the required end of a relationship with the entity 'ProductAttributeValue'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:57:13.977 +05:30 [WRN] Entity 'Product' has a global query filter defined and is the required end of a relationship with the entity 'ProductImage'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:57:13.984 +05:30 [WRN] Entity 'Review' has a global query filter defined and is the required end of a relationship with the entity 'ReviewImage'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:57:13.986 +05:30 [WRN] Entity 'User' has a global query filter defined and is the required end of a relationship with the entity 'UserRole'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:57:13.992 +05:30 [WRN] Entity 'Product' has a global query filter defined and is the required end of a relationship with the entity 'WishlistItem'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2026-09-14 13:57:14.113 +05:30 [WRN] The foreign key property 'SubCategory.CategoryId1' was created in shadow state because a conflicting property with the simple name 'CategoryId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core.
+2026-09-14 13:57:15.617 +05:30 [INF] ECommerce API listening...
+2026-09-14 13:57:15.669 +05:30 [INF] [EmbeddingService] Background embedding generator started.
+2026-09-14 13:57:15.796 +05:30 [WRN] The WebRootPath was not found: D:\Ecom\backend\src\ECommerce.API\wwwroot. Static files may be unavailable.
+2026-09-14 14:09:31.577 +05:30 [INF] HTTP GET /health responded 200 in 1674.8112 ms
+2026-09-14 14:09:31.594 +05:30 [INF] HTTP GET /health responded 200 in 8.7322 ms
+2026-09-14 14:09:39.565 +05:30 [INF] HTTP GET /health responded 200 in 6.3707 ms
+2026-09-14 14:09:39.569 +05:30 [INF] HTTP GET /health responded 200 in 3.2582 ms
+2026-09-14 14:10:18.921 +05:30 [INF] HTTP GET /health responded 200 in 1.4561 ms
+2026-09-14 14:10:18.928 +05:30 [INF] HTTP GET /health responded 200 in 2.1106 ms
+2026-09-14 14:11:02.918 +05:30 [INF] HTTP GET /health responded 200 in 2.1199 ms
+2026-09-14 14:11:02.924 +05:30 [INF] HTTP GET /health responded 200 in 1.5771 ms
+2026-09-14 14:11:03.075 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.9034 ms
+2026-09-14 14:11:03.075 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 3.1606 ms
+2026-09-14 14:11:03.176 +05:30 [WRN] You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-09-14 14:11:03.305 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 14:11:04.556 +05:30 [WRN] [CQRS Long Running Request] GetProductsQuery (1227ms) {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 14:11:04.579 +05:30 [INF] [CQRS Completed] GetProductsQuery in 1258ms
+2026-09-14 14:11:04.818 +05:30 [INF] HTTP GET /api/products responded 200 in 1729.2304 ms
+2026-09-14 14:11:04.836 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 14:11:05.195 +05:30 [INF] [CQRS Completed] GetProductsQuery in 342ms
+2026-09-14 14:11:05.205 +05:30 [INF] HTTP GET /api/products responded 200 in 380.8245 ms
+2026-09-14 14:11:38.241 +05:30 [INF] HTTP GET /health responded 200 in 2.7142 ms
+2026-09-14 14:11:38.247 +05:30 [INF] HTTP GET /health responded 200 in 1.5174 ms
+2026-09-14 14:11:38.253 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.1537 ms
+2026-09-14 14:11:38.262 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 14:11:38.283 +05:30 [INF] [CQRS Completed] GetProductsQuery in 11ms
+2026-09-14 14:11:38.286 +05:30 [INF] HTTP GET /api/products responded 200 in 29.1599 ms
+2026-09-14 14:11:38.289 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 14:11:38.301 +05:30 [INF] [CQRS Completed] GetProductsQuery in 5ms
+2026-09-14 14:11:38.303 +05:30 [INF] HTTP GET /api/products responded 200 in 14.6044 ms
+2026-09-14 14:12:05.122 +05:30 [INF] HTTP OPTIONS /api/auth/login responded 204 in 0.1874 ms
+2026-09-14 14:12:05.371 +05:30 [INF] HTTP POST /api/auth/login responded 400 in 234.2420 ms
+2026-09-14 14:13:59.768 +05:30 [INF] HTTP GET /health responded 200 in 1.2789 ms
+2026-09-14 14:13:59.772 +05:30 [INF] HTTP GET /health responded 200 in 0.9792 ms
+2026-09-14 14:13:59.785 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.2759 ms
+2026-09-14 14:13:59.792 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.2103 ms
+2026-09-14 14:13:59.799 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 14:13:59.815 +05:30 [INF] [CQRS Completed] GetProductsQuery in 4ms
+2026-09-14 14:13:59.817 +05:30 [INF] HTTP GET /api/products responded 200 in 18.3856 ms
+2026-09-14 14:13:59.819 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 14:13:59.832 +05:30 [INF] [CQRS Completed] GetProductsQuery in 3ms
+2026-09-14 14:13:59.834 +05:30 [INF] HTTP GET /api/products responded 200 in 15.5182 ms
+2026-09-14 14:44:59.691 +05:30 [INF] HTTP OPTIONS /api/auth/login responded 204 in 0.3988 ms
+2026-09-14 14:47:48.672 +05:30 [INF] HTTP GET /health responded 200 in 85.5749 ms
+2026-09-14 14:47:48.680 +05:30 [INF] HTTP GET /health responded 200 in 2.4478 ms
+2026-09-14 14:47:48.689 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.1984 ms
+2026-09-14 14:47:48.690 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.1040 ms
+2026-09-14 14:47:48.699 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 14:47:48.833 +05:30 [INF] [CQRS Completed] GetProductsQuery in 123ms
+2026-09-14 14:47:48.837 +05:30 [INF] HTTP GET /api/products responded 200 in 140.1119 ms
+2026-09-14 14:47:48.840 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 14:47:48.857 +05:30 [INF] [CQRS Completed] GetProductsQuery in 7ms
+2026-09-14 14:47:48.860 +05:30 [INF] HTTP GET /api/products responded 200 in 20.5649 ms
+2026-09-14 14:47:49.077 +05:30 [INF] HTTP GET /health responded 200 in 1.7158 ms
+2026-09-14 14:47:49.089 +05:30 [INF] HTTP GET /health responded 200 in 1.1473 ms
+2026-09-14 14:47:58.859 +05:30 [INF] HTTP GET /health responded 200 in 1.1880 ms
+2026-09-14 14:47:58.866 +05:30 [INF] HTTP GET /health responded 200 in 1.3023 ms
+2026-09-14 14:47:58.890 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.4169 ms
+2026-09-14 14:47:58.894 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.1050 ms
+2026-09-14 14:47:58.900 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 14:47:58.923 +05:30 [INF] [CQRS Completed] GetProductsQuery in 12ms
+2026-09-14 14:47:58.929 +05:30 [INF] HTTP GET /api/products responded 200 in 30.3032 ms
+2026-09-14 14:47:58.935 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 14:47:58.953 +05:30 [INF] [CQRS Completed] GetProductsQuery in 5ms
+2026-09-14 14:47:58.955 +05:30 [INF] HTTP GET /api/products responded 200 in 21.3197 ms
+2026-09-14 14:47:59.700 +05:30 [INF] HTTP GET /health responded 200 in 1.2984 ms
+2026-09-14 14:47:59.709 +05:30 [INF] HTTP GET /health responded 200 in 0.9564 ms
+2026-09-14 14:48:52.404 +05:30 [INF] HTTP GET /health responded 200 in 2.1384 ms
+2026-09-14 14:48:52.412 +05:30 [INF] HTTP GET /health responded 200 in 3.1685 ms
+2026-09-14 14:48:57.674 +05:30 [INF] HTTP OPTIONS /api/auth/login responded 204 in 0.0701 ms
+2026-09-14 14:51:09.565 +05:30 [INF] HTTP GET /health responded 200 in 0.9987 ms
+2026-09-14 14:51:09.568 +05:30 [INF] HTTP GET /health responded 200 in 0.8753 ms
+2026-09-14 14:51:09.575 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.1519 ms
+2026-09-14 14:51:09.576 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0925 ms
+2026-09-14 14:51:09.583 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 14:51:09.600 +05:30 [INF] [CQRS Completed] GetProductsQuery in 6ms
+2026-09-14 14:51:09.605 +05:30 [INF] HTTP GET /api/products responded 200 in 22.1601 ms
+2026-09-14 14:51:09.612 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 14:51:09.645 +05:30 [INF] [CQRS Completed] GetProductsQuery in 15ms
+2026-09-14 14:51:09.653 +05:30 [INF] HTTP GET /api/products responded 200 in 42.8878 ms
+2026-09-14 14:51:25.861 +05:30 [INF] HTTP OPTIONS /api/auth/login responded 204 in 0.2934 ms
+2026-09-14 14:51:25.869 +05:30 [INF] HTTP POST /api/auth/login responded 400 in 2.3708 ms
+2026-09-14 14:53:05.631 +05:30 [INF] HTTP GET /health responded 200 in 99.2007 ms
+2026-09-14 14:53:05.637 +05:30 [INF] HTTP GET /health responded 200 in 1.1898 ms
+2026-09-14 14:53:05.638 +05:30 [INF] HTTP OPTIONS /api/products responded 204 in 0.0847 ms
+2026-09-14 14:53:05.651 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 14:53:05.932 +05:30 [INF] [CQRS Completed] GetProductsQuery in 252ms
+2026-09-14 14:53:05.936 +05:30 [INF] HTTP GET /api/products responded 200 in 286.4443 ms
+2026-09-14 14:53:05.940 +05:30 [INF] [CQRS Executing] GetProductsQuery {"Category":null,"Brand":null,"MaxPrice":null,"MinPrice":null,"InStockOnly":null,"MinRating":null,"Sort":null,"PageNumber":1,"PageSize":10,"SortBy":null,"SortDirection":"asc","Search":null,"$type":"GetProductsQuery"}
+2026-09-14 14:53:05.967 +05:30 [INF] [CQRS Completed] GetProductsQuery in 9ms
+2026-09-14 14:53:05.972 +05:30 [INF] HTTP GET /api/products responded 200 in 32.2702 ms

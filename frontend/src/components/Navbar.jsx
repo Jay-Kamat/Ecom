@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useStore } from '../context/StoreContext.jsx';
-import { CATEGORIES } from '../../js/data.js';
+import { CATEGORIES } from '../data/data.js';
+import { filterAndRankProducts, matchCategorySynonym } from '../utils/searchEngine.js';
+import { SettingsIcon, PackageIcon, LogoutIcon, BoltIcon, getCategoryIcon } from './Icons.jsx';
+import './Navbar.css';
 
 export default function Navbar() {
   const {
@@ -8,7 +11,6 @@ export default function Navbar() {
     setSearchQuery,
     setCategory,
     cartTotals,
-    wishlist,
     user,
     setIsCartOpen,
     setIsAuthOpen,
@@ -16,44 +18,108 @@ export default function Navbar() {
     logout,
     activeView,
     setActiveView,
-    setIsAdminProductModalOpen,
+    navigateTo,
     products,
-    setSelectedProduct
+    setSelectedProduct,
+    showToast
   } = useStore();
 
-  const [searchInput, setSearchInput] = useState(filters.searchQuery);
+  const [searchInput, setSearchInput] = useState(filters.searchQuery || '');
+  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const [showMoreDropdown, setShowMoreDropdown] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const searchRef = useRef(null);
+  const [alertIndex, setAlertIndex] = useState(0);
+
+  const searchContainerRef = useRef(null);
+  const searchInputRef = useRef(null);
+  const moreDropdownRef = useRef(null);
+
+  const PRIMARY_CATEGORIES = React.useMemo(() => CATEGORIES.slice(0, 4), []);
+  const MORE_CATEGORIES = React.useMemo(() => CATEGORIES.slice(4), []);
+  const isMoreActive = MORE_CATEGORIES.some(c => c.id === filters.category);
+  const selectedMoreCategory = MORE_CATEGORIES.find(c => c.id === filters.category);
+
+  // Full-width Announcement Strip Messages
+  const ANNOUNCEMENTS = [
+    {
+      badge: 'FESTIVE SALE',
+      text: 'Get 20% OFF on your entire order with coupon code ',
+      highlight: 'AARYA20',
+      actionText: 'Copy Code AARYA20 →',
+      code: 'AARYA20'
+    },
+    {
+      badge: 'EXPRESS DISPATCH',
+      text: 'Free Next-Day Delivery across India on all Flagship 5G Mobiles & Laptops',
+      highlight: '',
+      actionText: 'Shop Flagships →',
+      category: 'mobiles'
+    },
+    {
+      badge: 'BUY WITH CONFIDENCE',
+      text: '7-Day Hassle-Free Replacement & Instant Refund Policy on all purchases',
+      highlight: '',
+      actionText: 'Explore Catalog →',
+      category: 'all'
+    }
+  ];
+
+  // Rotate announcement ticker every 6 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setAlertIndex(prev => (prev + 1) % ANNOUNCEMENTS.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [ANNOUNCEMENTS.length]);
 
   // Sync search input with global filter
   useEffect(() => {
-    setSearchInput(filters.searchQuery);
+    setSearchInput(filters.searchQuery || '');
+    if (filters.searchQuery) {
+      setIsSearchExpanded(true);
+    }
   }, [filters.searchQuery]);
 
-  // Suggestions for autocomplete
+  // Category shortcut matching
+  const matchedCategory = React.useMemo(() => {
+    if (!searchInput || searchInput.trim().length < 2) return null;
+    const q = searchInput.trim();
+    return CATEGORIES.find(
+      c => c.id !== 'all' && (c.name.toLowerCase().includes(q.toLowerCase()) || matchCategorySynonym(c.id, q))
+    );
+  }, [searchInput]);
+
+  // Autocomplete suggestions
   const suggestions = React.useMemo(() => {
-    if (!searchInput || searchInput.length < 2) return [];
-    const q = searchInput.toLowerCase();
-    return products
-      .filter(p => p.title.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q))
-      .slice(0, 5);
+    if (!searchInput || searchInput.trim().length < 1) return [];
+    return filterAndRankProducts(products, searchInput.trim()).slice(0, 5);
   }, [searchInput, products]);
 
-  // Close suggestions when clicking outside
+  // Click outside handling
   useEffect(() => {
     function handleClickOutside(e) {
-      if (searchRef.current && !searchRef.current.contains(e.target)) {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(e.target)) {
         setShowSuggestions(false);
+        if (!searchInput) {
+          setIsSearchExpanded(false);
+        }
+      }
+      if (!e.target.closest('.nav-user-container')) {
+        setShowUserDropdown(false);
+      }
+      if (moreDropdownRef.current && !moreDropdownRef.current.contains(e.target)) {
+        setShowMoreDropdown(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  }, [searchInput]);
 
   const handleSearchSubmit = (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
+    setCategory('all');
     setSearchQuery(searchInput);
     setShowSuggestions(false);
     if (activeView !== 'catalog') setActiveView('catalog');
@@ -62,332 +128,435 @@ export default function Navbar() {
   const handleSelectSuggestion = (prod) => {
     setSelectedProduct(prod);
     setShowSuggestions(false);
+    setIsSearchExpanded(false);
   };
 
-  return (
-    <header className="navbar-container" style={{ position: 'sticky', top: 0, zIndex: 1000, background: 'var(--navbar-bg, #1e293b)' }}>
-      <div className="navbar-inner" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 20px', maxWidth: '1440px', margin: '0 auto', gap: '16px' }}>
-        
-        {/* Brand Logo & Tagline */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <button 
-            type="button" 
-            className="mobile-menu-btn" 
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-            style={{ display: 'none', background: 'none', border: 'none', color: '#fff', fontSize: '1.4rem', cursor: 'pointer' }}
-          >
-            ☰
-          </button>
-          <div 
-            onClick={() => { setActiveView('catalog'); setCategory('all'); }} 
-            style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column' }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ fontSize: '1.45rem', fontWeight: '900', color: '#38bdf8', letterSpacing: '-0.5px' }}>Aarya</span>
-              <span style={{ fontSize: '1.45rem', fontWeight: '900', color: '#f8fafc', letterSpacing: '-0.5px' }}>Mart</span>
-              <span style={{ background: '#38bdf8', color: '#0f172a', fontSize: '0.65rem', fontWeight: '800', padding: '1px 5px', borderRadius: '4px', textTransform: 'uppercase' }}>Plus</span>
-            </div>
-            <span style={{ fontSize: '0.68rem', color: '#94a3b8', letterSpacing: '0.5px' }}>Explore <span style={{ color: '#fbbf24', fontWeight: '700' }}>Plus</span></span>
-          </div>
-        </div>
+  const handleCategoryClick = (catId) => {
+    setCategory(catId);
+    setSearchQuery('');
+    setActiveView('catalog');
+    if (window.__lenis) {
+      window.__lenis.scrollTo(350, { duration: 1.2 });
+    } else {
+      window.scrollTo({ top: 350, behavior: 'smooth' });
+    }
+  };
 
-        {/* Global Search Bar with Autocomplete */}
-        <div ref={searchRef} style={{ flex: 1, maxWidth: '620px', position: 'relative' }}>
-          <form onSubmit={handleSearchSubmit} style={{ display: 'flex', position: 'relative' }}>
-            <input 
-              type="text"
-              className="search-input"
-              placeholder="Search for Products, Brands, Gadgets, Fashion and more..."
-              value={searchInput}
-              onChange={(e) => {
-                setSearchInput(e.target.value);
-                setShowSuggestions(true);
-              }}
-              onFocus={() => setShowSuggestions(true)}
-              style={{
-                width: '100%',
-                padding: '10px 42px 10px 16px',
-                borderRadius: '8px',
-                border: '1px solid rgba(255,255,255,0.15)',
-                background: 'rgba(255,255,255,0.08)',
-                color: '#fff',
-                fontSize: '0.92rem',
-                outline: 'none',
-                transition: 'all 0.2s'
-              }}
-            />
-            {searchInput && (
+  const handleAlertAction = () => {
+    const current = ANNOUNCEMENTS[alertIndex];
+    if (current.code) {
+      navigator.clipboard?.writeText(current.code);
+      if (showToast) {
+        showToast(`Coupon code ${current.code} copied!`, 'success');
+      }
+    } else if (current.category) {
+      setCategory(current.category);
+      setSearchQuery('');
+      setActiveView('catalog');
+    }
+  };
+
+  const currentAlert = ANNOUNCEMENTS[alertIndex];
+
+  return (
+    <header className="site-header">
+      {/* 1. Main Navbar Dock */}
+      <div className="navbar-main-dock">
+        
+        {/* Brand Logo (Replaced Star) */}
+        <button
+          type="button"
+          className="nav-brand-logo"
+          onClick={() => {
+            setCategory('all');
+            setSearchQuery('');
+            setActiveView('catalog');
+            if (window.__lenis) {
+              window.__lenis.scrollTo(0, { duration: 1.2 });
+            } else {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }}
+          aria-label="AaryaMart Home"
+        >
+          <div className="nav-logo-mark">
+            {/* Minimal Geometric Shopping Bag Logo */}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+          </div>
+          <div className="nav-brand-text">
+            <span className="nav-brand-name">
+              Aarya<span className="nav-brand-accent">Mart</span>
+            </span>
+            <span className="nav-brand-tagline">Premium Store</span>
+          </div>
+        </button>
+
+        {/* E-Commerce Store Category Navigation with 'Show More' Dropdown */}
+        <nav className="nav-categories-dock" aria-label="Store Categories">
+          {PRIMARY_CATEGORIES.map((cat) => {
+            const isActive = (filters.category === cat.id) || (cat.id === 'all' && !filters.category && !isMoreActive);
+            return (
               <button
+                key={cat.id}
                 type="button"
-                onClick={() => { setSearchInput(''); setSearchQuery(''); }}
-                style={{
-                  position: 'absolute',
-                  right: '42px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  background: 'none',
-                  border: 'none',
-                  color: '#94a3b8',
-                  fontSize: '1.1rem',
-                  cursor: 'pointer'
-                }}
+                className={`nav-cat-item ${isActive ? 'active' : ''}`}
+                onClick={() => handleCategoryClick(cat.id)}
               >
-                &times;
+                <span>{cat.name}</span>
               </button>
+            );
+          })}
+
+          {/* More Categories Dropdown */}
+          <div ref={moreDropdownRef} className="nav-more-container">
+            <button
+              type="button"
+              className={`nav-cat-item ${isMoreActive ? 'active' : ''}`}
+              onClick={() => setShowMoreDropdown(!showMoreDropdown)}
+              aria-expanded={showMoreDropdown}
+              title="Browse more categories"
+            >
+              <span>{selectedMoreCategory ? selectedMoreCategory.name : 'More'}</span>
+              <span style={{ 
+                fontSize: '0.65rem', 
+                marginLeft: '2px', 
+                transition: 'transform 0.2s ease', 
+                transform: showMoreDropdown ? 'rotate(180deg)' : 'none',
+                opacity: 0.8
+              }}>
+                ▼
+              </span>
+            </button>
+
+            {showMoreDropdown && (
+              <div className="nav-more-dropdown">
+                {MORE_CATEGORIES.map((cat) => {
+                  const isActive = filters.category === cat.id;
+                  return (
+                    <button
+                      key={cat.id}
+                      type="button"
+                      className={`nav-more-item ${isActive ? 'active' : ''}`}
+                      onClick={() => {
+                        handleCategoryClick(cat.id);
+                        setShowMoreDropdown(false);
+                      }}
+                    >
+                      <span style={{ color: '#0284c7', display: 'flex', alignItems: 'center' }}>
+                        {getCategoryIcon(cat.id, 16)}
+                      </span>
+                      <span>{cat.name}</span>
+                    </button>
+                  );
+                })}
+              </div>
             )}
-            <button 
-              type="submit" 
-              style={{
-                position: 'absolute',
-                right: '4px',
-                top: '4px',
-                bottom: '4px',
-                width: '36px',
-                background: '#38bdf8',
-                border: 'none',
-                borderRadius: '6px',
-                color: '#0f172a',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
+          </div>
+        </nav>
+
+        {/* Action Controls & Integrated Search */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          
+          {/* Expandable Integrated Search Pill */}
+          <div ref={searchContainerRef} className="nav-search-container">
+            <div 
+              className={`nav-search-pill ${isSearchExpanded ? 'expanded' : ''}`}
+              onClick={() => {
+                if (!isSearchExpanded) {
+                  setIsSearchExpanded(true);
+                  setTimeout(() => searchInputRef.current?.focus(), 150);
+                }
               }}
             >
-              🔍
-            </button>
-          </form>
-
-          {/* Autocomplete Suggestions */}
-          {showSuggestions && suggestions.length > 0 && (
-            <div style={{
-              position: 'absolute',
-              top: '100%',
-              left: 0,
-              right: 0,
-              marginTop: '6px',
-              background: '#1e293b',
-              border: '1px solid #334155',
-              borderRadius: '8px',
-              boxShadow: '0 10px 25px rgba(0,0,0,0.4)',
-              zIndex: 1050,
-              overflow: 'hidden'
-            }}>
-              {suggestions.map(prod => (
-                <div
-                  key={prod.id}
-                  onClick={() => handleSelectSuggestion(prod)}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '12px',
-                    padding: '8px 14px',
-                    cursor: 'pointer',
-                    borderBottom: '1px solid #334155',
-                    transition: 'background 0.15s'
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.background = '#334155'}
-                  onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
-                >
-                  <img src={prod.images[0]} alt={prod.title} style={{ width: '36px', height: '36px', objectFit: 'cover', borderRadius: '4px' }} />
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: '0.85rem', color: '#f8fafc', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{prod.title}</div>
-                    <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>in {prod.brand} • <span style={{ color: '#38bdf8', fontWeight: '700' }}>₹{prod.price.toLocaleString()}</span></div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Action Controls (Auth, Wishlist, Cart, Admin) */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          
-          {/* Admin Button */}
-          <button
-            type="button"
-            onClick={() => setActiveView(activeView === 'admin' ? 'catalog' : 'admin')}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '6px 12px',
-              borderRadius: '6px',
-              background: activeView === 'admin' ? '#38bdf8' : 'rgba(255,255,255,0.08)',
-              color: activeView === 'admin' ? '#0f172a' : '#f8fafc',
-              border: '1px solid rgba(255,255,255,0.15)',
-              fontSize: '0.85rem',
-              fontWeight: '600',
-              cursor: 'pointer',
-              transition: 'all 0.2s'
-            }}
-          >
-            ⚙️ Admin
-          </button>
-
-          {/* User Account / Login */}
-          <div style={{ position: 'relative' }}>
-            {user ? (
-              <button
-                type="button"
-                onClick={() => setShowUserDropdown(!showUserDropdown)}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  background: 'none',
-                  border: 'none',
-                  color: '#fff',
-                  cursor: 'pointer',
-                  padding: '6px 8px',
-                  borderRadius: '6px'
-                }}
+              <svg 
+                className="nav-search-icon" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
               >
-                <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: '#38bdf8', color: '#0f172a', fontWeight: '800', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.82rem' }}>
-                  {user.name.charAt(0).toUpperCase()}
-                </div>
-                <span style={{ fontSize: '0.9rem', fontWeight: '600', maxWidth: '90px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                  {user.name}
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+
+              {isSearchExpanded ? (
+                <form onSubmit={handleSearchSubmit} style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
+                  <input
+                    ref={searchInputRef}
+                    type="text"
+                    className="nav-search-input"
+                    placeholder="Search mobile, macbook, audio..."
+                    value={searchInput}
+                    onChange={(e) => {
+                      setSearchInput(e.target.value);
+                      setShowSuggestions(true);
+                    }}
+                    onFocus={() => setShowSuggestions(true)}
+                  />
+                  {searchInput && (
+                    <button
+                      type="button"
+                      className="nav-search-close-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSearchInput('');
+                        setSearchQuery('');
+                      }}
+                      aria-label="Clear search"
+                    >
+                      &times;
+                    </button>
+                  )}
+                </form>
+              ) : (
+                <span style={{ fontSize: '0.92rem', fontWeight: '500', color: '#475569', letterSpacing: '-0.01em' }}>
+                  Search
                 </span>
-                <span style={{ fontSize: '0.7rem' }}>▼</span>
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={() => { setAuthMode('login'); setIsAuthOpen(true); }}
-                style={{
-                  background: '#fff',
-                  color: '#1e293b',
-                  border: 'none',
-                  padding: '7px 16px',
-                  borderRadius: '6px',
-                  fontWeight: '700',
-                  fontSize: '0.88rem',
-                  cursor: 'pointer',
-                  boxShadow: '0 2px 6px rgba(0,0,0,0.1)'
-                }}
-              >
-                Login
-              </button>
-            )}
+              )}
+            </div>
 
-            {/* Dropdown Menu */}
-            {user && showUserDropdown && (
-              <div style={{
-                position: 'absolute',
-                top: '100%',
-                right: 0,
-                marginTop: '8px',
-                background: '#1e293b',
-                border: '1px solid #334155',
-                borderRadius: '8px',
-                width: '180px',
-                boxShadow: '0 10px 25px rgba(0,0,0,0.3)',
-                zIndex: 1050,
-                overflow: 'hidden'
-              }}>
-                <div style={{ padding: '10px 14px', borderBottom: '1px solid #334155' }}>
-                  <div style={{ fontSize: '0.85rem', fontWeight: '700', color: '#fff' }}>{user.name}</div>
-                  <div style={{ fontSize: '0.72rem', color: '#94a3b8' }}>{user.email}</div>
-                  <div style={{ fontSize: '0.68rem', color: '#38bdf8', fontWeight: '600', marginTop: '2px' }}>Role: {user.role}</div>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => { setActiveView('orders'); setShowUserDropdown(false); }}
-                  style={{ width: '100%', textAlign: 'left', padding: '10px 14px', background: 'none', border: 'none', color: '#e2e8f0', cursor: 'pointer', fontSize: '0.85rem' }}
-                >
-                  📦 My Orders
-                </button>
-                <button
-                  type="button"
-                  onClick={() => { logout(); setShowUserDropdown(false); }}
-                  style={{ width: '100%', textAlign: 'left', padding: '10px 14px', background: 'none', border: 'none', color: '#f87171', cursor: 'pointer', fontSize: '0.85rem', borderTop: '1px solid #334155' }}
-                >
-                  🚪 Logout
-                </button>
+            {/* Autocomplete Suggestions Dropdown */}
+            {isSearchExpanded && showSuggestions && (suggestions.length > 0 || matchedCategory) && (
+              <div className="nav-autocomplete-dropdown">
+                {matchedCategory && (
+                  <div
+                    className="nav-category-shortcut"
+                    onClick={() => {
+                      setCategory(matchedCategory.id);
+                      setSearchQuery('');
+                      setShowSuggestions(false);
+                      setIsSearchExpanded(false);
+                      if (activeView !== 'catalog') setActiveView('catalog');
+                    }}
+                  >
+                    <span style={{ color: '#0284c7', display: 'flex', alignItems: 'center' }}>
+                      {getCategoryIcon(matchedCategory.id, 18)}
+                    </span>
+                    <span>View all in <strong>{matchedCategory.name}</strong></span>
+                    <span style={{ marginLeft: 'auto', fontSize: '0.75rem', opacity: 0.8 }}>→</span>
+                  </div>
+                )}
+
+                {suggestions.map((prod) => (
+                  <div
+                    key={prod.id}
+                    className="nav-autocomplete-item"
+                    onClick={() => handleSelectSuggestion(prod)}
+                  >
+                    <img
+                      src={prod.images[0]}
+                      alt={`${prod.title} - ${prod.brand || 'AaryaMart'} search thumbnail`}
+                      style={{ width: '36px', height: '36px', objectFit: 'contain', background: '#f8fafc', borderRadius: '6px', padding: '2px', border: '1px solid #e2e8f0' }}
+                    />
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: '0.84rem', color: '#0f172a', fontWeight: '600', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        {prod.title}
+                      </div>
+                      <div style={{ fontSize: '0.72rem', color: '#64748b' }}>
+                        {prod.brand} • <span style={{ color: '#0284c7', fontWeight: '700' }}>₹{prod.price.toLocaleString()}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
           </div>
 
-          {/* Wishlist Button */}
-          <button
-            type="button"
-            onClick={() => {
-              setActiveView('catalog');
-              // Filter wishlist or toggle toast
-            }}
-            aria-label="Wishlist"
-            style={{
-              position: 'relative',
-              background: 'none',
-              border: 'none',
-              color: '#fff',
-              fontSize: '1.25rem',
-              cursor: 'pointer',
-              padding: '6px'
-            }}
-          >
-            🤍
-            {wishlist.length > 0 && (
-              <span style={{
-                position: 'absolute',
-                top: '0',
-                right: '0',
-                background: '#ef4444',
-                color: '#fff',
-                borderRadius: '50%',
-                fontSize: '0.65rem',
-                fontWeight: '800',
-                width: '18px',
-                height: '18px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
-                {wishlist.length}
-              </span>
-            )}
-          </button>
+          {/* Action Group */}
+          <div className="nav-actions-group">
+            
+            {/* Cart Drawer Trigger */}
+            <button
+              id="nav-cart-btn"
+              type="button"
+              className="nav-action-pill-btn"
+              onClick={() => setIsCartOpen(true)}
+              aria-label="Shopping Cart"
+            >
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <path d="M16 10a4 4 0 0 1-8 0" />
+              </svg>
+              <span>Cart</span>
+              {cartTotals.totalCount > 0 && (
+                <span className="nav-cart-badge">{cartTotals.totalCount}</span>
+              )}
+            </button>
 
-          {/* Cart Drawer Button */}
-          <button
-            type="button"
-            onClick={() => setIsCartOpen(true)}
-            aria-label="Cart"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              background: 'none',
-              border: 'none',
-              color: '#fff',
-              cursor: 'pointer',
-              padding: '6px 10px',
-              borderRadius: '6px',
-              position: 'relative'
-            }}
-          >
-            <span style={{ fontSize: '1.3rem' }}>🛒</span>
-            <span style={{ fontSize: '0.9rem', fontWeight: '700' }}>Cart</span>
-            {cartTotals.totalCount > 0 && (
-              <span style={{
-                position: 'absolute',
-                top: '0',
-                right: '2px',
-                background: '#fbbf24',
-                color: '#0f172a',
-                borderRadius: '10px',
-                fontSize: '0.7rem',
-                fontWeight: '900',
-                padding: '1px 6px'
-              }}>
-                {cartTotals.totalCount}
-              </span>
-            )}
-          </button>
+            {/* Admin Portal Shortcut */}
+            <button
+              type="button"
+              className="nav-action-pill-btn"
+              onClick={() => navigateTo('/admin')}
+              title="Dedicated Admin Console (/admin)"
+            >
+              <SettingsIcon size={16} />
+              <span>Admin</span>
+            </button>
 
+            {/* User Profile / Auth */}
+            <div className="nav-user-container" style={{ position: 'relative' }}>
+              {user ? (
+                <button
+                  type="button"
+                  className="nav-action-pill-btn"
+                  onClick={() => setShowUserDropdown(!showUserDropdown)}
+                  style={{ padding: '4px 10px 4px 6px' }}
+                >
+                  <div className="nav-user-avatar">
+                    {user.name.charAt(0).toUpperCase()}
+                  </div>
+                  <span style={{ fontSize: '0.84rem', maxWidth: '80px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    {user.name.split(' ')[0]}
+                  </span>
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="nav-login-btn"
+                  onClick={() => {
+                    setAuthMode('login');
+                    setIsAuthOpen(true);
+                  }}
+                >
+                  Login
+                </button>
+              )}
+
+              {/* User Dropdown Menu */}
+              {user && showUserDropdown && (
+                <div className="nav-user-dropdown">
+                  <div style={{ padding: '8px 12px', borderBottom: '1px solid #f1f5f9' }}>
+                    <div style={{ fontSize: '0.84rem', fontWeight: '700', color: '#0f172a' }}>{user.name}</div>
+                    <div style={{ fontSize: '0.72rem', color: '#64748b' }}>{user.email}</div>
+                  </div>
+                  <button
+                    type="button"
+                    className="nav-user-dropdown-item"
+                    onClick={() => {
+                      setActiveView('orders');
+                      setShowUserDropdown(false);
+                    }}
+                  >
+                    <PackageIcon size={15} /> <span>My Orders</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="nav-user-dropdown-item"
+                    style={{ color: '#ef4444' }}
+                    onClick={() => {
+                      logout();
+                      setShowUserDropdown(false);
+                    }}
+                  >
+                    <LogoutIcon size={15} /> <span>Logout</span>
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Mobile menu trigger */}
+            <button
+              type="button"
+              className="nav-mobile-toggle"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle navigation menu"
+            >
+              {isMobileMenuOpen ? '✕' : '☰'}
+            </button>
+
+          </div>
         </div>
       </div>
+
+      {/* 2. Special Offers & Alerts Strip Across The Whole Page (Left to Right) */}
+      <div className="nav-alert-strip">
+        <div className="nav-alert-inner">
+          <div className="nav-alert-left">
+            <span className="nav-alert-badge">
+              <span className="live-pulse-dot" style={{ marginRight: '3px' }} />
+              <BoltIcon size={12} />
+              <span>{currentAlert.badge}</span>
+            </span>
+            <span className="nav-alert-text">
+              {currentAlert.text}
+              {currentAlert.highlight && (
+                <span className="nav-alert-highlight">{currentAlert.highlight}</span>
+              )}
+            </span>
+          </div>
+
+          <button
+            type="button"
+            className="nav-alert-action-btn"
+            onClick={handleAlertAction}
+          >
+            {currentAlert.actionText}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Categories Flyout Drawer */}
+      {isMobileMenuOpen && (
+        <div
+          style={{
+            position: 'absolute',
+            top: '100%',
+            left: '12px',
+            right: '12px',
+            background: '#ffffff',
+            borderRadius: '16px',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.18)',
+            padding: '12px',
+            zIndex: 1000,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '6px',
+            border: '1px solid #e2e8f0'
+          }}
+        >
+          <div style={{ fontSize: '0.78rem', fontWeight: '700', color: '#64748b', padding: '4px 10px', textTransform: 'uppercase' }}>
+            Store Categories
+          </div>
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat.id}
+              type="button"
+              onClick={() => {
+                handleCategoryClick(cat.id);
+                setIsMobileMenuOpen(false);
+              }}
+              style={{
+                width: '100%',
+                textAlign: 'left',
+                padding: '10px 14px',
+                borderRadius: '8px',
+                background: filters.category === cat.id ? '#e0f2fe' : 'transparent',
+                color: filters.category === cat.id ? '#0284c7' : '#1f2937',
+                fontWeight: '600',
+                fontSize: '0.9rem',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}
+            >
+              <span style={{ color: '#0284c7', display: 'flex', alignItems: 'center' }}>
+                {getCategoryIcon(cat.id, 16)}
+              </span>
+              <span>{cat.name}</span>
+            </button>
+          ))}
+        </div>
+      )}
     </header>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useStore } from '../context/StoreContext.jsx';
+import { CartIcon } from './Icons.jsx';
 
 export default function CartDrawer() {
   const {
@@ -17,18 +18,30 @@ export default function CartDrawer() {
 
   const [couponInput, setCouponInput] = useState('');
 
-  if (!isCartOpen) return null;
+  const handleUpdateQty = (prodId, delta) => {
+    updateCartQty(prodId, delta);
+  };
+
+  const handleRemove = (prodId) => {
+    removeFromCart(prodId);
+  };
 
   const handleApplyCoupon = async (e) => {
     e.preventDefault();
-    const success = await applyCoupon(couponInput);
-    if (success) setCouponInput('');
+    if (couponInput.trim()) {
+      const success = await applyCoupon(couponInput.trim());
+      if (success) {
+        setCouponInput('');
+      }
+    }
   };
 
   const handleProceedCheckout = () => {
     setIsCartOpen(false);
     setIsCheckoutOpen(true);
   };
+
+  if (!isCartOpen) return null;
 
   return (
     <div
@@ -58,8 +71,10 @@ export default function CartDrawer() {
       >
         {/* Cart Header */}
         <div style={{ padding: '16px 20px', borderBottom: '1px solid #e2e8f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ fontSize: '1.25rem' }}>🛒</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <span style={{ color: '#0284c7', display: 'flex', alignItems: 'center' }}>
+              <CartIcon size={22} />
+            </span>
             <h2 style={{ fontSize: '1.1rem', fontWeight: '800', color: '#0f172a', margin: 0 }}>
               Shopping Cart ({cartTotals.totalCount})
             </h2>
@@ -110,7 +125,7 @@ export default function CartDrawer() {
                   >
                     <img 
                       src={img} 
-                      alt={prod.title} 
+                      alt={`${prod.title} in your cart`} 
                       style={{ width: '64px', height: '64px', objectFit: 'contain', background: '#fff', borderRadius: '6px', border: '1px solid #e2e8f0', padding: '2px' }}
                     />
                     <div style={{ flex: 1, minWidth: 0 }}>
@@ -133,7 +148,7 @@ export default function CartDrawer() {
                         <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #cbd5e1', borderRadius: '6px', background: '#fff' }}>
                           <button
                             type="button"
-                            onClick={() => updateCartQty(prod.id, -1)}
+                            onClick={() => handleUpdateQty(prod.id, -1)}
                             style={{ width: '26px', height: '26px', background: 'none', border: 'none', cursor: 'pointer', fontWeight: '800' }}
                           >
                             -
@@ -143,7 +158,7 @@ export default function CartDrawer() {
                           </span>
                           <button
                             type="button"
-                            onClick={() => updateCartQty(prod.id, 1)}
+                            onClick={() => handleUpdateQty(prod.id, 1)}
                             style={{ width: '26px', height: '26px', background: 'none', border: 'none', cursor: 'pointer', fontWeight: '800' }}
                           >
                             +
@@ -152,7 +167,7 @@ export default function CartDrawer() {
 
                         <button
                           type="button"
-                          onClick={() => removeFromCart(prod.id)}
+                          onClick={() => handleRemove(prod.id)}
                           style={{ background: 'none', border: 'none', color: '#ef4444', fontSize: '0.75rem', fontWeight: '700', cursor: 'pointer' }}
                         >
                           Remove
@@ -165,7 +180,9 @@ export default function CartDrawer() {
             </div>
           ) : (
             <div style={{ textAlign: 'center', padding: '60px 20px' }}>
-              <div style={{ fontSize: '3.5rem', marginBottom: '12px' }}>🛒</div>
+              <div style={{ color: '#cbd5e1', marginBottom: '16px', display: 'flex', justifyContent: 'center' }}>
+                <CartIcon size={56} strokeWidth={1.5} />
+              </div>
               <h3 style={{ fontSize: '1.1rem', fontWeight: '800', color: '#1e293b', margin: '0 0 6px' }}>
                 Your cart is empty
               </h3>

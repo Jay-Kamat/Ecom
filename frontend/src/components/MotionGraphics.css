@@ -1,0 +1,176 @@
+/* ==========================================================================
+   AaryaMart Premium Motion Graphics & Micro-Animations System
+   Brings the website to life with smooth, tactile, luxury micro-interactions
+   ========================================================================== */
+
+/* 1. Staggered Product Grid Entrance */
+@keyframes cardEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.product-card-animated {
+  animation: cardEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transition: 
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease;
+  position: relative;
+  will-change: transform, box-shadow;
+}
+
+.product-card-animated:hover {
+  transform: translateY(-7px);
+  box-shadow: 
+    0 20px 35px -8px rgba(15, 23, 42, 0.12),
+    0 8px 16px -4px rgba(15, 23, 42, 0.06);
+  border-color: rgba(56, 189, 248, 0.35) !important;
+}
+
+/* 2. Image Zoom Micro-Interaction */
+.product-image-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.product-image-zoom {
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.product-card-animated:hover .product-image-zoom {
+  transform: scale(1.06);
+}
+
+/* 3. Wishlist Heart Pop Animation */
+@keyframes heartPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.28); }
+  100% { transform: scale(1); }
+}
+
+.wishlist-btn-pop {
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.wishlist-btn-pop:hover {
+  transform: scale(1.14);
+  background: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.25) !important;
+}
+
+.wishlist-btn-pop:active {
+  animation: heartPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 4. Action Button Ripple & Hover Lift */
+.btn-motion {
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-motion:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.3);
+}
+
+.btn-motion:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* 5. Shimmer Sweep on Badges */
+@keyframes shimmerSweep {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.badge-shimmer {
+  background: linear-gradient(
+    90deg, 
+    rgba(255, 255, 255, 0) 0%, 
+    rgba(255, 255, 255, 0.35) 50%, 
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmerSweep 3.5s infinite;
+}
+
+/* 6. Subtle Pulse for Live Alerts */
+@keyframes livePulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(56, 189, 248, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+  }
+}
+
+.live-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #38bdf8;
+  animation: livePulse 2s infinite;
+  display: inline-block;
+}
+
+/* 7. Category Page Header (Shown when category is filtered) */
+.category-page-header {
+  max-width: 1440px;
+  margin: 16px auto 12px;
+  padding: 0 20px;
+  animation: navSlideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.category-page-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 18px;
+  padding: 22px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+}
+
+.category-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-bottom: 6px;
+}
+
+.category-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.category-count-chip {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #0284c7;
+  background: #e0f2fe;
+  padding: 3px 10px;
+  border-radius: 9999px;
+}

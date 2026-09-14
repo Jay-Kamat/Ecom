@@ -285,7 +285,7 @@ export default function AdminProductModal() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px', textAlign: 'left' }}>
                   <img
                     src={imagePreview}
-                    alt="Preview"
+                    alt={title ? `${title} product photo upload preview` : 'Selected product photo upload preview'}
                     style={{ width: '56px', height: '56px', objectFit: 'cover', borderRadius: '6px', border: '1px solid #e2e8f0' }}
                   />
                   <div style={{ flex: 1, minWidth: 0 }}>

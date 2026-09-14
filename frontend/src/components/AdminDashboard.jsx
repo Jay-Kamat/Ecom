@@ -118,7 +118,7 @@ export default function AdminDashboard() {
                 return (
                   <tr key={p.id} style={{ borderBottom: '1px solid #f1f5f9' }}>
                     <td style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                      <img src={img} alt={p.title} style={{ width: '40px', height: '40px', objectFit: 'contain', borderRadius: '6px', border: '1px solid #e2e8f0' }} />
+                      <img src={img} alt={`${p.title} catalog thumbnail`} style={{ width: '40px', height: '40px', objectFit: 'contain', borderRadius: '6px', border: '1px solid #e2e8f0' }} />
                       <div>
                         <div style={{ fontWeight: '700', color: '#0f172a' }}>{p.title}</div>
                         <div style={{ fontSize: '0.72rem', color: '#94a3b8' }}>ID: #{p.id}</div>

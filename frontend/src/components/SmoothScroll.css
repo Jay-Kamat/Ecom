@@ -1,0 +1,84 @@
+/* ==========================================================================
+   Smooth Flow & Momentum Scrolling Enhancements
+   ========================================================================== */
+
+/* Floating Luxury Back to Top Capsule Button */
+.floating-scroll-top-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 995;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 12px 28px -4px rgba(0, 0, 0, 0.25),
+    0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 9999px;
+  min-height: unset;
+  min-width: unset;
+  padding: 8px 16px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(16px) scale(0.92);
+  transition: 
+    opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.floating-scroll-top-btn.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.floating-scroll-top-btn:hover {
+  background: #0284c7;
+  border-color: #38bdf8;
+  box-shadow: 
+    0 16px 36px -4px rgba(2, 132, 199, 0.4),
+    0 6px 14px rgba(2, 132, 199, 0.2);
+  transform: translateY(-3px) scale(1.04);
+}
+
+.floating-scroll-top-btn:active {
+  transform: translateY(0) scale(0.96);
+}
+
+/* Custom Minimalist High-End Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+  border: 2px solid #f1f5f9;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+}

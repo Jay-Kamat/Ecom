@@ -1,5 +1,8 @@
 import React from 'react';
 import { useStore } from '../context/StoreContext.jsx';
+import { HeartIcon, CartIcon, StarIcon } from './Icons.jsx';
+import { animateFlyToCart, triggerHeartBurst } from '../utils/tactileFeedback.js';
+import './MotionGraphics.css';
 
 export default function ProductCard({ product }) {
   const { setSelectedProduct, addToCart, toggleWishlist, isInWishlist } = useStore();
@@ -11,41 +14,37 @@ export default function ProductCard({ product }) {
 
   return (
     <article 
-      className="product-card"
+      className="product-card product-card-animated"
       onClick={() => setSelectedProduct(product)}
       style={{
-        background: '#fff',
-        borderRadius: '12px',
+        background: '#ffffff',
+        borderRadius: '16px',
         border: '1px solid #e2e8f0',
-        padding: '14px',
+        padding: '16px',
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
         cursor: 'pointer',
-        transition: 'transform 0.2s, box-shadow 0.2s',
-        height: '100%'
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'translateY(-4px)';
-        e.currentTarget.style.boxShadow = '0 12px 24px rgba(0,0,0,0.08)';
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = 'translateY(0)';
-        e.currentTarget.style.boxShadow = 'none';
+        height: '100%',
+        boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)'
       }}
     >
       {/* Top badges: Discount & Wishlist */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px' }}>
         {product.discount > 0 ? (
-          <span style={{
-            background: '#ecfdf5',
-            color: '#059669',
-            fontSize: '0.72rem',
-            fontWeight: '800',
-            padding: '2px 8px',
-            borderRadius: '4px',
-            border: '1px solid #a7f3d0'
-          }}>
+          <span 
+            className="badge-shimmer"
+            style={{
+              background: '#ecfdf5',
+              color: '#059669',
+              fontSize: '0.72rem',
+              fontWeight: '800',
+              padding: '3px 8px',
+              borderRadius: '6px',
+              border: '1px solid #a7f3d0',
+              letterSpacing: '0.02em'
+            }}
+          >
             {product.discount}% OFF
           </span>
         ) : (
@@ -54,53 +53,75 @@ export default function ProductCard({ product }) {
 
         <button
           type="button"
+          className={`wishlist-btn-pop ${wishlisted ? 'active' : ''}`}
           onClick={(e) => {
             e.stopPropagation();
+            if (!wishlisted) {
+              triggerHeartBurst(e.currentTarget);
+            }
             toggleWishlist(product.id);
           }}
           aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
           style={{
-            background: 'rgba(255,255,255,0.9)',
+            background: 'rgba(255, 255, 255, 0.95)',
             border: '1px solid #e2e8f0',
             borderRadius: '50%',
-            width: '32px',
-            height: '32px',
+            width: '34px',
+            height: '34px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'pointer',
-            fontSize: '1rem',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
-            color: wishlisted ? '#ef4444' : '#94a3b8',
-            transition: 'transform 0.15s'
+            boxShadow: '0 2px 6px rgba(0, 0, 0, 0.06)',
+            color: wishlisted ? '#ef4444' : '#94a3b8'
           }}
         >
-          {wishlisted ? '❤️' : '🤍'}
+          <HeartIcon filled={wishlisted} size={17} />
         </button>
       </div>
 
-      {/* Product Image Container */}
-      <div style={{ width: '100%', height: '180px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '12px', overflow: 'hidden' }}>
+      {/* Product Image Container with Zoom Micro-interaction */}
+      <div 
+        className="product-image-container"
+        style={{ 
+          width: '100%', 
+          height: '185px', 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center', 
+          marginBottom: '14px', 
+          borderRadius: '10px',
+          background: '#f8fafc'
+        }}
+      >
         <img 
           src={mainImage} 
-          alt={product.title} 
+          alt={`${product.title} - ${product.brand || 'AaryaMart'} (${product.category || 'Product'})`}
           loading="lazy"
+          className="product-image-zoom"
           style={{
-            maxHeight: '100%',
-            maxWidth: '100%',
-            objectFit: 'contain',
-            transition: 'transform 0.3s'
+            maxHeight: '155px',
+            maxWidth: '90%',
+            objectFit: 'contain'
           }}
         />
       </div>
 
       {/* Brand & Badge */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-        <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', color: '#64748b', letterSpacing: '0.5px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+        <span style={{ fontSize: '0.74rem', fontWeight: '700', textTransform: 'uppercase', color: '#64748b', letterSpacing: '0.5px' }}>
           {product.brand}
         </span>
         {product.badge && (
-          <span style={{ fontSize: '0.65rem', background: '#fef3c7', color: '#d97706', padding: '1px 6px', borderRadius: '4px', fontWeight: '700' }}>
+          <span style={{ 
+            fontSize: '0.66rem', 
+            background: '#fef3c7', 
+            color: '#b45309', 
+            padding: '2px 7px', 
+            borderRadius: '9999px', 
+            fontWeight: '700',
+            border: '1px solid #fde68a'
+          }}>
             {product.badge}
           </span>
         )}
@@ -108,10 +129,10 @@ export default function ProductCard({ product }) {
 
       {/* Product Title */}
       <h3 style={{
-        fontSize: '0.92rem',
+        fontSize: '0.94rem',
         fontWeight: '600',
-        color: '#1e293b',
-        margin: '0 0 6px',
+        color: '#0f172a',
+        margin: '0 0 8px',
         lineHeight: 1.35,
         display: '-webkit-box',
         WebkitLineClamp: 2,
@@ -123,30 +144,31 @@ export default function ProductCard({ product }) {
       </h3>
 
       {/* Rating Row */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '10px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '12px' }}>
         <span style={{
-          background: product.rating >= 4 ? '#16a34a' : '#eab308',
-          color: '#fff',
+          background: product.rating >= 4.5 ? '#047857' : (product.rating >= 4 ? '#059669' : '#d97706'),
+          color: '#ffffff',
           fontSize: '0.72rem',
           fontWeight: '700',
-          padding: '2px 6px',
-          borderRadius: '4px',
-          display: 'flex',
+          padding: '2px 7px',
+          borderRadius: '6px',
+          display: 'inline-flex',
           alignItems: 'center',
-          gap: '2px'
+          gap: '3px'
         }}>
-          ★ {product.rating}
+          <StarIcon size={11} filled={true} />
+          <span>{product.rating}</span>
         </span>
-        <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
+        <span style={{ fontSize: '0.75rem', color: '#64748b' }}>
           ({(product.ratingCount || 10).toLocaleString()})
         </span>
       </div>
 
       {/* Price & Action Row */}
-      <div style={{ marginTop: 'auto', paddingTop: '8px', borderTop: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div style={{ marginTop: 'auto', paddingTop: '10px', borderTop: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
-            <span style={{ fontSize: '1.15rem', fontWeight: '800', color: '#0f172a' }}>
+            <span style={{ fontSize: '1.18rem', fontWeight: '800', color: '#0f172a' }}>
               ₹{product.price.toLocaleString()}
             </span>
             {product.mrp && product.mrp > product.price && (
@@ -155,34 +177,37 @@ export default function ProductCard({ product }) {
               </span>
             )}
           </div>
-          <div style={{ fontSize: '0.68rem', color: '#16a34a', fontWeight: '600' }}>
+          <div style={{ fontSize: '0.68rem', color: product.inStock ? '#059669' : '#dc2626', fontWeight: '600', marginTop: '1px' }}>
             {product.inStock ? 'In Stock • Fast Delivery' : 'Out of Stock'}
           </div>
         </div>
 
         <button
           type="button"
+          className="btn-motion"
           onClick={(e) => {
             e.stopPropagation();
+            animateFlyToCart(e.currentTarget, mainImage);
             addToCart(product);
           }}
           disabled={!product.inStock}
           style={{
-            background: product.inStock ? '#0284c7' : '#94a3b8',
-            color: '#fff',
+            background: product.inStock ? 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)' : '#94a3b8',
+            color: '#ffffff',
             border: 'none',
-            borderRadius: '6px',
-            padding: '8px 12px',
-            fontSize: '0.82rem',
+            borderRadius: '8px',
+            padding: '8px 14px',
+            fontSize: '0.84rem',
             fontWeight: '700',
             cursor: product.inStock ? 'pointer' : 'not-allowed',
-            transition: 'background 0.2s',
+            boxShadow: product.inStock ? '0 4px 12px rgba(2, 132, 199, 0.25)' : 'none',
             display: 'flex',
             alignItems: 'center',
-            gap: '4px'
+            gap: '6px'
           }}
         >
-          <span>+</span> Add
+          <CartIcon size={14} />
+          <span>Add</span>
         </button>
       </div>
     </article>

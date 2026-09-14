@@ -1,6 +1,7 @@
 import React from 'react';
 import { useStore } from '../context/StoreContext.jsx';
 import ProductCard from './ProductCard.jsx';
+import { FilterIcon } from './Icons.jsx';
 
 export default function ProductGrid() {
   const { filteredProducts, filters, setSortBy, resetFilters, setIsFilterDrawerOpen } = useStore();
@@ -27,6 +28,8 @@ export default function ProductGrid() {
             onClick={() => setIsFilterDrawerOpen(true)}
             style={{
               display: 'none',
+              alignItems: 'center',
+              gap: '6px',
               padding: '6px 12px',
               borderRadius: '6px',
               background: '#f1f5f9',
@@ -36,7 +39,8 @@ export default function ProductGrid() {
               cursor: 'pointer'
             }}
           >
-            ⚡ Filters
+            <FilterIcon size={14} />
+            <span>Filters</span>
           </button>
           <span style={{ fontSize: '0.9rem', color: '#64748b' }}>
             Showing <strong style={{ color: '#0f172a' }}>{filteredProducts.length}</strong> items

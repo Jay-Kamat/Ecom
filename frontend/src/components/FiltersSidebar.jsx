@@ -1,6 +1,7 @@
 import React from 'react';
 import { useStore } from '../context/StoreContext.jsx';
-import { CATEGORIES, BRANDS } from '../../js/data.js';
+import { CATEGORIES, BRANDS } from '../data/data.js';
+import { StarIcon } from './Icons.jsx';
 
 export default function FiltersSidebar() {
   const {
@@ -159,7 +160,9 @@ export default function FiltersSidebar() {
                   onChange={() => setMinRating(r)}
                   style={{ accentColor: '#0284c7' }}
                 />
-                <span>{r}★ &amp; above</span>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+                  {r} <StarIcon size={12} filled={true} /> &amp; above
+                </span>
               </label>
             ))}
             <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.85rem', color: '#334155', cursor: 'pointer' }}>

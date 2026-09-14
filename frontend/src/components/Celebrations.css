@@ -1,0 +1,260 @@
+/* ==========================================================================
+   Tactile & Sensory Feedback Animations
+   ========================================================================== */
+
+/* Cart Button Bump & Badge Bounce */
+.cart-bump-animation {
+  animation: cartBumpBounce 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.cart-bump-animation .nav-cart-badge {
+  animation: badgePopPulse 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  background: #10b981 !important;
+}
+
+@keyframes cartBumpBounce {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.18) translateY(-3px); }
+  65% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+@keyframes badgePopPulse {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.45); }
+  100% { transform: scale(1); }
+}
+
+/* Wishlist Heart Pop */
+.wishlist-btn-pop {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease !important;
+}
+
+.wishlist-btn-pop:active {
+  transform: scale(0.82) !important;
+}
+
+.wishlist-btn-pop.active {
+  animation: heartSpringPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes heartSpringPop {
+  0% { transform: scale(0.8); }
+  50% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+/* Tactile Spring Press on Buttons */
+button, .nav-action-pill-btn, .nav-cat-item, .product-card {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.96);
+  transition: transform 0.1s ease;
+}
+
+/* ==========================================================================
+   Order Placed Celebratory Screen & Confetti
+   ========================================================================== */
+
+.order-celebration-container {
+  position: relative;
+  text-align: center;
+  padding: 36px 20px 24px;
+  overflow: hidden;
+}
+
+/* Animated Checkmark Circle */
+.success-checkmark-circle {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 10px 25px -4px rgba(16, 185, 129, 0.45),
+    0 0 0 12px rgba(16, 185, 129, 0.12);
+  animation: circlePopIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes circlePopIn {
+  0% {
+    transform: scale(0) rotate(-45deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.15) rotate(0deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.success-svg-check {
+  width: 44px;
+  height: 44px;
+  stroke: #ffffff;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: checkmarkDraw 0.5s ease 0.35s forwards;
+}
+
+@keyframes checkmarkDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Celebratory Title & Confetti Embers */
+.celebration-headline {
+  font-size: 1.65rem;
+  font-weight: 900;
+  color: #0f172a;
+  margin: 0 0 6px;
+  letter-spacing: -0.02em;
+  animation: fadeInUp 0.4s ease 0.2s both;
+}
+
+.celebration-subtext {
+  font-size: 0.92rem;
+  color: #64748b;
+  margin: 0 0 20px;
+  animation: fadeInUp 0.4s ease 0.3s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Order Summary Card */
+.celebration-order-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  text-align: left;
+  animation: fadeInUp 0.4s ease 0.4s both;
+}
+
+.celebration-order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.order-id-pill {
+  background: #0284c7;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+/* Mini Order Tracker */
+.mini-tracker {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin: 20px 10px 10px;
+}
+
+.mini-tracker::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  right: 20px;
+  height: 3px;
+  background: #e2e8f0;
+  z-index: 1;
+}
+
+.mini-tracker-progress {
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  width: 25%;
+  height: 3px;
+  background: #10b981;
+  z-index: 2;
+  transition: width 0.5s ease;
+}
+
+.tracker-node {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.tracker-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.tracker-node.active .tracker-dot {
+  background: #10b981;
+  border-color: #10b981;
+  color: #fff;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+}
+
+.tracker-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #64748b;
+  text-align: center;
+  max-width: 75px;
+}
+
+.tracker-node.active .tracker-label {
+  color: #0f172a;
+}
+
+/* Falling Confetti Canvas */
+.confetti-canvas-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}

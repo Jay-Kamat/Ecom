@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStore } from '../context/StoreContext.jsx';
-import { CATEGORIES } from '../../js/data.js';
+import { CATEGORIES } from '../data/data.js';
 
 export default function CategoryStrip() {
   const { filters, setCategory, setActiveView } = useStore();
